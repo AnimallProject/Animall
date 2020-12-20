@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="productMapper">
+	
+	<select id="selectProductList" parameterType="string" resultType="Product">
+		SELECT P.PNO, P.PNAME, P.PCONTENT, PI.CHANGENAME 
+		FROM PRODUCT P JOIN PRODUCT_IMAGES PI ON(P.PNO = PI.PNO)
+		WHERE PTYPE = #{ptype}
+	</select>
+	
+	<insert id="insertProduct" parameterType="Product">
+		INSERT INTO PRODUCT ()
+	</insert>
+	
+	
+	
+	
+
+	
+	
+	
+	
+	
+	
+
+	
+	
+	
+	
+</mapper>
