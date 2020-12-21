@@ -9,10 +9,7 @@
 		WHERE PTYPE = #{ptype}
 	</select>
 	
-	<insert id="insertProduct" parameterType="Product">
-		INSERT INTO PRODUCT ()
-	</insert>
-	
+
 	
 	
 	
