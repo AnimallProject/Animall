@@ -9,6 +9,7 @@ import org.springframework.stereotype.Repository;
 
 import com.kh.animall.users.product.model.vo.Product;
 import com.kh.animall.users.product.model.vo.ProductImage;
+import com.kh.animall.users.product.model.vo.ProductListView;
 
 @Repository
 public class ProductDAOImpl implements ProductDAO {
@@ -17,7 +18,7 @@ public class ProductDAOImpl implements ProductDAO {
 	SqlSessionTemplate sqlSession;
 	
 	@Override
-	public List<Product> selectProductList(String ptype) {
+	public List<ProductListView> selectProductList(String ptype) {
 		
 		return sqlSession.selectList("productMapper.selectProductList", ptype);
 	}

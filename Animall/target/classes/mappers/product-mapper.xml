@@ -3,13 +3,29 @@
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="productMapper">
 	
-	<select id="selectProductList" parameterType="string" resultType="Product">
+	<select id="selectProductList" parameterType="string" resultType="ProductListView">
 		SELECT P.PNO, P.PNAME, P.PCONTENT, PI.CHANGENAME 
 		FROM PRODUCT P JOIN PRODUCT_IMAGES PI ON(P.PNO = PI.PNO)
-		WHERE PTYPE = #{ptype}
+		WHERE PTYPE = #{ptype} AND IMGLEVEL = 0
 	</select>
 	
-
+	<insert id="insertProduct" parameterType="Product">
+		INSERT INTO PRODUCT (PNO, PTYPE, PNAME, PCONTENT, PPRICE, PGUIDE)
+		VALUES(SEQ_PNO.NEXTVAL, #{ptype}, #{pname}, #{pcontent}, #{pprice}, #{pguide})	
+	</insert>
+	
+	<insert id="insertProductImage" parameterType="ProductImage">
+	
+		<selectKey keyProperty="pno" resultType="_int" order="BEFORE" >
+			SELECT SEQ_PNO.CURRVAL FROM DUAL
+		</selectKey>
+		
+		INSERT INTO PRODUCT_IMAGES(PIMGNO, PNO, ORIGINNAME, CHANGENAME, IMGPATH , IMGLEVEL)
+		VALUES(SEQ_PIMGNO.NEXTVAL, #{pno}, #{originname}, #{changename}, #{imgpath}, #{imglevel})
+	</insert>
+	
+	
+	
 	
 	
 	

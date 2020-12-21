@@ -14,7 +14,8 @@
   
 	<script>
 		function productInsertForm(){
-			location.href = "${pageContext.request.contextPath}/product/productInsertForm.do";
+			var ptype = document.getElementById('ptype').value;
+			location.href = "${pageContext.request.contextPath}/product/productInsertForm.do?ptype="+ptype;
 		}		
 	</script>
 
@@ -66,19 +67,22 @@
 <section class="section">
     <div class="container">
         <div class="row">
+        	<!-- for문 시작 전 ptype먼저 넘겨주고 -->
+        	<input type="hidden" id="ptype" name="ptype" value="${ptype}" readonly/>
             <!-- 제품들 for문 시작 -->
             <c:forEach items="${plist}" var="plist">
             <div class="col-lg-4 col-sm-6 mb-5">
                 <div class="card text-center">
                     <h4 class="card-title pt-3">${plist.pname}</h4>
                     <div class="card-img-wrapper">
-                        <img class="card-img-top rounded-0" src="${pageContext.request.contextPath }/resources/images/service/service-1.jpg" alt="service-image">
+                        <img class="card-img-top rounded-0" src="${pageContext.request.contextPath }/resources/productUpFiles/${plist.changename}" alt="service-image">
                     </div>
                     <div class="card-body p-0">
                         <i class="square-icon translateY-33 rounded rounded ti-bar-chart"></i>
                         <p class="card-text mx-2 mb-0">${plist.pcontent}</p>
                         <a href="service-single.html" class="btn btn-secondary translateY-25">장바구니</a>
                     </div>
+                    
                 </div>
             </div>  
             </c:forEach>
