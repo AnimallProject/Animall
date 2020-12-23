@@ -11,12 +11,19 @@
 <head>
   <meta charset="utf-8">
   <title>상품</title>
-  
+    <script src="${pageContext.request.contextPath }/resources/js/jquery-3.5.1.min.js"></script>
 	<script>
 		function productInsertForm(){
 			var ptype = document.getElementById('ptype').value;
 			location.href = "${pageContext.request.contextPath}/product/productInsertForm.do?ptype="+ptype;
 		}		
+
+		$(function(){
+			$(".card-img-wrapper").on("click",function(){
+				var pno = $(this).attr("id");
+				location.href = "${pageContext.request.contextPath}/product/productSelectOne.do?pno="+pno;
+			});
+		});
 	</script>
 
 </head>
@@ -73,8 +80,9 @@
             <c:forEach items="${plist}" var="plist">
             <div class="col-lg-4 col-sm-6 mb-5">
                 <div class="card text-center">
+                	
                     <h4 class="card-title pt-3">${plist.pname}</h4>
-                    <div class="card-img-wrapper">
+                    <div class="card-img-wrapper" id="${plist.pno}">
                         <img class="card-img-top rounded-0" src="${pageContext.request.contextPath }/resources/productUpFiles/${plist.changename}" alt="service-image">
                     </div>
                     <div class="card-body p-0">

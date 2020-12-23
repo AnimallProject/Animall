@@ -55,6 +55,7 @@ public class ProductController {
 								@RequestParam(value="pimage", required=false) MultipartFile[] upFiles) {
 		
 		System.out.println("product-테스트 :" + product);
+		System.out.println("ptype:" + product.getPtype());
 		
 		String saveDirectory = req.getServletContext().getRealPath("/resources/productUpFiles");
 		
@@ -63,6 +64,7 @@ public class ProductController {
 		List<ProductImage> imageList = new ArrayList<ProductImage>();
 		
 		for(MultipartFile f : upFiles) {
+			
 			if(f.isEmpty() != true) {
 				
 				String originName = f.getOriginalFilename();
@@ -100,6 +102,125 @@ public class ProductController {
 		
 		System.out.println("result" + result);
 		
-		return "users/product/productList";  // loc, msg를 해야할까 안해야할까.
+		String loc = "/product/productList.do?ptype="+product.getPtype();
+		String msg = "";
+		
+		if(result > 0) {
+			msg = "상품 등록 완료";
+		}
+		else {
+			msg = "상품 등록 실패";
+		}
+		
+		model.addAttribute("loc",loc);
+		model.addAttribute("msg",msg);
+		
+		
+		return "common/msg";
+	}
+	
+	@RequestMapping("/product/productSelectOne.do")
+	public String productSelectOne(@RequestParam int pno, Model model) {
+		
+		Product product = productService.selectOneProduct(pno);
+		
+		System.out.println("selectOne에서의 product :" + product);
+		
+		List<ProductImage> imageList = productService.selectProductImageList(pno);
+		
+		System.out.println("imageList에서의 imageList : " + imageList);
+		
+		model.addAttribute("product", product);
+		model.addAttribute("imageList", imageList);
+		
+		return "/users/product/productDetail";
+	}
+	
+	@RequestMapping("/product/productGoUpdate.do")
+	public String productGoUpdate(@RequestParam int pno, Model model) {
+		Product product = productService.selectOneProduct(pno);
+		System.out.println("productUpdate에서의 product : " + product);
+		
+		List<ProductImage> imageList = productService.selectProductImageList(pno);
+		System.out.println("productUpdate에서의 imageList : " + imageList );
+		
+		
+		model.addAttribute("product", product);
+		model.addAttribute("imageList", imageList);
+		return "users/product/productGoUpdate";
+		
+	}
+	
+	@RequestMapping("/product/productEndUpdate.do")
+	public String productEndUpdate(Product product, Model model) {
+		
+		int pno = product.getPno();
+		System.out.println("pno:"+pno);
+		
+		Product originProduct = productService.selectOneProduct(pno);
+		System.out.println("originProduct : " + originProduct);
+		
+		originProduct.setPname(product.getPname());
+		originProduct.setPcontent(product.getPcontent());
+		originProduct.setPprice(product.getPprice());
+		originProduct.setPguide(product.getPguide());
+	
+		int result = productService.updateProduct(originProduct);
+		
+		String loc = "/product/productSelectOne.do?pno="+pno;
+		String msg = "";
+		
+		if(result > 0) {
+			msg = "상품 수정 성공";
+		}
+		else {
+			msg = "상품 수정 실패";
+		}
+		
+		model.addAttribute("loc", loc);
+		model.addAttribute("msg", msg);
+		
+		return "common/msg";
+	}
+	
+	
+	
+	@RequestMapping("/product/productDelete.do")
+	public String productDelete(
+								@RequestParam String ptype,
+								@RequestParam int pno, 
+								HttpServletRequest req,
+								Model model) {
+
+		System.out.println("RequestParam으로 받은 ptype :" + ptype);
+		
+		String saveDir = req.getServletContext().getRealPath("/resources/productUpFiles");
+		
+		List<ProductImage> deleteList = productService.selectProductImageList(pno);
+		
+		System.out.println("Delete에서의 imageList : " + deleteList);
+		
+		int result2 = productService.deleteProductImage(pno);
+		int result1 = productService.deleteProduct(pno);
+		
+		String loc = "/product/productList.do?ptype="+ptype;
+		String msg = "";
+		
+		if(result1 > 0 && result2 > 0) {
+			msg = "제품 삭제 완료";
+			
+			for(ProductImage pi : deleteList) {
+				new File(saveDir + "/" + pi.getChangename()).delete();
+			}
+		}
+		else {
+			msg = "제품 삭제 실패";
+		}
+		
+		model.addAttribute("loc", loc);
+		model.addAttribute("msg",msg);
+		
+		return "common/msg";
+		
 	}
 }

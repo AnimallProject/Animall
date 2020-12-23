@@ -23,7 +23,7 @@ public class Product {
 	private String pguide;
 	private int pprice;
 	private String pdetail;
-	private boolean isDelete;
+	private String isDelete;
 	private int reviewAmount;
 		
 }

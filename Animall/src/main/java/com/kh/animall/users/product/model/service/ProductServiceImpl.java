@@ -54,6 +54,33 @@ public class ProductServiceImpl implements ProductService {
 		return result1;
 	}
 
+	@Override
+	public Product selectOneProduct(int pno) {
+		return productDAO.selectOneProduct(pno);
+	}
+
+	@Override
+	public List<ProductImage> selectProductImageList(int pno) {
+
+		return productDAO.selectProductImageList(pno);
+	}
+
+	@Override
+	public int deleteProduct(int pno) {
+		return productDAO.deleteProduct(pno);
+	}
+
+	@Override
+	public int deleteProductImage(int pno) {
+		return productDAO.deleteProductImage(pno);
+	}
+
+	@Override
+	public int updateProduct(Product originProduct) {
+		return productDAO.updateProduct(originProduct);
+	}
+
+	
 
 
 }

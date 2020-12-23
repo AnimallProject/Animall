@@ -35,5 +35,30 @@ public class ProductDAOImpl implements ProductDAO {
 		return sqlSession.insert("productMapper.insertProductImage", pi);
 	}
 
+	@Override
+	public Product selectOneProduct(int pno) {
+		return sqlSession.selectOne("productMapper.selectOneProduct", pno);
+	}
+
+	@Override
+	public List<ProductImage> selectProductImageList(int pno) {
+		return sqlSession.selectList("productMapper.selectProductImageList", pno);
+	}
+
+	@Override
+	public int deleteProduct(int pno) {
+		return sqlSession.delete("productMapper.deleteProduct", pno);
+	}
+
+	@Override
+	public int deleteProductImage(int pno) {
+		return sqlSession.delete("productMapper.deleteProductImage", pno);
+	}
+
+	@Override
+	public int updateProduct(Product originProduct) {
+		return sqlSession.update("productMapper.updateProduct", originProduct);
+	}
+
 
 }

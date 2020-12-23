@@ -15,5 +15,15 @@ public interface ProductDAO {
 	int insertProduct(Product product);
 
 	int insertProductImage(ProductImage pi);
+
+	Product selectOneProduct(int pno);
+
+	List<ProductImage> selectProductImageList(int pno);
+
+	int deleteProduct(int pno);
+
+	int deleteProductImage(int pno);
+
+	int updateProduct(Product originProduct);
 	
 }

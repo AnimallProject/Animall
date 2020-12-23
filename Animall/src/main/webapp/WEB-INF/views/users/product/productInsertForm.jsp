@@ -10,7 +10,8 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-	<script>
+<script src="${pageContext.request.contextPath }/resources/js/jquery-3.5.1.min.js"></script>
+<script>
 
 	function validate(){
 		var pcontent = $("[name=pcontent]").val();
@@ -20,7 +21,122 @@
 		}
 		return true;
 	}
+
+    $(function(){
+        $('#pimage1area').click(function(){
+           $('#pimage1').click();
+        });
+        
+        $('#pimage2area').click(function(){
+           $('#pimage2').click();
+        });
+        
+        $('#pimage3area').click(function(){
+           $('#pimage3').click();
+        });
+        
+        $('#pimage4area').click(function(){
+           $('#pimage4').click();
+        });
+        
+        $('input[type="file"]').hide();
+     });
+     
+     function imageLoad(img, num){
+        if(img.files && img.files[0]) {
+           
+           var reader = new FileReader();
+           
+           reader.onload = function(e){
+              
+              switch(num){
+              case 1 : $('#pimage1area').attr('src', e.target.result);
+                     break;
+              case 2 : $('#pimage2area').attr('src', e.target.result);
+                     break;
+              case 3 : $('#pimage3area').attr('src', e.target.result);
+                     break;
+              case 4 : $('#pimage4area').attr('src', e.target.result);
+                     break;
+              }
+           }
+           
+           reader.readAsDataURL(img.files[0]);
+           
+        }   
+     }
 	</script>
+	
+	<style>
+	
+	.product_upper_area{
+	padding:30px;
+	}
+	*{
+
+	}
+	
+	.product_upper_area{
+	
+	}
+	
+	.product_image_area{
+	width:500px;
+	height:550px;
+	
+	display:inline-block;
+	}
+	
+	.product_text_area{
+	float:right;
+	width:400px;
+	height:500px;
+	margin-right:100px;
+	}
+	
+	.image_big_area{
+	width:500px;
+	height:450px;
+	}
+	
+	.image_big_area>img{
+	width:500px;
+	height:450px;
+	}
+	
+	.image_small_area{
+	width:500px;
+	height:100px;
+	margin:0px 0px;
+	}
+	
+	.image_small_area > ol{
+	margin:0px 0px;
+	}
+	.image_small_area > ol > li ,
+	.image_small_area > ol > li > img{
+	width:100px;
+	height:100px;
+	display:inline-block;
+	float: right;
+	}
+	
+	.btn_area{
+	padding-left:70%;
+	}
+	
+	.productInsertBtn{
+	height:50px;
+	width:200px;
+	background: #997296;
+	color: snow;
+	font-weight:bold;
+	text-align:center;
+	}
+	
+
+
+	</style>
 	
 </head>
 <body>
@@ -32,39 +148,60 @@
 			<div class="product_upper_area">
 
 				<div class="product_image_area">
-					<input type="file" name="pimage" id="" />
 					<div class="image_big_area">
+					<input type="file" name="pimage" id="pimage1" onchange="imageLoad(this,1);"/>
+					<img id="pimage1area" alt="" />
+					</div>
+					<div class="image_small_area">
 						<ol>
-							<li><input type="file" name="pimage" id="" /></li>
-							<li><input type="file" name="pimage" id="" /></li>
-							<li><input type="file" name="pimage" id="" /></li>
+							<li class="image_small_area1">
+								<input type="file" name="pimage" id="pimage2" onchange="imageLoad(this,2);" />
+								<img id="pimage2area" alt="" />
+							</li>
+							<li class="image_small_area2">
+								<input type="file" name="pimage" id="pimage3" onchange="imageLoad(this,3);"/>
+								<img id="pimage3area" alt=""/>
+							</li>
+							<li class="image_small_area3">
+								<input type="file" name="pimage" id="pimage4" onchange="imageLoad(this,4);"/>
+								<img id="pimage4area" alt=""/>
+							</li>
 						</ol>
 					</div>
 				</div>
 				
 				<div class="product_text_area">
 					<div class="product_name">
-						<input type="text" id="pname" name="pname" /><label for="pname">상품명</label>
+						<h4>제품명</h4>
+						<input type="text" id="pname" name="pname" />
 					</div>
+					<hr />
 					<div class="product_content">
-						<textarea name="pcontent" id="pcontent" placeholder="상품설명"	required></textarea>
+						<textarea name="pcontent" id="pcontent" placeholder="제품상세설명"	required></textarea>
 					</div>
 				
 					<hr />
 					<div class="product_price">
-						<input type="number" id="pprice" name="pprice" /><label for="pprice" required>상품가격</label>
+						<h4>제품 가격</h4>
+						<input type="number" id="pprice" name="pprice" />
 					</div>
+					<hr />
 					<div class="ptype">
-						<input type="text" id="ptype" name="ptype" value="${ptype}" readonly/><label for="ptype">상품타입</label>
+						<h4>제품 타입</h4>
+						<input type="text" id="ptype" name="ptype" value="${ptype}" readonly/>
 					</div>
+					<hr />
 					<div class="product_pguide">
+						
 						<textarea name="pguide" id="pguide" placeholder="구매안내"	required></textarea>
 					</div>
 				</div>
 				
+				<div class="btn_area">
+					<button type="submit" class="productInsertBtn" onsubmit="return validate();">상품등록</button>
+				</div>
 			</div>
 			
-			<button type="submit" onsubmit="return validate();">상품등록</button>
 	
 		</form>
 

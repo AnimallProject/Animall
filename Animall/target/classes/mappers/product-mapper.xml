@@ -24,6 +24,36 @@
 		VALUES(SEQ_PIMGNO.NEXTVAL, #{pno}, #{originname}, #{changename}, #{imgpath}, #{imglevel})
 	</insert>
 	
+	<select id="selectOneProduct" parameterType="_int" resultType="Product">
+		SELECT * FROM PRODUCT WHERE PNO = #{pno}
+	</select>
+	
+	<select id="selectProductImageList" parameterType="_int" resultType="ProductImage">
+		SELECT * FROM PRODUCT_IMAGES WHERE PNO = #{pno}
+	</select>
+	
+	<update id="updateProduct" parameterType="Product">
+		UPDATE PRODUCT 
+		SET PNAME = #{pname},
+			PCONTENT = #{pcontent},
+			PPRICE = #{pprice},
+			PGUIDE = #{pguide}
+		WHERE PNO = #{pno}
+	</update>
+	
+	
+	<delete id="deleteProductImage" parameterType="_int">
+		DELETE FROM PRODUCT_IMAGES WHERE PNO = #{pno}
+	</delete>
+	
+	<delete id="deleteProduct" parameterType="_int">
+		DELETE FROM PRODUCT WHERE PNO = #{pno}
+	</delete>
+	
+	
+	
+
+	
 	
 	
 	
