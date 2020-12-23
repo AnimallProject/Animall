@@ -10,10 +10,12 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+ <link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/owl.carousel.css">
+ <link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/owl.carousel.min.css">
+<script type="text/javascript" src="${pageContext.request.contextPath }/resources/js/jquery-3.5.1.js"></script>
 <script src="${pageContext.request.contextPath }/resources/js/jquery-3.5.1.min.js"></script>
+
 	
-
-
 
 	<style>
 	
@@ -103,8 +105,37 @@
 	border:none;
 	}
 	
+	.product_lower_area{
+	margin:30px 0px;
+	}
+	.product_lower_area .nav_area > ol{
+	width:100%;
+	margin-left:25%;
+	}
+	
+	.product_lower_area .nav_area > ol > li{
+	display:inline-block;
+	padding: 0px 10px;
+	}
 	</style>
 	
+		<script>
+			$(document).ready(function(){
+				  $('.owl-carousel').owlCarousel({
+				       items:1,
+			           loop:true,
+				       center:false,
+				       margin:10,
+				       URLhashListener:true,
+				       autoplay:true,
+				       autoplayHoverPause:true,
+				       startPosition: 'URLHash'
+				  });
+			});
+		</script>
+					
+	
+
 </head>
 <body>
 	<c:import url="../../common/header.jsp" />
@@ -114,23 +145,45 @@
 			<div class="product_upper_area">
 				
 				<div class="product_image_area">
-					<div class="image_big_area" >
 					
-					<img id="pimage1area" alt="" />
+					<div class="owl-carousel owl-theme">
+						
+						<div class="image_big_area" >
+					 		 <div class="item" data-hash="image1">
+								<img id="pimage1area" src="${pageContext.request.contextPath}/resources/productUpFiles/${imageList.get(0).changename}" alt="" />
+							 </div>
+						</div>
+						<div class="image_big_area" >
+							 <div class="item" data-hash="image2">
+								<img id="pimage2area" src="${pageContext.request.contextPath}/resources/productUpFiles/${imageList.get(1).changename}" alt="" />
+							 </div>
+						</div>
+						<div class="image_big_area" >
+							 <div class="item" data-hash="image3">
+								<img id="pimage3area" src="${pageContext.request.contextPath}/resources/productUpFiles/${imageList.get(2).changename}" alt="" />
+							 </div>
+						</div>
+						<div class="image_big_area" >
+							 <div class="item" data-hash="image4">
+								<img id="pimage4area" src="${pageContext.request.contextPath}/resources/productUpFiles/${imageList.get(3).changename}" alt="" />
+							 </div>
+						</div>
+					
 					</div>
+					
 					<div class="image_small_area">
 						<ol>
-							<li class="image_small_area1">
-							
-								<img id="pimage2area" src="" alt="" />
+							<li class="image_small_area">
+								<img src="${pageContext.request.contextPath}/resources/productUpFiles/${imageList.get(0).changename}" onclick="location.href='#image1'" alt="" />
 							</li>
-							<li class="image_small_area2">
-								
-								<img id="pimage3area" src="" alt=""/>
+							<li class="image_small_area">
+								<img src="${pageContext.request.contextPath}/resources/productUpFiles/${imageList.get(1).changename}" onclick="location.href='#image2'" alt="" />
 							</li>
-							<li class="image_small_area3">
-								
-								<img id="pimage4area" src="" alt=""/>
+							<li class="image_small_area">
+								<img src="${pageContext.request.contextPath}/resources/productUpFiles/${imageList.get(2).changename}" onclick="location.href='#image3'" alt="" />
+							</li>
+							<li class="image_small_area">
+								<img src="${pageContext.request.contextPath}/resources/productUpFiles/${imageList.get(3).changename}" onclick="location.href='#image4'" alt="" />
 							</li>
 						</ol>
 					</div>
@@ -180,13 +233,29 @@
 				</div>
 			</div>
 
-		<div class="product_lower_area"></div>
+		<div class="product_lower_area">
+			<div class="nav_area">
+				<ol>
+					<li>
+						<h3>상세정보</h3>
+					</li>
+					<li>
+						<h3>리뷰</h3>
+					</li>
+					<li>
+						<h3>상품문의</h3>
+					</li>
+				</ol>
+			</div>
+		</div>
 
 	</div>
 
 
 	<c:import url="../../common/footer.jsp" />
 	
+	<script src="${pageContext.request.contextPath }/resources/js/owl.carousel.min.js"></script>
+	<script src="${pageContext.request.contextPath }/resources/js/owl.carousel.js"></script>
 	
 </body>
 </html>
