@@ -72,9 +72,6 @@
 	.product_upper_area{
 	padding:30px;
 	}
-	*{
-
-	}
 	
 	.product_upper_area{
 	

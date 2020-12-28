@@ -22,14 +22,7 @@
 	.product_upper_area{
 	padding:30px;
 	}
-	*{
 
-	}
-	
-	.product_upper_area{
-	
-	}
-	
 	.product_image_area{
 	width:500px;
 	height:550px;
@@ -73,8 +66,8 @@
 	
 	.btn_area{
 	width:1000px;
-	padding-top:30px;
-	padding-left:20%;
+	padding-top:80px;
+	padding-left:25%;
 	display:inline-block;
 	}
 	
@@ -93,6 +86,7 @@
 	text-align:center;
 	border:none;
 	opacity:50%;
+	border-radius:5px;
 	}
 	
 	.btn2{
@@ -103,6 +97,7 @@
 	font-weight:bold;
 	text-align:center;
 	border:none;
+	border-radius:5px;
 	}
 	
 	.product_lower_area{
@@ -110,13 +105,89 @@
 	}
 	.product_lower_area .nav_area > ol{
 	width:100%;
-	margin-left:25%;
+	border: 2px solid black;
+	text-align:center;
+	border-radius : 10px;
+	border : 1px solid grey;
 	}
 	
 	.product_lower_area .nav_area > ol > li{
 	display:inline-block;
 	padding: 0px 10px;
+	border : none;
+	padding : 5px 50px;
+	background : grey;
+	border-radius : 10px;
+	opacity:30%;
 	}
+	
+	.product_lower_area .nav_area > ol > li > h3{
+	color : black;
+	font-weight:bold;
+	}
+	
+	.reviewImage{
+	width:220px;
+	}
+	
+	
+	#rimage{
+	margin-top:10px;
+	}
+	
+	#rcontent{
+	border:none;
+	resize:none;
+	}
+	
+	.goinquiry{
+		border-radius:5px;
+		background:#fff;
+		border: 1px solid #e5e5e5;
+		border-left:none;
+		border-right:none;
+		padding:50px;
+	}
+	
+	.pititle > h6{
+	display:inline-block;
+	
+	}
+	
+	.pititle{
+	padding-left: 50px;
+	}
+	
+	.picontent{
+	padding: 50px;
+	}
+	
+	input[id='pititle']{
+	width:300px;
+	height:30px;
+	border: 1px solid #e5e5e5;
+	}
+	
+	h6[id='piproductname']{
+	padding-left:10%
+	}
+	h6[id='piname']{
+	padding-left:20%;
+	}
+	
+	textarea[name='picontent']{
+	border: 1px solid #e5e5e5;
+	resize:none;
+	}
+	
+	input{
+	border:none;
+	}
+	
+	
+	
+	
+
 	</style>
 	
 		<script>
@@ -131,8 +202,38 @@
 				       autoplayHoverPause:true,
 				       startPosition: 'URLHash'
 				  });
-			});
+			});	
+
+		    $(function(){
+		        $('#reviewImageArea').click(function(){
+		           $('#rimage').click();
+		        });
+		     });
+
+			function imageLoad(img, num){
+		        if(img.files && img.files[0]) {
+		           
+		           var reader = new FileReader();
+		           
+		           reader.onload = function(e){
+		              
+		              switch(num){
+		              case 1 : $('#reviewImageArea').attr('src', e.target.result);
+		                     break;
+		           	  }
+		           
+		           
+		           }
+		              
+		           reader.readAsDataURL(img.files[0]);
+		           
+		 	  }
+		    }
 		</script>
+		
+	
+		
+		
 					
 	
 
@@ -197,7 +298,7 @@
 					</div>
 					<hr />
 					<div class="product_content">
-						<textarea name="pcontent" id="pcontent" placeholder="제품상세설명"	readonly>${product.pcontent}</textarea>
+						<textarea name="pcontent" id="pcontent" placeholder="제품상세설명" style="border:none; resize:none;" readonly>${product.pcontent}</textarea>
 					</div>
 				
 					<hr />
@@ -212,9 +313,13 @@
 					</div>
 					<hr />
 					<div class="product_pguide">
-						
-						<textarea name="pguide" id="pguide" placeholder="구매안내"	readonly>${product.pguide}</textarea>
+						<textarea name="pguide" id="pguide" placeholder="구매안내" style="border:none; resize:none;" readonly>${product.pguide}</textarea>
 					</div>
+					<hr />
+					<div class="product_order_price">
+						<h4>수량 : </h4>
+					</div>
+					
 				</div>
 				
 				<div class="btn_area">
@@ -235,18 +340,116 @@
 
 		<div class="product_lower_area">
 			<div class="nav_area">
-				<ol>
-					<li>
-						<h3>상세정보</h3>
+				<ul class="nav nav-tabs" id="myTab" role="tablist">
+					<li class="nav-item">
+						<a class="nav-link active" data-toggle="tab" href="#detailInfo" role="tab">
+							<h3>상세정보</h3>
+						</a>
 					</li>
-					<li>
-						<h3>리뷰</h3>
+					<li class="nav-item">
+						<a class="nav-link" data-toggle="tab" href="#review" role="tab">
+							<h3>리뷰</h3>
+						</a>
 					</li>
-					<li>
-						<h3>상품문의</h3>
+					<li class="nav-item">
+						<a class="nav-link" data-toggle="tab" href="#productInquiry" role="tab">
+							<h3>상품문의</h3>						
+						</a>
 					</li>
-				</ol>
+				</ul>
 			</div>
+		
+		<div class="tab-content" id="myTabContent">
+			
+			<div class="tab-pane fade show active product_description" id="detailInfo" role="tabpanel">
+				123
+				
+			</div>
+			
+			<div class="tab-pane fade review_area" id="review" role="tabpanel" >
+				<form name="productReviewForm" action="${pageContext.request.contextPath}/product/productReviewInsert.do" method="post" enctype="multipart/form-data">
+					    <select name="reviewstar" class="reviewstar" id="reviewstar">
+                              <option value="" >별점 선택하기</option>
+                              <option value="5">★★★★★</option>
+                              <option value="4">★★★★☆</option>
+                              <option value="3">★★★☆☆</option>
+                              <option value="2">★★☆☆☆</option>
+                              <option value="1">★☆☆☆☆</option>
+                        </select> <br> <br> 
+				<div class="d-flex mb-4">
+					<div class="mr-3 reviewImage">
+						<img id="reviewImageArea" style="width:200px; height:200px" />
+						<input type="file" name="rimage" id="rimage" onchange="imageLoad(this,1);"/>
+					</div>
+					<div class="border rounded py-3 px-4">
+						<div class="border-bottom mb-10" style="width:750px; height:190px;">
+							<h5><!-- {member.mname} -->123 </h5>
+							<p>
+								<textarea name="rcontent" id="rcontent" cols="90" rows="5">해당 상품에 대한 리뷰를 입력하세요!</textarea>
+							</p>
+						 </div>
+					</div>
+				</div>				
+				</form>		
+				
+				<!-- 
+				<c:if test="{리스트가 있다면}">
+				</c:if>
+				 -->
+				<div class="d-flex mb-4">
+					<div class="mr-3 reviewImage">
+						<img src="${pageContext.request.contextPath}/resources/reviewUpFiles/" style="width:200px; height:200px"  />
+					</div>
+					<div class="border rounded py-3 px-4">
+						<div class="border-bottom mb-10"  style="width:750px; height:190px;">
+							<h5><!-- {member.mname} --></h5>
+							<h6 class="font-weight-light"><!-- {member.mdate --></h4>
+							<p><!-- {pcontent} --></p>
+						</div>
+					
+						<div class="d-flex justify-content-between">
+							<div>
+								<ul class="list-inline d-inline-block">
+						
+								<!-- forEach문 -->
+									<!-- c:if문 -->
+									<li class="list-inline-item">
+									   	<a href="#">
+											<i class="ti-star golden"></i>
+										</a>
+									</li>
+									<li class="list-inline-item">
+                         		       <a href="#">
+                              		      <i class="ti-star text-color"></i>
+                          		      </a>
+                        		   </li>
+								</ul>
+							</div>
+						</div>	
+					</div>
+				</div>
+				
+				
+			</div>
+			
+			<div class="tab-pane fade product_inquiry_area" id="productInquiry" role="tabpanel">
+				<div class="goinquiry">
+					<div class="pititle">
+						<h6 class="font-weight-light">
+							<label for="pititle">제목&nbsp;:&nbsp;</label><input type="text" id="pititle"/>
+						</h6>
+						<h6 class="font-weight-light" id="piproductname">문의 제품 : ${product.pname} </h6>
+						<h6 class="font-weight-light" id="piname">문의자 : 김형록<!-- {mname} --></h6>
+					</div>
+					<hr />
+					<div class="picontent">
+						<h6 class="font-weight-light">문의 내용 <!-- productInquirycontent --></h6><br />
+						<textarea name="picontent" id="" cols="110" rows="15">Q. 이런 형식 어때요?</textarea>
+					</div>
+				</div>
+			</div>
+			
+			
 		</div>
 
 	</div>
