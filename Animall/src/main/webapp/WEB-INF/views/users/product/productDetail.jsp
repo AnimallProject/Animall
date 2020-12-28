@@ -26,7 +26,6 @@
 	.product_image_area{
 	width:500px;
 	height:550px;
-	
 	display:inline-block;
 	}
 	
@@ -40,6 +39,7 @@
 	.image_big_area{
 	width:500px;
 	height:450px;
+	border:1px solid #e5e5e5;
 	}
 	
 	.image_big_area>img{
@@ -80,7 +80,7 @@
 	.btn1{
 	height:50px;
 	width:200px;
-	background: grey;
+	background: #e5e5e5;
 	color: black;
 	font-weight:bold;
 	text-align:center;
@@ -98,6 +98,13 @@
 	text-align:center;
 	border:none;
 	border-radius:5px;
+	}
+	
+	.btn3{
+	width:100px;
+	height:30px;
+	border-radius:5px;
+	margin-left:90%;
 	}
 	
 	.product_lower_area{
@@ -184,9 +191,31 @@
 	border:none;
 	}
 	
+	.minus{
+	width:30px;
+	backgorund:#e5e5e5;
+	border-radius:10px;
+	}
 	
+	.plus{
+	width:30px;
+	background:#997296;
+	border-radius:10px;
+	}
 	
+	.product_lower_area img{
+	border:1px solid #e5e5e5;
+	}
 	
+	.image_big_area > .item{
+	width:100%;
+	height:100%;
+	}
+	
+	.image_big_area > .item > img{
+	width:100%;
+	height:100%;
+	}
 
 	</style>
 	
@@ -229,6 +258,44 @@
 		           
 		 	  }
 		    }
+
+		    function pdelete(){
+				if($('#orderQuantity').val() > 1){
+					var pprice = Number($('#pprice').val());
+					var productQtn = Number($('#orderQuantity').val()) - 1;
+					var totalPrice = pprice * productQtn;		
+
+					$('#orderQuantity').val(productQtn);
+					$('#total_price').val(totalPrice);
+				}else{
+					alert("1개가 최소 수량입니다.");
+				}
+			}
+
+			function padd(){
+				var pprice = Number($('#pprice').val());
+				var productQtn = Number($('#orderQuantity').val()) + 1;
+				var totalPrice = pprice * productQtn;
+
+				$('#orderQuantity').val(productQtn);
+				$('#total_price').val(totalPrice);
+			}
+
+			// ProductInquiry 유효성 검사
+			function PIvalidate(){
+				var pititle = $("[id=pititle]").val();
+				if(pititle.trim().length==0){
+					alert("문의 제목을 입력하세요.");
+					return false;
+				}
+
+				var picontent = $("[name=picontent]").val();
+				if(picontent.trim().length==0){
+					alert("문의 내용을 입력하세요.");
+					return false;	
+				}
+				return true;
+			}
 		</script>
 		
 	
@@ -317,7 +384,13 @@
 					</div>
 					<hr />
 					<div class="product_order_price">
-						<h4>수량 : </h4>
+						<h5>수량</h5><br />
+						<input type="button" class="minus" value="-" onclick="pdelete();" />
+						<input type="number" id="orderQuantity" value="1"  style="text-align:center;"/>
+						<input type="button" class="plus" value="+" onclick="padd();" /><br /><br />
+						<h6 class="font-weight-light">가격 : 
+							<input type="text" id="total_price" value="${product.pprice}" readonly />원
+						</h6>
 					</div>
 					
 				</div>
@@ -433,32 +506,34 @@
 			</div>
 			
 			<div class="tab-pane fade product_inquiry_area" id="productInquiry" role="tabpanel">
-				<div class="goinquiry">
-					<div class="pititle">
-						<h6 class="font-weight-light">
-							<label for="pititle">제목&nbsp;:&nbsp;</label><input type="text" id="pititle"/>
-						</h6>
-						<h6 class="font-weight-light" id="piproductname">문의 제품 : ${product.pname} </h6>
-						<h6 class="font-weight-light" id="piname">문의자 : 김형록<!-- {mname} --></h6>
+				<form action="${pageContext.request.contextPath}/product/productInquiry.do" method="post" onsubmit="return PIvalidate();" >
+					<div class="goinquiry">
+						<div class="pititle">
+							<h6 class="font-weight-light">
+								<label for="pititle">제목&nbsp;:&nbsp;</label><input type="text" id="pititle"/>
+							</h6>
+							<input type="hidden" value="${product.pno}" />
+							<h6 class="font-weight-light" id="piproductname">문의 제품 : ${product.pname} </h6>
+							<h6 class="font-weight-light" id="piname">문의자 : 김형록<!-- {mname} --></h6>
+							<input type="hidden" value="" /> <!-- 여기 value에 mno 넣어주기 -->
+						</div>
+						<hr />
+						<div class="picontent">
+							<h6 class="font-weight-light">문의 내용 <!-- productInquirycontent --></h6><br />
+							<textarea name="picontent" cols="110" rows="15">Q. 문의내용을 입력하세요.</textarea>
+							<input type="submit" class="btn3" value="문의하기"/>	
+						</div>
 					</div>
-					<hr />
-					<div class="picontent">
-						<h6 class="font-weight-light">문의 내용 <!-- productInquirycontent --></h6><br />
-						<textarea name="picontent" id="" cols="110" rows="15">Q. 이런 형식 어때요?</textarea>
-					</div>
-				</div>
+				</form>
 			</div>
-			
-			
 		</div>
-
 	</div>
 
 
 	<c:import url="../../common/footer.jsp" />
 	
-	<script src="${pageContext.request.contextPath }/resources/js/owl.carousel.min.js"></script>
-	<script src="${pageContext.request.contextPath }/resources/js/owl.carousel.js"></script>
+	<script src="${pageContext.request.contextPath}/resources/js/owl.carousel.min.js"></script>
+	<script src="${pageContext.request.contextPath}/resources/js/owl.carousel.js"></script>
 	
 </body>
 </html>

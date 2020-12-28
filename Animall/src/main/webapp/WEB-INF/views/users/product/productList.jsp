@@ -25,7 +25,21 @@
 			});
 		});
 	</script>
-
+	
+	<style>
+	.btn2{
+		height:50px;
+		width:100px;
+		background: #997296;
+		color: snow;
+		font-weight:bold;
+		text-align:center;
+		border:none;
+		border-radius:5px;
+		float:right;
+	}
+	
+	</style>
 </head>
 
 <body>
@@ -83,7 +97,7 @@
                 	
                     <h4 class="card-title pt-3">${plist.pname}</h4>
                     <div class="card-img-wrapper" id="${plist.pno}">
-                        <img class="card-img-top rounded-0" src="${pageContext.request.contextPath }/resources/productUpFiles/${plist.changename}" alt="service-image">
+                        <img class="card-img-top rounded-0" src="${pageContext.request.contextPath}/resources/productUpFiles/${plist.changename}">
                     </div>
                     <div class="card-body p-0">
                         <i class="square-icon translateY-33 rounded rounded ti-bar-chart"></i>
@@ -95,11 +109,16 @@
             </div>  
             </c:forEach>
   		    <!-- 제품들 for문 끝 -->
+  		</div>  
+  		<div class="btn_area">
+				<!-- <c:if test="${!empty member and member.mtype eq 'admin'}">  -->
+					<input type="button" value="상품등록" id="" class="btn2" onclick="productInsertForm();"/>
+				<!-- </c:if> -->  		    
+  	   </div>
+  	</div>   
 </section>
 
-	<input type="button" value="상품등록" id="" class="" onclick="productInsertForm();"/>
-	<!-- <c:if test="${!empty member and member.mtype eq 'admin'}">  -->
-	<!-- </c:if> -->
+
 	
 	<c:import url="../../common/footer.jsp"/>
 

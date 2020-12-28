@@ -11,6 +11,8 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <script src="${pageContext.request.contextPath }/resources/js/jquery-3.5.1.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+
 <script>
 
 	function validate(){
@@ -25,7 +27,25 @@
 	function productDelete(){
 		var ptype = document.getElementById('ptype').value;
 		var pno = document.getElementById('pno').value;
-		location.href = "${pageContext.request.contextPath}/product/productDelete.do?pno="+pno+"&ptype="+ptype;
+	
+		var result = Swal.fire({
+			title : '제품을 삭제하시겠습니까?',
+			icon:'warning',
+			showCancelButton:true,
+			confirmButtonColor:'#3085d6',
+			cancelButtonColor:'#d33',
+			confirmButtonText:'제품 삭제',
+			cancelButtonText:'취소'
+			}).then((result) => {
+				if(result.isConfirmed){
+					Swal.fire(
+						'제품이 삭제되었습니다.'
+							)
+
+					location.href = "${pageContext.request.contextPath}/product/productDelete.do?pno="+pno+"&ptype="+ptype;
+				
+				}
+			})	
 	}	
 
 </script>
@@ -35,14 +55,7 @@
 	.product_upper_area{
 	padding:30px;
 	}
-	*{
 
-	}
-	
-	.product_upper_area{
-	
-	}
-	
 	.product_image_area{
 	width:500px;
 	height:550px;
