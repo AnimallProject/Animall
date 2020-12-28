@@ -2746,18 +2746,13 @@ ul.tag-list li a:hover {
   background: #303032;
   top: -25px;
   right: 10px;
-  border: 1px solid #454547;
   text-align: center;
   display: block;
-  transition: .2s ease;
+  transition: 0.1s;
 }
 
 .back-to-top i {
   line-height: 50px;
-}
-
-.back-to-top:hover {
-  border-color: #e84444;
 }
 
 .back-to-top:focus {

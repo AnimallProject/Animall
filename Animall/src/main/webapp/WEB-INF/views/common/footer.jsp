@@ -1,156 +1,132 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-
 <!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title></title>
 
-<footer class="bg-secondary">
-    <div class="py-100 border-bottom" style="border-color: #454547 !important">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-4 col-md-4">
-                    <div class="mb-5 mb-md-0 text-center text-md-left">
-                        <!-- logo -->
-                        <img class="mb-30" src="${pageContext.request.contextPath }/resources/images/logo-footer.png" alt="logo">
-                        <p class="text-white mb-30">Lorem ipsum dolor amet consectetur adipisicing elit sed eiusm tempor incididunt labore dolore magna aliqua enim.</p>
-                        <!-- social icon -->
-                        <ul class="list-inline">
-                            <li class="list-inline-item">
-                                <a class="social-icon-outline" href="#">
-                                    <i class="ti-facebook"></i>
-                                </a>
-                            </li>
-                            <li class="list-inline-item">
-                                <a class="social-icon-outline" href="#">
-                                    <i class="ti-twitter-alt"></i>
-                                </a>
-                            </li>
-                            <li class="list-inline-item">
-                                <a class="social-icon-outline" href="#">
-                                    <i class="ti-vimeo-alt"></i>
-                                </a>
-                            </li>
-                            <li class="list-inline-item">
-                                <a class="social-icon-outline" href="#">
-                                    <i class="ti-linkedin"></i>
-                                </a>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-                <!-- footer links -->
-                <div class="col-lg-2 col-md-4 col-6">
-                <h4 class="text-white mb-4">Services</h4>
-                <ul class="footer-links">
-                    <li>
-                        <a href="#">Company History</a>
-                    </li>
-                    <li>
-                        <a href="about.html">About Us</a>
-                    </li>
-                    <li>
-                        <a href="contact.html">Contact Us</a>
-                    </li>
-                    <li>
-                        <a href="service.html">Service</a>
-                    </li>
-                    <li>
-                        <a href="#">Privacy Policy</a>
-                    </li>
-                </ul>
-                </div>
-                <!-- footer links -->
-                <div class="col-lg-2 col-md-4 col-6">
-                <h4 class="text-white mb-4">Quick Link</h4>
-                <ul class="footer-links">
-                    <li>
-                        <a href="#">Company History</a>
-                    </li>
-                    <li>
-                        <a href="about-2.html">About Us</a>
-                    </li>
-                    <li>
-                        <a href="contact.html">Contact Us</a>
-                    </li>
-                    <li>
-                        <a href="service-2.html">Service</a>
-                    </li>
-                    <li>
-                        <a href="#">Privacy Policy</a>
-                    </li>
-                </ul>
-                </div>
-                <!-- subscribe form -->
-                <div class="col-lg-3 col-md-12 offset-lg-1">
-                    <div class="mt-5 mt-lg-0 text-center text-md-left">
-                        <h4 class="mb-4 text-white">Subscribe Us</h4>
-                        <p class="text-white mb-4">Lorem ipsum dolor sit amet, consect etur adipisicing. elit sed do
-                            eiusmod. </p>
-                        <form action="#" class="position-relative">
-                            <input type="text" class="form-control subscribe" name="subscribe" id="Subscribe" placeholder="Enter Your Email">
-                            <button class="btn-subscribe" type="submit" value="send">
-                                <i class="ti-arrow-right"></i>
-                            </button>
-                        </form>
-                    </div>
-                </div>
-            </div>
+<!-- 푸터 css -->
+<link rel="stylesheet" href="resources/css/footer.css" />
+
+</head>
+<body>
+<footer>
+<!-- 글꼴 적용 -->
+
+
+<div class="topContainer">
+	<div style="font-family: Nanum Gothic">
+	<div class="bigContainer1">
+		<div class="topMenuBlank">
+		</div>
+		<div class="topMenu">
+			<a href="#">
+				Animall 소개
+			</a>
+		</div>
+		<div class="topMenu">
+			<a href="#">
+				인재채용
+			</a>
+		</div>
+		<div class="topMenu">
+			<a href="#">
+				이용약관
+			</a>
+		</div>
+		<div class="topMenu">
+			<a href="#">
+				개인정보처리방침
+			</a>
+		</div>
+		<div class="topMenu" style="border:none;">
+			<a href="#">
+				이용안내
+			</a>
+		</div>
+	</div>
+	</div>
+	
+	<div class="bigContainer2">
+	<div class="midMenuBlank"></div>
+		<div class="midMenu">
+			<div class="midTitle">
+				<h5>CUSTOMER CENTER</h5>
+			</div>
+			<div class="midContent">
+				1644 - 1234 <br/>
+				AM:09:00 - PM:18:00 <br/>
+				주말 및 공휴일은 고객센터를 운영하지 않습니다 <br/><br />
+				
+				<div style="font-family: Nanum Gothic">
+					<a href="#" style=" display : flex;">
+						<h3 style="color : #997296;">1:1</h3>
+						<div style="width : 2px"></div>
+						<h3 style="color : #997296; font-weight : bold"> 문의하기</h3>
+					</a>
+				</div>
+				
+				<p style="color : black; font-size : 13px">(1:1 문의는 24시간 이용이 가능합니다)</p>
+			</div>
+			
+		</div>
+		<div class="midMenu">
+			<div class="midTitle">
+				<h5>ADDRESS</h5>
+			</div>
+			<div class="midContent">
+				서울시 강남구 역삼동 KH352길 ANIMALL
+			</div>
+			
+		
+		</div>
+		<div class="midMenu">
+			<div class="midTitle">
+				<h5>COMPANY INFO</h5>
+			</div>
+			<div class="midContent">
+				대표이사 : 김형록 <br/>
+				사업자등록번호 : 123-99-12345 <br/>
+				통신판매업 : 2020-서울강남-12345 호 <br/>
+				이메일 : Animall@Animallcorp.com <br/>
+			</div>
+			
+		
+		</div>
+	</div>
+	<div class="bigContainer3">
+		<div class="animallRights">
+           &copy; ANIMALL CORP. All RIGHTS RESERVED
         </div>
-    </div>
-    <!-- copyright -->
-    <div class="pt-4 pb-3 position-relative">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-6 col-md-5">
-                    <p class="text-white text-center text-md-left">
-                        <span class="text-primary">Bizpro</span> &copy; 2017 All Right Reserved</p>
-                </div>
-                <div class="col-lg-6 col-md-7">
-                    <ul class="list-inline text-center text-md-right">
-                        <li class="list-inline-item mx-lg-3 my-lg-0 mx-2 my-2">
-                            <a class="font-secondary text-white" href="#">Legal</a>
-                        </li>
-                        <li class="list-inline-item mx-lg-3 my-lg-0 mx-2 my-2">
-                            <a class="font-secondary text-white" href="#">Sitemap</a>
-                        </li>
-                        <li class="list-inline-item mx-lg-3 my-lg-0 mx-2 my-2">
-                            <a class="font-secondary text-white" href="#">Privacy Policy</a>
-                        </li>
-                        <li class="list-inline-item ml-lg-3 my-lg-0 ml-2 my-2 ml-0">
-                            <a class="font-secondary text-white" href="#">Terms &amp; Conditions</a>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-        <!-- back to top -->
-        <button class="back-to-top">
-            <i class="ti-angle-up"></i>
-        </button>
-    </div>
+	</div>
+</div>   
+  
+
 </footer>
 <!-- /footer -->
 
 <!-- jQuery -->
-<script src="${pageContext.request.contextPath }/resources/plugins/jQuery/jquery.min.js"></script>
+<script src="resources/plugins/jQuery/jquery.min.js"></script>
 <!-- Bootstrap JS -->
-<script src="${pageContext.request.contextPath }/resources/plugins/bootstrap/bootstrap.min.js"></script>
+<script src="resources/plugins/bootstrap/bootstrap.min.js"></script>
 <!-- magnific popup -->
-<script src="${pageContext.request.contextPath }/resources/plugins/magnific-popup/jquery.magnific.popup.min.js"></script>
+<script src="resources/plugins/magnific-popup/jquery.magnific.popup.min.js"></script>
 <!-- slick slider -->
-<script src="${pageContext.request.contextPath }/resources/plugins/slick/slick.min.js"></script>
+<script src="resources/plugins/slick/slick.min.js"></script>
 <!-- filter -->
-<script src="${pageContext.request.contextPath }/resources/plugins/filterizr/jquery.filterizr.min.js"></script>
+<script src="resources/plugins/filterizr/jquery.filterizr.min.js"></script>
 <!-- Google Map -->
 <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBu5nZKbeK-WHQ70oqOWo-_4VmwOwKP9YQ"></script>
-<script src="${pageContext.request.contextPath }/resources/plugins/google-map/gmap.js"></script>
+<script src="resources/plugins/google-map/gmap.js"></script>
 <!-- Syo Timer -->
-<script src="${pageContext.request.contextPath }/resources/plugins/syotimer/jquery.syotimer.js"></script>
+<script src="resources/plugins/syotimer/jquery.syotimer.js"></script>
 <!-- aos -->
-<script src="${pageContext.request.contextPath }/resources/plugins/aos/aos.js"></script>
+<script src="resources/plugins/aos/aos.js"></script>
 <!-- swiper -->
-<script src="${pageContext.request.contextPath }/resources/plugins/swiper/swiper.min.js"></script>
+<script src="resources/plugins/swiper/swiper.min.js"></script>
 <!-- Main Script -->
-<script src="${pageContext.request.contextPath }/resources/js/script.js"></script>
+<script src="resources/js/script.js"></script>
 
 </body>
 </html>
