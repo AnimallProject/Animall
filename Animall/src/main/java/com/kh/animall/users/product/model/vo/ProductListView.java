@@ -16,6 +16,7 @@ public class ProductListView {
 
 	private int pno;
 	private String pname;
+	private int pprice;
 	private String pcontent;
 	private String changename;
 	

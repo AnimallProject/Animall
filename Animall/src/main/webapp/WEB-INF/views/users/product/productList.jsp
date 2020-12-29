@@ -39,6 +39,24 @@
 		float:right;
 	}
 	
+	.card-img-wrapper > .productListImage{
+		width:100%;
+		height:100%;
+	}
+	
+	.productList .basket{
+		display:none;
+	}
+	
+	.productList:hover .basket{
+		display:block;
+	}
+	
+	.btn{
+		width:150px;
+		margin:auto;
+	}
+	
 	</style>
 </head>
 
@@ -93,16 +111,20 @@
             <!-- 제품들 for문 시작 -->
             <c:forEach items="${plist}" var="plist">
             <div class="col-lg-4 col-sm-6 mb-5">
-                <div class="card text-center">
+                <div class="card text-center productList">
                 	
                     <h4 class="card-title pt-3">${plist.pname}</h4>
+                    <hr />
                     <div class="card-img-wrapper" id="${plist.pno}">
-                        <img class="card-img-top rounded-0" src="${pageContext.request.contextPath}/resources/productUpFiles/${plist.changename}">
+                        <img class="card-img-top rounded-0 productListImage" src="${pageContext.request.contextPath}/resources/productUpFiles/${plist.changename}">
                     </div>
                     <div class="card-body p-0">
-                        <i class="square-icon translateY-33 rounded rounded ti-bar-chart"></i>
+                        
                         <p class="card-text mx-2 mb-0">${plist.pcontent}</p>
-                        <a href="service-single.html" class="btn btn-secondary translateY-25">장바구니</a>
+                        <p class="card-text mx-2 mb-0">${plist.pprice}원</p>
+                        <a href="service-single.html" class="btn btn-secondary translateY-25 basket">
+                        	<img src="${pageContext.request.contextPath}/resources/images/basketIcon2.png" alt="" />
+                        </a>
                     </div>
                     
                 </div>
@@ -112,8 +134,8 @@
   		</div>  
   		<div class="btn_area">
 				<!-- <c:if test="${!empty member and member.mtype eq 'admin'}">  -->
-					<input type="button" value="상품등록" id="" class="btn2" onclick="productInsertForm();"/>
 				<!-- </c:if> -->  		    
+					<input type="button" value="상품등록" id="" class="btn2" onclick="productInsertForm();"/>
   	   </div>
   	</div>   
 </section>

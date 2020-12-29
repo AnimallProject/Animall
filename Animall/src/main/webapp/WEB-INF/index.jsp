@@ -88,7 +88,7 @@
             </div>
         </div>
     </div>
-    <!-- nav bar -->
+
     <div class="navigation">
         <div class="container">
             <nav class="navbar navbar-expand-lg navbar-light bg-light">

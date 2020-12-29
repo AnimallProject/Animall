@@ -260,9 +260,12 @@ h6, .h6 {
   background: #ee7171;
 }
 
+
+/* background 색상 바꾸고 !important 추가*/
 .btn-secondary {
-  background: #303032;
+  background:#e5e5e5 !important;
   color: #fff;
+  transition-duration: 0.5s;
 }
 
 .btn-secondary:active {
@@ -447,6 +450,8 @@ button {
   background: #000;
   opacity: .8;
 }
+
+
 
 .overlay-primary {
   position: relative;

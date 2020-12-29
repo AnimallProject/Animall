@@ -4,7 +4,7 @@
 <mapper namespace="productMapper">
 	
 	<select id="selectProductList" parameterType="string" resultType="ProductListView">
-		SELECT P.PNO, P.PNAME, P.PCONTENT, PI.CHANGENAME 
+		SELECT P.PNO, P.PNAME, P.PCONTENT, PI.CHANGENAME, P.PPRICE
 		FROM PRODUCT P JOIN PRODUCT_IMAGES PI ON(P.PNO = PI.PNO)
 		WHERE PTYPE = #{ptype} AND IMGLEVEL = 0
 	</select>

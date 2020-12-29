@@ -42,9 +42,9 @@
 	border:1px solid #e5e5e5;
 	}
 	
-	.image_big_area>img{
-	width:500px;
-	height:450px;
+	.image_big_area > .item > img{
+	width:100%;
+	height:100%;
 	}
 	
 	.image_small_area{
@@ -56,13 +56,29 @@
 	.image_small_area > ol{
 	margin:0px 0px;
 	}
-	.image_small_area > ol > li ,
-	.image_small_area > ol > li > img{
+	.image_small_area > ol > li{
 	width:100px;
 	height:100px;
 	display:inline-block;
 	float: right;
+	padding:10px;
 	}
+	
+	
+	.image_small_area > ol > li > img{
+	width:100%;
+	height:100%;
+	display:inline-block;
+	float:right;
+	padding:10px;
+	}
+	
+	
+	
+	.image_small_area > ol > li:hover{
+		border:1px solid #997296;
+	}
+	
 	
 	.btn_area{
 	width:1000px;
@@ -215,6 +231,22 @@
 	.image_big_area > .item > img{
 	width:100%;
 	height:100%;
+	}
+	
+	.orderInfo > .Info > h3{
+	font-size:18px;
+	font-weight:bold;
+	}
+	
+	.orderInfo > .Info > h3::before{
+	content:'';
+	position:absolute;
+	left:0;
+	display:inline-block;
+	width:5px;
+	height:20px;
+	background:#6d6d6d;
+
 	}
 
 	</style>
@@ -420,6 +452,11 @@
 						</a>
 					</li>
 					<li class="nav-item">
+						<a class="nav-link" data-toggle="tab" href="#orderInfo" role="tab">
+							<h3>구매 안내</h3>
+						</a>
+					</li>
+					<li class="nav-item">
 						<a class="nav-link" data-toggle="tab" href="#review" role="tab">
 							<h3>리뷰</h3>
 						</a>
@@ -436,6 +473,46 @@
 			
 			<div class="tab-pane fade show active product_description" id="detailInfo" role="tabpanel">
 				123
+				
+			</div>
+			
+			<div class="tab-pane fade orderInfo" id="orderInfo" role="tabpanel">
+				<div class="Info">
+					<h3 class="overlay-primary">&nbsp;&nbsp;상품결제정보</h3><br />
+					<p>고액결제의 경우 안전을 위해 카드사에서 확인전화를 드릴 수도 있습니다. 확인과정에서 도난 카드의 사용이나 타인 명의의 주문등 정상적인 주문이 아니라고 판단될 경우 임의로 주문을 보류 또는 취소할 수 있습니다.  </p>
+					<p>무통장 입금은 상품 구매 대금은 PC뱅킹, 인터넷뱅킹, 텔레뱅킹 혹은 가까운 은행에서 직접 입금하시면 됩니다.  
+					   주문시 입력한 입금자명과 실제입금자의 성명이 반드시 일치하여야 하며, 7일 이내로 입금을 하셔야 하며 입금되지 않은 주문은 자동취소 됩니다.</p>
+				</div>
+				<hr /><br />
+				
+				<div class="Info">
+					<h3 class="overlay-primary">&nbsp;&nbsp;배송정보</h3><br />
+					<p>- 산간벽지나 도서지방은 별도의 추가금액을 지불하셔야 하는 경우가 있습니다.
+					   고객님께서 주문하신 상품은 입금 확인후 배송해 드립니다. 다만, 상품종류에 따라서 상품의 배송이 다소 지연될 수 있습니다.</p>
+				</div>
+				<hr /><br />
+				<div class="Info">
+					<h3 class="overlay-primary">&nbsp;&nbsp;교환 및 반품정보</h3><br />
+					<h6 class="font-weight-light">교환 및 반품 주소</h6>
+					<p>-서울특별시 강남구 테헤란로14길 6 남도빌딩 2f, 3f, 4f, 5f, 6f</p>
+					<h6 class="font-weight-light">교환 및 반품이 가능한 경우</h6>
+					<p>- 상품을 공급 받으신 날로부터 7일이내 
+  					   - 공급받으신 상품 및 용역의 내용이 표시.광고 내용과 다른경우.</p>
+					<p>- 고객님의 사용 또는 일부 소비에 의하여 상품의 가치가 현저히 감소한 경우 교환 및 반품이 불가 할수있습니다.
+					   - 제품 수령후 1개월 이상 지연 되는경우 개인정보 보호관련 규정에 의해 구매 내역 확인이 어려울수있습니다.</p>
+					<p>
+					   ※ 고객 변심으로 인한 교환 및 반품의 경우  추가 비용이 발생됩니다.
+  					   ( 색상 및 사이즈 교환)
+					</p>
+					<p>
+					   -추가 문의 사항은 Q&A를 통한 문의시 확인 후 순차 답변 진행되고있습니다.
+					</p>
+				</div>
+				<hr /><br />
+				<div class="Info">
+					<h3 class="overlay-primary">&nbsp;&nbsp;서비스 문의</h3>
+					<p>010-1234-1234</p>
+				</div>
 				
 			</div>
 			
@@ -486,6 +563,21 @@
 						
 								<!-- forEach문 -->
 									<!-- c:if문 -->
+									<li class="list-inline-item">
+									   	<a href="#">
+											<i class="ti-star golden"></i>
+										</a>
+									</li>
+									<li class="list-inline-item">
+									   	<a href="#">
+											<i class="ti-star golden"></i>
+										</a>
+									</li>
+									<li class="list-inline-item">
+									   	<a href="#">
+											<i class="ti-star golden"></i>
+										</a>
+									</li>
 									<li class="list-inline-item">
 									   	<a href="#">
 											<i class="ti-star golden"></i>
