@@ -246,7 +246,11 @@
 	width:5px;
 	height:20px;
 	background:#6d6d6d;
-
+	}
+	
+	.product_description > img{
+	width:100%;
+	height:100%;
 	}
 
 	</style>
@@ -472,8 +476,7 @@
 		<div class="tab-content" id="myTabContent">
 			
 			<div class="tab-pane fade show active product_description" id="detailInfo" role="tabpanel">
-				123
-				
+				<img src="${pageContext.request.contextPath}/resources/productUpFiles/${imageList.get(4).changename}" alt="" />
 			</div>
 			
 			<div class="tab-pane fade orderInfo" id="orderInfo" role="tabpanel">

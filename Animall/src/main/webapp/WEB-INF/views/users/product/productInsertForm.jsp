@@ -38,6 +38,10 @@
         $('#pimage4area').click(function(){
            $('#pimage4').click();
         });
+
+        $('#pimage5area').click(function(){
+           $('#pimage5').click();
+        });
         
         $('input[type="file"]').hide();
      });
@@ -58,6 +62,8 @@
                      break;
               case 4 : $('#pimage4area').attr('src', e.target.result);
                      break;
+              case 5 : $('#pimage5area').attr('src', e.target.result);
+             		 break;
               }
            }
            
@@ -131,6 +137,18 @@
 	text-align:center;
 	}
 	
+	.detail_info_area{
+	margin-top:30px;
+	width:100%;
+	height:1000px;
+	border: 1px solid #e5e5e5;
+	}
+	
+	.detail_info_area > img{
+	width:100%;
+	height:100%;
+	}
+	
 
 
 	</style>
@@ -194,6 +212,11 @@
 					</div>
 				</div>
 				
+				<div class="detail_info_area">
+					<input type="file" name="pimage" id="pimage5" onchange="imageLoad(this,5);"/>
+					<img id="pimage5area" alt=""/>
+				</div>
+				<br />
 				<div class="btn_area">
 					<button type="submit" class="productInsertBtn" onsubmit="return validate();">상품등록</button>
 				</div>

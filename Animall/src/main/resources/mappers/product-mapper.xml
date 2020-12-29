@@ -7,6 +7,7 @@
 		SELECT P.PNO, P.PNAME, P.PCONTENT, PI.CHANGENAME, P.PPRICE
 		FROM PRODUCT P JOIN PRODUCT_IMAGES PI ON(P.PNO = PI.PNO)
 		WHERE PTYPE = #{ptype} AND IMGLEVEL = 0
+		ORDER BY P.PNO DESC
 	</select>
 	
 	<insert id="insertProduct" parameterType="Product">
