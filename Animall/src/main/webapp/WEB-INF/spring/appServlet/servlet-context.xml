@@ -28,7 +28,7 @@
 	<!--viewResolver는 나갈때 읽는거지만 CommonMultipartResolver는 들어올 때 읽는것. 멀티파트 형식으로 읽어줌.  -->
 	<beans:bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
 		<beans:property name="maxUploadSize" value="20971520"/>
-		<!--  max 파일용량은 10MB이다.  -->
+		<!--  max 파일용량은 20MB이다.  -->
 	</beans:bean>
 	
 	

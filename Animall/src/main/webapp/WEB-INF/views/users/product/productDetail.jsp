@@ -252,6 +252,49 @@
 	width:100%;
 	height:100%;
 	}
+	
+	.review_avg_area{
+	border : 1px solid #e5e5e5;
+	width:330px;
+	margin-left:20px;
+	}
+	
+	.review_avg_area > .avg_area{
+
+	margin-top:10px;
+	margin-left:auto;
+	margin-right:auto;
+	width:250px;
+	height:80px;
+	text-align:center;
+	
+	}
+	
+	.review_avg_area > .avg_area > .avg_area_font{
+	margin-top:40px;
+	font-weight:bold;
+	color:#e5e5e5;
+	font-size:25px;
+	}
+	
+	.count_area{
+	margin-top:-40px;
+	margin-left:auto;
+	margin-right:auto;
+	width:250px;
+	height:130px;
+	text-align:center;
+	}
+	
+	.reviewInsertBtn{
+	margin-top:35px;
+	border-radius:8px;
+	background:#997296;
+	color:snow;
+	border:none;
+	width:100px;
+	height:30px;
+	}
 
 	</style>
 	
@@ -330,6 +373,17 @@
 					alert("문의 내용을 입력하세요.");
 					return false;	
 				}
+				return true;
+			}
+
+			// Review 유효성 검사
+			function reviewvalidate(){
+				var rcontent = $("[id=rcontent]").val();
+				if(rcontent.trim().length==0){
+					alert("리뷰 내용을 입력하세요.");
+					return false;
+				}
+
 				return true;
 			}
 		</script>
@@ -520,30 +574,141 @@
 			</div>
 			
 			<div class="tab-pane fade review_area" id="review" role="tabpanel" >
-				<form name="productReviewForm" action="${pageContext.request.contextPath}/product/productReviewInsert.do" method="post" enctype="multipart/form-data">
-					    <select name="reviewstar" class="reviewstar" id="reviewstar">
+				<form name="productReviewForm" action="${pageContext.request.contextPath}/productreview/productReviewInsert.do" method="post" enctype="multipart/form-data">					 
+				<div class="d-flex mb-4">
+					<div class="mr-3 reviewImage">
+						<img id="reviewImageArea" name="rimage" style="width:200px; height:150px" />
+						<input type="file" name="rimage" id="rimage" onchange="imageLoad(this,1);"/>
+						<button type="submit" class="reviewInsertBtn" onsubmit="return reviewvalidate();">리뷰등록</button>
+					</div>
+					<div class="border rounded py-3 px-4">
+						<div class="border-bottom mb-10" style="width:400px; height:190px;">
+							<h5><!-- {member.mname} -->123 </h5>
+							<input type="hidden" name="pno" value="${product.pno}"/>
+							<p>
+								<textarea name="rcontent" id="rcontent" cols="50" rows="5">해당 상품에 대한 리뷰를 입력하세요!</textarea>
+							</p>
+						 </div>
+						    <select name="rrating" class="reviewstar" id="reviewstar">	
                               <option value="" >별점 선택하기</option>
                               <option value="5">★★★★★</option>
                               <option value="4">★★★★☆</option>
                               <option value="3">★★★☆☆</option>
                               <option value="2">★★☆☆☆</option>
                               <option value="1">★☆☆☆☆</option>
-                        </select> <br> <br> 
-				<div class="d-flex mb-4">
-					<div class="mr-3 reviewImage">
-						<img id="reviewImageArea" style="width:200px; height:200px" />
-						<input type="file" name="rimage" id="rimage" onchange="imageLoad(this,1);"/>
+                       		</select>
 					</div>
-					<div class="border rounded py-3 px-4">
-						<div class="border-bottom mb-10" style="width:750px; height:190px;">
-							<h5><!-- {member.mname} -->123 </h5>
-							<p>
-								<textarea name="rcontent" id="rcontent" cols="90" rows="5">해당 상품에 대한 리뷰를 입력하세요!</textarea>
-							</p>
-						 </div>
+				</form>
+					<div class="review_avg_area">
+						<div class="avg_area">
+							<h6 class="avg_area_font">평점 : 0.0</h6>
+						</div>
+						
+						<div class="count_area">
+							<ul class="list-inline d-inline-block">
+									<li class="list-inline-item">
+										<i class="ti-star golden"></i>
+									</li>
+									<li class="list-inline-item"> 
+										<i class="ti-star golden"></i>
+									</li>
+									<li class="list-inline-item">
+										<i class="ti-star golden"></i>
+									</li>
+									<li class="list-inline-item">
+										<i class="ti-star golden"></i>
+									</li>
+									<li class="list-inline-item">
+                              		    <i class="ti-star golden"></i>
+                        		   </li>
+                        		   <li class="list-inline-item">
+                        		   		0
+                        		   </li>
+							</ul>
+							<ul class="list-inline d-inline-block">
+									<li class="list-inline-item">
+										<i class="ti-star golden"></i>
+									</li>
+									<li class="list-inline-item"> 
+										<i class="ti-star golden"></i>
+									</li>
+									<li class="list-inline-item">
+										<i class="ti-star golden"></i>
+									</li>
+									<li class="list-inline-item">
+										<i class="ti-star golden"></i>
+									</li>
+									<li class="list-inline-item">
+                              		    <i class="ti-star text-color"></i>
+                        		   </li>
+                        		   <li class="list-inline-item">
+                        		   		0
+                        		   </li>
+							</ul>
+							<ul class="list-inline d-inline-block">
+									<li class="list-inline-item">
+										<i class="ti-star golden"></i>
+									</li>
+									<li class="list-inline-item"> 
+										<i class="ti-star golden"></i>
+									</li>
+									<li class="list-inline-item">
+										<i class="ti-star golden"></i>
+									</li>
+									<li class="list-inline-item">
+										<i class="ti-star text-color"></i>
+									</li>
+									<li class="list-inline-item">
+                              		    <i class="ti-star text-color"></i>
+                        		   </li>
+                        		    <li class="list-inline-item">
+                        		   		0
+                        		   </li>
+							</ul>
+							<ul class="list-inline d-inline-block">
+									<li class="list-inline-item">
+										<i class="ti-star golden"></i>
+									</li>
+									<li class="list-inline-item"> 
+										<i class="ti-star golden"></i>
+									</li>
+									<li class="list-inline-item">
+										<i class="ti-star text-color"></i>
+									</li>
+									<li class="list-inline-item">
+										<i class="ti-star text-color"></i>
+									</li>
+									<li class="list-inline-item">
+                              		    <i class="ti-star text-color"></i>
+                        		   </li>
+                        		    <li class="list-inline-item">
+                        		   		0
+                        		   </li>
+							</ul>
+							<ul class="list-inline d-inline-block">
+									<li class="list-inline-item">
+										<i class="ti-star golden"></i>
+									</li>
+									<li class="list-inline-item"> 
+										<i class="ti-star text-color"></i>
+									</li>
+									<li class="list-inline-item">
+										<i class="ti-star text-color"></i>
+									</li>
+									<li class="list-inline-item">
+										<i class="ti-star text-color"></i>
+									</li>
+									<li class="list-inline-item">
+                              		    <i class="ti-star text-color"></i>
+                        		   </li>
+                        		    <li class="list-inline-item">
+                        		   		0
+                        		   </li>
+							</ul>
+						</div>
 					</div>
 				</div>				
-				</form>		
+						
 				
 				<!-- 
 				<c:if test="{리스트가 있다면}">
@@ -551,10 +716,10 @@
 				 -->
 				<div class="d-flex mb-4">
 					<div class="mr-3 reviewImage">
-						<img src="${pageContext.request.contextPath}/resources/reviewUpFiles/" style="width:200px; height:200px"  />
+						<img src="${pageContext.request.contextPath}/resources/reviewUpFiles/" style="width:200px; height:150px"  />
 					</div>
 					<div class="border rounded py-3 px-4">
-						<div class="border-bottom mb-10"  style="width:750px; height:190px;">
+						<div class="border-bottom mb-10"  style="width:600px; height:190px;">
 							<h5><!-- {member.mname} --></h5>
 							<h6 class="font-weight-light"><!-- {member.mdate --></h4>
 							<p><!-- {pcontent} --></p>

@@ -10,6 +10,7 @@
 		<typeAlias type="com.kh.animall.users.product.model.vo.Product" alias="Product" />
 		<typeAlias type="com.kh.animall.users.product.model.vo.ProductImage" alias="ProductImage" />
 		<typeAlias type="com.kh.animall.users.product.model.vo.ProductListView" alias="ProductListView" />
+		<typeAlias type="com.kh.animall.users.productreview.model.vo.ProductReview" alias="ProductReview" />
 	</typeAliases>
 
 	<typeHandlers>
