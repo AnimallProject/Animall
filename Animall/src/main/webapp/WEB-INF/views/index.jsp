@@ -6,29 +6,31 @@
 <head>
   <meta charset="utf-8">
   <title>ANIMALL</title>
-  <!-- 캐러셀 css -->
+  <!-- css -->
   <link rel="stylesheet" href="resources/css/carousel.css"/>
+  <link rel="stylesheet" href="resources/css/index.css" />
+  <link rel="stylesheet" href="resources/css/rayer.css" />
   
 </head>
 
 <body>
   
 <header>
-	<%@ include file="views/common/header.jsp"%>
+	<%@ include file="common/header.jsp"%>
 </header>
 
 <!-- 캐러셀 -->
 
-<section>
+<section style="display : flex; justify-content : center;">
   <div class="carousel-container">
   <i class="fas fa-arrow-right" id="nextBtn"></i>
   <i class="fas fa-arrow-left" id="prevBtn"></i>
   	<div class="carousel-slide">
-  	<img src="resources/images/banner/pet_food_banner.png" id="lastClone" alt="" />
-  		<img src="resources/images/banner/dog_cat_banner1.png" alt="" />
-  		<img src="resources/images/banner/christmas_banner.png" alt="" />
-  		<img src="resources/images/banner/pet_food_banner.png" alt="" />
-  	<img src="resources/images/banner/dog_cat_banner1.png" id="firstClone" alt="" />
+  	<img src="resources/images/banner/pet_food_banner3.png" id="lastClone" alt="" />
+  		<img src="resources/images/banner/cat_dog_banner3.png" alt="" />
+  		<img src="resources/images/banner/christmas_banner3.png" alt="" />
+  		<img src="resources/images/banner/pet_food_banner3.png" alt="" />
+  	<img src="resources/images/banner/cat_dog_banner3.png" id="firstClone" alt="" />
   	</div>
   </div>
   
@@ -37,38 +39,99 @@
 
 <!-- 상품추천 -->
 <section>
-<div class="" style="border : 1px solid black; height : 700px; width : auto;
-	display : flex; align-items : center; flex-direction : column; padding-bottom : 50px; ">
-	<div class="" style="border : 1px solid black; width : 1350px;
-	 display : flex; justify-content : center; align-items : center;
-	height : 180px; display : flex; justify-content : center; align-items : center;
-	padding-top : 70px">
+<div class="primeContainer_ForIndexProduct">
+	<div class="bigContainer_ForIndexProduct1">
 	        <h3 class="">이 상품 어때요?</h3>
 	</div>
 	
-	<div class="" style="border-bottom : 1px solid black; width : 1350px;
-	 display : flex; justify-content : center; align-items : center;
-	height : 450px; display : flex; justify-content : center; align-items : center;">
+	<div class="bigContainer_ForIndexProduct2">
 	
-	<div>
-		<div style="width : 315px; height : 300px; border : 1px solid black;">
-			<a href="">
-			<img src="" alt="" />
-			</a>
+	<c:forEach var="indexProduct" items="${productList}">
+		<div>
+			<div class="imgContainer_ForIndexProduct">
+				<a href="">
+				<img src="${pageContext.request.contextPath}${indexProduct.imgpath}" alt="" />
+				</a>
+			</div>
+			<div class="productContainer_ForIndexProduct">
+				<p style ="height : 10px">${indexProduct.pname}</p>
+				<p style ="height : 10px">${indexProduct.pprice}</p>
+			</div>
 		</div>
-		<div style="border : 1px solid black; height : 100px ; width : 315px;
-		display : flex; justify-content : center; align-items : center; flex-direction : column;">
-			<p style ="height : 10px">동결 건조 북어</p>
-			<p style ="height : 10px">1000원</p>
-		</div>
-	</div>
+	</c:forEach>
+	
 
-
-
-            
 	</div>
 </div>
 </section>
+
+
+
+
+
+
+
+
+<div class="primeContainer_forRayer">
+<div class="bigContainer_forRayer" id="write__form__bg"></div>
+
+		<form id='write__form' role='form' method='post'
+			enctype='multipart/form-data'>
+			<div id="write__form__box"
+				style="display: flex; justify-content: center; align-items: center; position: fixed; top: 0; left: 0; widtH: 100%; height: 100%; z-index: 9999;">
+				<div
+					style="background-color: #ffffff; width: 550px; height: 700px; position: relative; display: flex; justify-content: center;">
+
+					<div style="margin: 60px 0 0 0;">
+						<div>
+							<input id="btitle" placeholder="제목" type="text" name="btitle"
+								style="height: 40px; width: 350px; margin: 0 0 30px 0; padding: 0; border: none; border-bottom: 1px solid #191621; font-size: 20pt; background-color: transparent; border-radius: 0;">
+						</div>
+						<div style="width: 350px; height: 350px; margin: 0 0 30px 0;">
+							<textarea id="bcontent" placeholder="내용" name="bcontent"
+								style="padding: 0; border: solid 1px black; font-size: 11pt; width: 100%; height: 100%; padding: 10px;"></textarea>
+						</div>
+
+						<div>
+							<div>
+								<input id="file1" type="file" name="file">
+							</div>
+							<div>
+								<input id="file2" type="file" name="file">
+							</div>
+							<div>
+								<input id="file3" type="file" name="file">
+							</div>
+						</div>
+
+						<div
+							style="margin: 20px 0 0 0; display: flex; justify-content: center;">
+							<div id="write__button"
+								style="background-color: #997296; width: 350px; border-radius: 14px; display: flex; justify-content: center; align-items: center; cursor: pointer; height: 25px;">
+								<div style="font-size: 10pt; color: white;">글등록</div>
+							</div>
+						</div>
+
+					</div>
+					<div id="write__close__button"
+						style="cursor: pointer; position: absolute; top: 10px; right: 10px;">
+						<img src="/animall/resources/images/cancel.png"
+							style="width: 25px;">
+					</div>
+				</div>
+
+			</div>
+		</form>
+	</div>
+</div>
+
+
+
+
+
+
+
+
 
 <section class="about section-sm overlay" style="background-image: url(resources/images/background/about-bg.jpg);">
     <div class="container">
@@ -633,7 +696,7 @@
 
 <!-- footer -->
 <footer>
-	<%@ include file="views/common/footer.jsp" %>
+	<%@ include file="common/footer.jsp" %>
 </footer>
 
 </body>

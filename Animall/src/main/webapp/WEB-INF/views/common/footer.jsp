@@ -18,8 +18,7 @@
 <div class="topContainer">
 	<div style="font-family: Nanum Gothic">
 	<div class="bigContainer1">
-		<div class="topMenuBlank">
-		</div>
+		
 		<div class="topMenu">
 			<a href="#">
 				Animall 소개
@@ -44,6 +43,8 @@
 			<a href="#">
 				이용안내
 			</a>
+		</div>
+		<div class="topMenuBlank">
 		</div>
 	</div>
 	</div>

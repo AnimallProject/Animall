@@ -8,6 +8,8 @@
 
 	<typeAliases>
 		<typeAlias type="com.kh.animall.users.product.model.vo.Product" alias="Product" />
+		<typeAlias type="com.kh.animall.index.model.vo.IndexProduct" alias="IndexProduct" />
+		<typeAlias type="com.kh.animall.index.model.vo.ProductImages" alias="ProductImages" />
 	</typeAliases>
 
 	<typeHandlers>

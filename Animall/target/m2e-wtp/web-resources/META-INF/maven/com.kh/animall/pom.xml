@@ -154,6 +154,14 @@
 			<version>1.18.16</version>
 			<scope>provided</scope>
 		</dependency>
+		
+		<!-- @ResponseBody : java Object ==> JSON -->
+		<dependency>
+		    <groupId>com.fasterxml.jackson.core</groupId>
+		    <artifactId>jackson-databind</artifactId>
+		    <version>2.11.3</version>
+		</dependency>
+		
 		<!-- 게시판에 파일을 올릴 수 있게 하는 파일 입출력 라이브러리 -->
 		<dependency>
 			<groupId>commons-io</groupId>

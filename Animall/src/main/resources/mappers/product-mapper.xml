@@ -9,7 +9,23 @@
 		WHERE PTYPE = #{ptype}
 	</select>
 	
-
+	<insert id="insertProduct">
+		<selectKey keyProperty="bno" resultType="int" order="BEFORE">
+			 SELECT SEQ_BOARD.NEXTVAL FROM DUAL
+		</selectKey>
+		INSERT INTO BOARD (BNO, MNO, BTITLE, BCONTENT, BDATE)
+		VALUES (#{bno}, #{mno}, #{btitle}, #{bcontent}, SYSDATE)
+	</insert>
+	
+	
+	<insert id="insertProductImg">
+		INSERT INTO BOARD_IMAGES (BIMGNO, BNO, MNO, ORIGINNAME, CHANGENAME, IMGPATH, IMGLEVEL, UPLOADDATE)
+		SELECT SEQ_BOARD_IMAGE.NEXTVAL, A.* from(		
+		<foreach collection="list" item="bi" separator="UNION ALL">
+			SELECT #{bi.bno}, #{bi.mno}, #{bi.originname}, #{bi.changename}, #{bi.imgpath}, #{bi.imglevel}, SYSDATE FROM DUAL
+		</foreach>
+		) A
+	</insert>
 	
 	
 	
