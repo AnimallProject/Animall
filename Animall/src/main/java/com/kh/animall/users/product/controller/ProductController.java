@@ -128,8 +128,6 @@ public class ProductController {
 
 	}
 	
-	
-	
 	@RequestMapping("/product/productList.do")
 	public String selectProductList(@RequestParam String ptype, Model model) {
 	
