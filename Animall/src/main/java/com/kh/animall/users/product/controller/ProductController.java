@@ -8,13 +8,18 @@ import java.util.Date;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.kh.animall.users.product.model.service.ProductService;
 import com.kh.animall.users.product.model.vo.Product;
@@ -26,6 +31,104 @@ public class ProductController {
 	
 	@Autowired
 	ProductService productService;
+	
+	@RequestMapping("/product/productList2.do")
+	public ModelAndView selectProductList2(@RequestParam String ptype, Model model,
+									HttpServletResponse response) throws IOException {
+		
+		response.setCharacterEncoding("UTF-8"); 
+		
+		ModelAndView mv = new ModelAndView();
+		
+		List<ProductListView> plist = new ArrayList<>();
+		
+		plist = productService.selectProductList(ptype);
+		
+		System.out.println("json plist를 보고싶다 :" + plist);
+		
+		JSONArray jsonplist = new JSONArray();
+		
+		for(ProductListView plv : plist) {
+			JSONObject jsonplv = new JSONObject();
+			
+			jsonplv.put("pno", plv.getPno());
+			jsonplv.put("pname", plv.getPname());
+			jsonplv.put("pprice", plv.getPprice());
+			jsonplv.put("pcontent", plv.getPcontent());
+			jsonplv.put("changename", plv.getChangename());
+			
+			jsonplist.add(jsonplv);
+			
+		}
+		
+		System.out.println("jsonplist :" + jsonplist);
+		
+		JSONObject sendResult = new JSONObject();
+		
+		sendResult.put("jsonplist", jsonplist);
+		
+		System.out.println("sendResult : " + sendResult);
+		
+		
+		response.setContentType("application/json; charset=UTF-8");
+//		response.getWriter().print(sendResult.toJSONString());
+//	
+//		System.out.println("sendResult toJSONString : " + sendResult.toJSONString());
+//		
+//		mv.addObject("ptype", ptype);
+//		mv.addObject("sendResult", sendResult);
+//		
+//		mv.setViewName("users/product/productList");
+		
+		return mv;
+	}
+	
+	@RequestMapping("/product/productMoreList.do")
+	@ResponseBody
+	public void selectProductMoreList(@RequestParam String ptype, Model model,
+									HttpServletResponse response) throws IOException {
+		
+		response.setCharacterEncoding("UTF-8"); 
+		
+//		ModelAndView mv = new ModelAndView();
+		
+		List<ProductListView> plist = new ArrayList<>();
+		
+		plist = productService.selectProductList(ptype);
+		
+		System.out.println("json plist를 보고싶다 :" + plist);
+		
+		JSONArray jsonplist = new JSONArray();
+		
+		for(ProductListView plv : plist) {
+			JSONObject jsonplv = new JSONObject();
+			
+			jsonplv.put("pno", plv.getPno());
+			jsonplv.put("pname", plv.getPname());
+			jsonplv.put("pprice", plv.getPprice());
+			jsonplv.put("pcontent", plv.getPcontent());
+			jsonplv.put("changename", plv.getChangename());
+			
+			jsonplist.add(jsonplv);
+			
+		}
+		
+		System.out.println("jsonplist :" + jsonplist);
+		
+		
+		response.setContentType("application/json; charset=UTF-8");
+		response.getWriter().print(jsonplist.toJSONString());
+//	
+//		System.out.println("sendResult toJSONString : " + sendResult.toJSONString());
+//		
+//		mv.addObject("ptype", ptype);
+//		mv.addObject("sendResult", sendResult);
+//		
+//		mv.setViewName("users/product/productList");
+
+	}
+	
+	
 	
 	@RequestMapping("/product/productList.do")
 	public String selectProductList(@RequestParam String ptype, Model model) {

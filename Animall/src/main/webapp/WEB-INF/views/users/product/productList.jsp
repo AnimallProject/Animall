@@ -12,18 +12,121 @@
   <meta charset="utf-8">
   <title>상품</title>
     <script src="${pageContext.request.contextPath }/resources/js/jquery-3.5.1.min.js"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 	<script>
 		function productInsertForm(){
 			var ptype = document.getElementById('ptype').value;
 			location.href = "${pageContext.request.contextPath}/product/productInsertForm.do?ptype="+ptype;
 		}		
 
-		$(function(){
+		function showDetail() {
 			$(".card-img-wrapper").on("click",function(){
 				var pno = $(this).attr("id");
 				location.href = "${pageContext.request.contextPath}/product/productSelectOne.do?pno="+pno;
 			});
+		}
+		
+		$(function(){
+			//console.log($start);
+			var ptype = '${ptype}';
+			
+			console.log(ptype);
+	
+			var $productList = $('.forProductList'),
+			$start = 0,
+			$end = 6,
+			$count = 0;
+			elements =[];
+			$now = 0;
+			
+			$('#loadmore').on('click',function(){
+
+				elements.length = 0;
+				
+				$.ajax({
+					url : '${pageContext.request.contextPath}/product/productMoreList.do?ptype='+ptype,
+					type: 'get',
+					success:function(data){
+						//console.log(data);
+						//console.log(data.length);
+							if(data.length <= 6){
+								$('#loadmore').hide();
+
+								for(var i = $start; i < data.length; i++){
+									var itemHTML=
+												  '<div class="col-lg-4 col-sm-6 mb-5">' + 
+												  	'<div class="card text-center productList">' +
+												  	  '<h4 class="card-title pt-3">' + data[i].pname + '</h4><hr />' +
+												  		'<div class="card-img-wrapper" id="' + data[i].pno + '">' +
+												  		   '<img class="card-img-top rounded-0 productListImage" src="${pageContext.request.contextPath}/resources/productUpFiles/' + data[i].changename + '"></div>'
+														+ '<div class="card-body p-0">' + 	
+														'<p class="card-text mx-2 mb-0">' + data[i].pcontent + '</p>' +
+													     '<p class="card-text mx-2 mb-0">' + data[i].pprice + '</p>' +
+													     '<a href="service-single.html" class="btn btn-secondary translateY-25 basket">' +
+													     '<img src="${pageContext.request.contextPath}/resources/images/basketIcon2.png" alt="" />' +
+													     '</a></div></div></div>';
+													     
+								     elements.push($(itemHTML).get(0));	  
+
+								     $count += 1;                  
+								}
+									
+								$productList.append(elements);
+
+							}else{
+					
+								for(var i = $start; i < $end; i++){
+									var itemHTML=
+												  '<div class="col-lg-4 col-sm-6 mb-5">' + 
+												  	'<div class="card text-center productList">' +
+												  	  '<h4 class="card-title pt-3">' + data[i].pname + '</h4><hr />' +
+												  		'<div class="card-img-wrapper" id="' + data[i].pno + '">' +
+												  		   '<img class="card-img-top rounded-0 productListImage" src="${pageContext.request.contextPath}/resources/productUpFiles/' + data[i].changename + '"></div>'
+														+ '<div class="card-body p-0">' + 	
+														'<p class="card-text mx-2 mb-0">' + data[i].pcontent + '</p>' +
+													     '<p class="card-text mx-2 mb-0">' + data[i].pprice + '</p>' +
+													     '<a href="service-single.html" class="btn btn-secondary translateY-25 basket">' +
+													     '<img src="${pageContext.request.contextPath}/resources/images/basketIcon2.png" alt="" />' +
+													     '</a></div></div></div>';
+													     
+								     elements.push($(itemHTML).get(0));	  
+	
+								     $count += 1;                  
+								 }
+	
+								 console.log(elements);
+	
+								 $productList.append(elements);
+	
+								 $start = $end;
+	
+								 if((data.length-$start) < 6){
+									$end += (data.length-$start);
+								 }else{
+									$end += 6;
+								 }
+								 
+								 
+								 if($start < data.length){
+									$('#loadmore').show();
+								 }else{
+									$('#loadmore').hide();
+			
+								 }
+							 
+							}
+							
+						showDetail();
+						
+					}
+				
+				    });
+			});		
+			
+			$('#loadmore').click();	
+			
 		});
+
 	</script>
 	
 	<style>
@@ -56,6 +159,12 @@
 		width:150px;
 		margin:auto;
 	}
+	
+	.btn_area > input[id='loadmore']{
+		margin-right:430px;
+	}
+	
+
 	
 	</style>
 </head>
@@ -105,37 +214,18 @@
 
 <section class="section">
     <div class="container">
-        <div class="row">
+        <div class="row forProductList">
         	<!-- for문 시작 전 ptype먼저 넘겨주고 -->
         	<input type="hidden" id="ptype" name="ptype" value="${ptype}" readonly/>
             <!-- 제품들 for문 시작 -->
-            <c:forEach items="${plist}" var="plist">
-            <div class="col-lg-4 col-sm-6 mb-5">
-                <div class="card text-center productList">
-                	
-                    <h4 class="card-title pt-3">${plist.pname}</h4>
-                    <hr />
-                    <div class="card-img-wrapper" id="${plist.pno}">
-                        <img class="card-img-top rounded-0 productListImage" src="${pageContext.request.contextPath}/resources/productUpFiles/${plist.changename}">
-                    </div>
-                    <div class="card-body p-0">
-                        
-                        <p class="card-text mx-2 mb-0">${plist.pcontent}</p>
-                        <p class="card-text mx-2 mb-0">${plist.pprice}원</p>
-                        <a href="service-single.html" class="btn btn-secondary translateY-25 basket">
-                        	<img src="${pageContext.request.contextPath}/resources/images/basketIcon2.png" alt="" />
-                        </a>
-                    </div>
-                    
-                </div>
-            </div>  
-            </c:forEach>
+            
   		    <!-- 제품들 for문 끝 -->
   		</div>  
   		<div class="btn_area">
 				<!-- <c:if test="${!empty member and member.mtype eq 'admin'}">  -->
 				<!-- </c:if> -->  		    
 					<input type="button" value="상품등록" id="" class="btn2" onclick="productInsertForm();"/>
+					<input type="button" value="더보기" id="loadmore" class="btn2"/>
   	   </div>
   	</div>   
 </section>
