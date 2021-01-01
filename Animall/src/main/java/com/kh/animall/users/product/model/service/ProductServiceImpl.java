@@ -10,6 +10,7 @@ import com.kh.animall.users.product.model.dao.ProductDAO;
 import com.kh.animall.users.product.model.vo.Product;
 import com.kh.animall.users.product.model.vo.ProductImage;
 import com.kh.animall.users.product.model.vo.ProductListView;
+import com.kh.animall.users.product.model.vo.ProductReviewView;
 
 @Service
 public class ProductServiceImpl implements ProductService {
@@ -78,6 +79,38 @@ public class ProductServiceImpl implements ProductService {
 	@Override
 	public int updateProduct(Product originProduct) {
 		return productDAO.updateProduct(originProduct);
+	}
+
+	@Override
+	public List<ProductReviewView> selectProductReviewList(int pno) {
+		
+		return productDAO.selectProductReviewList(pno);
+	}
+
+	@Override
+	public int selectRating1(int pno) {
+		return productDAO.selectRating1(pno);
+	}
+
+	@Override
+	public int selectRating2(int pno) {
+		
+		return productDAO.selectRating2(pno);
+	}
+	
+	@Override
+	public int selectRating3(int pno) {
+		return productDAO.selectRating3(pno);
+	}
+	
+	@Override
+	public int selectRating4(int pno) {
+		return productDAO.selectRating4(pno);
+	}
+	
+	@Override
+	public int selectRating5(int pno) {
+		return productDAO.selectRating5(pno);
 	}
 
 	

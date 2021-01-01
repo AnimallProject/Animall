@@ -51,6 +51,33 @@
 		DELETE FROM PRODUCT WHERE PNO = #{pno}
 	</delete>
 	
+	<select id="selectProductReviewList" parameterType="_int" resultType="ProductReviewView">
+		SELECT PR.RNO, PR.PNO, M.NNAME, PR.RRATING, PR.RDATE, PR.RCONTENT, RI.CHANGENAME
+		FROM MEMBER M JOIN PRODUCT_REVIEW PR ON(M.MNO = PR.MNO) JOIN REVIEW_IMAGES RI ON(RI.PRIMGNO = PR.PRIMGNO)
+		WHERE PNO = #{pno} 
+		ORDER BY RDATE
+	</select>
+	
+	<select id="selectRating1" parameterType="_int" resultType="_int">
+		SELECT COUNT(*) FROM PRODUCT_REVIEW WHERE PNO=#{pno} AND RRATING = 1
+	</select>
+	
+	<select id="selectRating2" parameterType="_int" resultType="_int">
+		SELECT COUNT(*) FROM PRODUCT_REVIEW WHERE PNO=#{pno} AND RRATING = 2
+	</select>
+	
+	<select id="selectRating3" parameterType="_int" resultType="_int">
+		SELECT COUNT(*) FROM PRODUCT_REVIEW WHERE PNO=#{pno} AND RRATING = 3
+	</select>
+	
+	<select id="selectRating4" parameterType="_int" resultType="_int">
+		SELECT COUNT(*) FROM PRODUCT_REVIEW WHERE PNO=#{pno} AND RRATING = 4
+	</select>
+	
+	<select id="selectRating5" parameterType="_int" resultType="_int">
+		SELECT COUNT(*) FROM PRODUCT_REVIEW WHERE PNO=#{pno} AND RRATING = 5
+	</select>
+	
 	
 	
 

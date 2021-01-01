@@ -10,6 +10,7 @@ import org.springframework.stereotype.Repository;
 import com.kh.animall.users.product.model.vo.Product;
 import com.kh.animall.users.product.model.vo.ProductImage;
 import com.kh.animall.users.product.model.vo.ProductListView;
+import com.kh.animall.users.product.model.vo.ProductReviewView;
 
 @Repository
 public class ProductDAOImpl implements ProductDAO {
@@ -58,6 +59,37 @@ public class ProductDAOImpl implements ProductDAO {
 	@Override
 	public int updateProduct(Product originProduct) {
 		return sqlSession.update("productMapper.updateProduct", originProduct);
+	}
+
+	@Override
+	public List<ProductReviewView> selectProductReviewList(int pno) {
+
+		return sqlSession.selectList("productMapper.selectProductReviewList", pno);
+	}
+
+	@Override
+	public int selectRating1(int pno) {
+		return sqlSession.selectOne("productMapper.selectRating1", pno);
+	}
+
+	@Override
+	public int selectRating2(int pno) {
+		return sqlSession.selectOne("productMapper.selectRating2", pno);
+	}
+
+	@Override
+	public int selectRating3(int pno) {
+		return sqlSession.selectOne("productMapper.selectRating3", pno);
+	}
+
+	@Override
+	public int selectRating4(int pno) {
+		return sqlSession.selectOne("productMapper.selectRating4", pno);
+	}
+
+	@Override
+	public int selectRating5(int pno) {
+		return sqlSession.selectOne("productMapper.selectRating5", pno);
 	}
 
 

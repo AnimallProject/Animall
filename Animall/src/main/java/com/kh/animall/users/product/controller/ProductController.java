@@ -25,6 +25,7 @@ import com.kh.animall.users.product.model.service.ProductService;
 import com.kh.animall.users.product.model.vo.Product;
 import com.kh.animall.users.product.model.vo.ProductImage;
 import com.kh.animall.users.product.model.vo.ProductListView;
+import com.kh.animall.users.product.model.vo.ProductReviewView;
 
 @Controller
 public class ProductController {
@@ -229,10 +230,26 @@ public class ProductController {
 		
 		List<ProductImage> imageList = productService.selectProductImageList(pno);
 		
+		List<ProductReviewView> prv = productService.selectProductReviewList(pno); 
+		
+		System.out.println("productReviewList입니다 :" + prv);
+		
 		System.out.println("imageList에서의 imageList : " + imageList);
+		
+		int rating1 = productService.selectRating1(pno);
+		int rating2 = productService.selectRating2(pno);
+		int rating3 = productService.selectRating3(pno);
+		int rating4 = productService.selectRating4(pno);
+		int rating5 = productService.selectRating5(pno);
 		
 		model.addAttribute("product", product);
 		model.addAttribute("imageList", imageList);
+		model.addAttribute("prv", prv);
+		model.addAttribute("rating1", rating1);
+		model.addAttribute("rating2", rating2);
+		model.addAttribute("rating3", rating3);
+		model.addAttribute("rating4", rating4);
+		model.addAttribute("rating5", rating5);
 		
 		return "/users/product/productDetail";
 	}

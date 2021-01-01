@@ -295,7 +295,7 @@
 	width:100px;
 	height:30px;
 	}
-
+	
 	</style>
 	
 		<script>
@@ -378,21 +378,24 @@
 
 			// Review 유효성 검사
 			function reviewvalidate(){
-				var rcontent = $("[id=rcontent]").val();
-				if(rcontent.trim().length==0){
+				var rcontent = $('#rcontent').val();
+				if(!rcontent){
 					alert("리뷰 내용을 입력하세요.");
+					return false;
+				}
+				return true;
+			}
+
+			function rratingvalidate(){
+				var rrating = $('#reviewstar').val();
+				if(!rrating){
+					alert("별점을 선택하세요.");
 					return false;
 				}
 
 				return true;
 			}
 		</script>
-		
-	
-		
-		
-					
-	
 
 </head>
 <body>
@@ -585,12 +588,13 @@
 						<div class="border-bottom mb-10" style="width:400px; height:190px;">
 							<input type="hidden" name="mno" value="${member.mno}"/>
 							<h5>${member.nname}</h5>
+							<hr />
 							<input type="hidden" name="pno" value="${product.pno}"/>
 							<p>
-								<textarea name="rcontent" id="rcontent" cols="50" rows="5">해당 상품에 대한 리뷰를 입력하세요!</textarea>
+								<textarea name="rcontent" id="rcontent" cols="50" rows="5" required>해당 상품에 대한 리뷰를 입력하세요!</textarea>
 							</p>
 						 </div>
-						    <select name="rrating" class="reviewstar" id="reviewstar">	
+						    <select name="rrating" class="reviewstar" id="reviewstar" required>	
                               <option value="" >별점 선택하기</option>
                               <option value="5">★★★★★</option>
                               <option value="4">★★★★☆</option>
@@ -600,9 +604,18 @@
                        		</select>
 					</div>
 				</form>
+					<c:if test="${!empty prv}">
+						<c:set var="rratingavg" value="${(rating1 * 1 + rating2 * 2 + rating3 * 3 + rating4 * 4 + rating5 * 5) / (rating1 + rating2 + rating3 + rating4 + rating5)}" />
+					</c:if>
+					<c:if test="${empty prv}">
+						<c:set var="rratingavg" value="0.0" />
+					</c:if>
+					
+					<fmt:formatNumber var="rratingavg2" value="${rratingavg}" pattern="0.0" />
+					
 					<div class="review_avg_area">
 						<div class="avg_area">
-							<h6 class="avg_area_font">평점 : 0.0</h6>
+							<h6 class="avg_area_font">평점 : ${rratingavg2}</h6>
 						</div>
 						
 						<div class="count_area">
@@ -623,7 +636,7 @@
                               		    <i class="ti-star golden"></i>
                         		   </li>
                         		   <li class="list-inline-item">
-                        		   		0
+                        		   		${rating5}
                         		   </li>
 							</ul>
 							<ul class="list-inline d-inline-block">
@@ -643,7 +656,7 @@
                               		    <i class="ti-star text-color"></i>
                         		   </li>
                         		   <li class="list-inline-item">
-                        		   		0
+                        		   		${rating4}
                         		   </li>
 							</ul>
 							<ul class="list-inline d-inline-block">
@@ -663,7 +676,7 @@
                               		    <i class="ti-star text-color"></i>
                         		   </li>
                         		    <li class="list-inline-item">
-                        		   		0
+                        		   		${rating3}
                         		   </li>
 							</ul>
 							<ul class="list-inline d-inline-block">
@@ -683,7 +696,7 @@
                               		    <i class="ti-star text-color"></i>
                         		   </li>
                         		    <li class="list-inline-item">
-                        		   		0
+                        		   		${rating2}
                         		   </li>
 							</ul>
 							<ul class="list-inline d-inline-block">
@@ -703,67 +716,130 @@
                               		    <i class="ti-star text-color"></i>
                         		   </li>
                         		    <li class="list-inline-item">
-                        		   		0
+                        		   		${rating1}
                         		   </li>
 							</ul>
 						</div>
 					</div>
 				</div>				
 						
-				
-				<!-- 
-				<c:if test="{리스트가 있다면}">
-				</c:if>
-				 -->
-				<div class="d-flex mb-4">
-					<div class="mr-3 reviewImage">
-						<img src="${pageContext.request.contextPath}/resources/reviewUpFiles/" style="width:200px; height:150px"  />
-					</div>
+				 <c:if test="${!empty prv}">
+				 	<c:forEach items="${prv}" var="prv">
+				 	
+				 	<div class="d-flex mb-4">
+						<div class="mr-3 reviewImage">
+							<img src="${pageContext.request.contextPath}/resources/productReviewUpFiles/${prv.changename}" style="width:200px; height:150px"  />
+						</div>
 					<div class="border rounded py-3 px-4">
 						<div class="border-bottom mb-10"  style="width:600px; height:190px;">
-							<h5><!-- {member.mname} --></h5>
-							<h6 class="font-weight-light"><!-- {member.mdate --></h4>
-							<p><!-- {pcontent} --></p>
+							<div class="reviewname">
+							<h5>${prv.nname}</h5>
+							<h6 class="font-weight-light">${prv.rdate}</h6>
+							</div>
+							
+							<hr />
+							<p>${prv.rcontent}</p>
 						</div>
 					
 						<div class="d-flex justify-content-between">
 							<div>
 								<ul class="list-inline d-inline-block">
-						
-								<!-- forEach문 -->
-									<!-- c:if문 -->
-									<li class="list-inline-item">
-									   	<a href="#">
+									<c:if test="${prv.rrating == 5}"> 
+										<li class="list-inline-item">
 											<i class="ti-star golden"></i>
-										</a>
-									</li>
-									<li class="list-inline-item">
-									   	<a href="#">
+										</li>
+										<li class="list-inline-item">
 											<i class="ti-star golden"></i>
-										</a>
-									</li>
-									<li class="list-inline-item">
-									   	<a href="#">
+										</li>
+										<li class="list-inline-item">
 											<i class="ti-star golden"></i>
-										</a>
-									</li>
-									<li class="list-inline-item">
-									   	<a href="#">
+										</li>
+										<li class="list-inline-item">
 											<i class="ti-star golden"></i>
-										</a>
-									</li>
-									<li class="list-inline-item">
-                         		       <a href="#">
-                              		      <i class="ti-star text-color"></i>
-                          		      </a>
-                        		   </li>
+										</li>
+										<li class="list-inline-item">
+											<i class="ti-star golden"></i>
+										</li>
+									</c:if>
+									<c:if test="${prv.rrating == 4}">
+										<li class="list-inline-item">
+											<i class="ti-star golden"></i>
+										</li>
+										<li class="list-inline-item">
+											<i class="ti-star golden"></i>
+										</li>		
+										<li class="list-inline-item">
+											<i class="ti-star golden"></i>
+										</li>
+										<li class="list-inline-item">
+											<i class="ti-star golden"></i>
+										</li>
+										<li class="list-inline-item">
+                              		    	<i class="ti-star text-color"></i>
+                        		   		</li>
+									</c:if>
+									<c:if test="${prv.rrating == 3}">
+										<li class="list-inline-item">
+											<i class="ti-star golden"></i>
+										</li>
+										<li class="list-inline-item">
+											<i class="ti-star golden"></i>
+										</li>
+										<li class="list-inline-item">
+											<i class="ti-star golden"></i>
+										</li>
+										<li class="list-inline-item">
+                              		    	<i class="ti-star text-color"></i>
+                        		   		</li>
+                        		   		<li class="list-inline-item">
+                              		    	<i class="ti-star text-color"></i>
+                        		   		</li>
+                        		   	</c:if>
+                        		   	<c:if test="${prv.rrating == 2}">
+                        		   		<li class="list-inline-item">
+											<i class="ti-star golden"></i>
+										</li>
+										<li class="list-inline-item">
+											<i class="ti-star golden"></i>
+										</li>
+										<li class="list-inline-item">
+                              		    	<i class="ti-star text-color"></i>
+                        		   		</li>
+                        		   		<li class="list-inline-item">
+                              		    	<i class="ti-star text-color"></i>
+                        		   		</li>
+                        		   		<li class="list-inline-item">
+                              		    	<i class="ti-star text-color"></i>
+                        		   		</li>
+                        		   	</c:if>
+                        		   	<c:if test="${prv.rrating == 1}">
+                        		   		<li class="list-inline-item">
+											<i class="ti-star golden"></i>
+										</li>
+										<li class="list-inline-item">
+                              		    	<i class="ti-star text-color"></i>
+                        		   		</li>
+                        		   		<li class="list-inline-item">
+                              		    	<i class="ti-star text-color"></i>
+                        		   		</li>
+                        		   		<li class="list-inline-item">
+                              		    	<i class="ti-star text-color"></i>
+                        		   		</li>
+                        		   		<li class="list-inline-item">
+                              		    	<i class="ti-star text-color"></i>
+                        		   		</li>
+									</c:if>
 								</ul>
 							</div>
 						</div>	
 					</div>
 				</div>
-				
-				
+				 		
+				 		
+				 		
+				 	</c:forEach>
+				 </c:if>
+											
 			</div>
 			
 			<div class="tab-pane fade product_inquiry_area" id="productInquiry" role="tabpanel">
@@ -775,7 +851,7 @@
 							</h6>
 							<input type="hidden" value="${product.pno}" />
 							<h6 class="font-weight-light" id="piproductname">문의 제품 : ${product.pname} </h6>
-							<h6 class="font-weight-light" id="piname">문의자 : 김형록<!-- {mname} --></h6>
+							<h6 class="font-weight-light" id="piname">${member.nname}</h6>
 							<input type="hidden" value="" /> <!-- 여기 value에 mno 넣어주기 -->
 						</div>
 						<hr />
@@ -789,9 +865,9 @@
 			</div>
 		</div>
 	</div>
-
-
-	<c:import url="../../common/footer.jsp" />
+	</div>
+	
+	<c:import url="../../common/footer.jsp"/>
 	
 	<script src="${pageContext.request.contextPath}/resources/js/owl.carousel.min.js"></script>
 	<script src="${pageContext.request.contextPath}/resources/js/owl.carousel.js"></script>

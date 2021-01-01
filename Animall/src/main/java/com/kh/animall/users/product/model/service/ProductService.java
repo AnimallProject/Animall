@@ -6,6 +6,7 @@ import java.util.List;
 import com.kh.animall.users.product.model.vo.Product;
 import com.kh.animall.users.product.model.vo.ProductImage;
 import com.kh.animall.users.product.model.vo.ProductListView;
+import com.kh.animall.users.product.model.vo.ProductReviewView;
 
 public interface ProductService {
 
@@ -22,5 +23,16 @@ public interface ProductService {
 	int deleteProductImage(int pno);
 
 	int updateProduct(Product originProduct);
+
+	List<ProductReviewView> selectProductReviewList(int pno);
+
+	int selectRating1(int pno);
+
+	int selectRating2(int pno);
+
+	int selectRating3(int pno);
 	
+	int selectRating4(int pno);
+	
+	int selectRating5(int pno);
 }
