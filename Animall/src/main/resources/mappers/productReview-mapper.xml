@@ -3,6 +3,20 @@
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="productReviewMapper">
 	
+	<insert id="insertReviewImage" parameterType="ProductReviewImage">
+		INSERT INTO REVIEW_IMAGES(PRIMGNO, ORIGINNAME, CHANGENAME, IMGPATH, IMGLEVEL, UPLOADDATE, ISDELETE)
+		VALUES(SEQ_PRIMGNO.NEXTVAL, #{originname}, #{changename}, #{imgpath}, DEFAULT, DEFAULT, DEFAULT)
+	</insert>
+	
+	<insert id="insertProductReview" parameterType="ProductReview">
+		
+		<selectKey keyProperty="primgno" resultType="_int" order="BEFORE">
+			SELECT SEQ_PRIMGNO.CURRVAL FROM DUAL
+		</selectKey>
+	
+		INSERT INTO PRODUCT_REVIEW (RNO, PNO, MNO, RRATING, RDATE, RCONTENT, PRIMGNO) 
+		VALUES(SEQ_RNO.NEXTVAL, #{pno}, #{mno}, #{rrating}, DEFAULT, #{rcontent}, #{primgno})
+	</insert>
 	
 	
 	

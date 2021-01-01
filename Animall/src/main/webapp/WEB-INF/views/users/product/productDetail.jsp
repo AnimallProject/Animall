@@ -583,7 +583,8 @@
 					</div>
 					<div class="border rounded py-3 px-4">
 						<div class="border-bottom mb-10" style="width:400px; height:190px;">
-							<h5><!-- {member.mname} -->123 </h5>
+							<input type="hidden" name="mno" value="${member.mno}"/>
+							<h5>${member.nname}</h5>
 							<input type="hidden" name="pno" value="${product.pno}"/>
 							<p>
 								<textarea name="rcontent" id="rcontent" cols="50" rows="5">해당 상품에 대한 리뷰를 입력하세요!</textarea>

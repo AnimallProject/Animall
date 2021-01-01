@@ -25,7 +25,7 @@ public class ProductReview {
 	private int rrating;
 	private Date rdate;
 	private String rcontent;
-	
+	private int primgno;
 	
 	
 }

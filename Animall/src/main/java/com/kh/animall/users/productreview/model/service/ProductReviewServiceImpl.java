@@ -16,12 +16,7 @@ public class ProductReviewServiceImpl implements ProductReviewService {
 	
 	
 	@Override
-	public int insertProductReview(ProductReview preview, ProductReviewImage pri) {
-		int result1 = prDAO.insertProductReview(preview); 
-		
-		System.out.println("review 서비스에서의 result1 :" + result1);
-		
-		if(result1 == 0) throw new ProductException();
+	public int insertProductReview(ProductReview pr, ProductReviewImage pri) {
 		
 		if(pri != null) {
 			int result2 = prDAO.insertProductReviewImage(pri);
@@ -30,6 +25,12 @@ public class ProductReviewServiceImpl implements ProductReviewService {
 			
 			if(result2 == 0) throw new ProductException();
 		}
+		
+		int result1 = prDAO.insertProductReview(pr); 
+		
+		System.out.println("review 서비스에서의 result1 :" + result1);
+		
+		if(result1 == 0) throw new ProductException();
 		
 		return result1;
 	}

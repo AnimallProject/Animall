@@ -11,6 +11,7 @@
 		<typeAlias type="com.kh.animall.users.product.model.vo.ProductImage" alias="ProductImage" />
 		<typeAlias type="com.kh.animall.users.product.model.vo.ProductListView" alias="ProductListView" />
 		<typeAlias type="com.kh.animall.users.productreview.model.vo.ProductReview" alias="ProductReview" />
+		<typeAlias type="com.kh.animall.users.productreview.model.vo.ProductReviewImage" alias="ProductReviewImage" />
 		
 		<typeAlias type="com.kh.animall.index.model.vo.IndexProduct" alias="IndexProduct" />
 		<typeAlias type="com.kh.animall.users.member.model.vo.Member" alias="Member" />

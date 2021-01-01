@@ -15,7 +15,7 @@ import lombok.ToString;
 @AllArgsConstructor
 public class ProductReviewImage {
 
-	private int pimgno;
+	private int primgno;
 	private String originname;
 	private String changename;
 	private String imgpath;

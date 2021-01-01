@@ -14,14 +14,13 @@ public class ProductReviewDAOImpl implements ProductReviewDAO {
 	SqlSessionTemplate sqlSession;
 	
 	@Override
-	public int insertProductReview(ProductReview preview) {
-		return sqlSession.insert("productReviewMapper.insertProductReview", preview);
+	public int insertProductReview(ProductReview pr) {
+		return sqlSession.insert("productReviewMapper.insertProductReview", pr);
 	}
 
 	@Override
 	public int insertProductReviewImage(ProductReviewImage pri) {
-		// TODO Auto-generated method stub
-		return 0;
+		return sqlSession.insert("productReviewMapper.insertReviewImage", pri);
 	}
 
 }

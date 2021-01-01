@@ -30,7 +30,19 @@ public class ProductReviewController {
 	public String productReviewInsert(ProductReview preview, Model model, HttpServletRequest req,
 									 @RequestParam(value="rimage", required=false) MultipartFile upFile) {
 		
+		Integer rrating = preview.getRrating();
+		
 		System.out.println("productreview-테스트 : " + preview);
+		System.out.println("rrating 타입 확인 : " + rrating.getClass().getName());
+		
+		ProductReview pr = new ProductReview();
+		
+		pr.setRno(preview.getRno());
+		pr.setPno(preview.getPno());
+		pr.setMno(preview.getMno());
+		pr.setRrating(rrating);
+		pr.setRcontent(preview.getRcontent());
+		pr.setPrimgno(preview.getPrimgno());
 		
 		String saveDirectory = req.getServletContext().getRealPath("/resources/productReviewUpFiles");
 		
@@ -63,7 +75,7 @@ public class ProductReviewController {
 			pri.setImgpath(imgpath);		
 		}
 		
-		int result = prService.insertProductReview(preview, pri);
+		int result = prService.insertProductReview(pr, pri);
 		
 		System.out.println("result" + result);
 		

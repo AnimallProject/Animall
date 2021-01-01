@@ -723,29 +723,6 @@
 <footer>
 	<%@ include file="common/footer.jsp" %>
 </footer>
-<!-- /footer -->
-
-<!-- jQuery -->
-<script src="resources/plugins/jQuery/jquery.min.js"></script>
-<!-- Bootstrap JS -->
-<script src="resources/plugins/bootstrap/bootstrap.min.js"></script>
-<!-- magnific popup -->
-<script src="resources/plugins/magnific-popup/jquery.magnific.popup.min.js"></script>
-<!-- slick slider -->
-<script src="resources/plugins/slick/slick.min.js"></script>
-<!-- filter -->
-<script src="resources/plugins/filterizr/jquery.filterizr.min.js"></script>
-<!-- Google Map -->
-<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBu5nZKbeK-WHQ70oqOWo-_4VmwOwKP9YQ"></script>
-<script src="resources/plugins/google-map/gmap.js"></script>
-<!-- Syo Timer -->
-<script src="resources/plugins/syotimer/jquery.syotimer.js"></script>
-<!-- aos -->
-<script src="resources/plugins/aos/aos.js"></script>
-<!-- swiper -->
-<script src="resources/plugins/swiper/swiper.min.js"></script>
-<!-- Main Script -->
-<script src="resources/js/script.js"></script>
 
 </body>
 </html>
