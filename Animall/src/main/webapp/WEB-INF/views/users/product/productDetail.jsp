@@ -120,7 +120,7 @@
 	width:100px;
 	height:30px;
 	border-radius:5px;
-	margin-left:90%;
+	margin-left:87%;
 	}
 	
 	.product_lower_area{
@@ -185,6 +185,12 @@
 	padding: 50px;
 	}
 	
+	.inquiryUpper > h6{
+	display:inline-block;
+	}
+	
+	
+	
 	input[id='pititle']{
 	width:300px;
 	height:30px;
@@ -195,7 +201,10 @@
 	padding-left:10%
 	}
 	h6[id='piname']{
-	padding-left:20%;
+	padding-left:5%;
+	}
+	h6[id="secretinquiry"]{
+	padding-left:10%;
 	}
 	
 	textarea[name='picontent']{
@@ -294,6 +303,65 @@
 	border:none;
 	width:100px;
 	height:30px;
+	}
+	
+	
+	/* 문의 부분 css*/
+
+	
+	h6[id="inquirynum"]{
+	padding-left:10%;
+	}
+	
+	h6[id="inquirytitle"]{
+	padding-left:10%;
+	}
+	
+	h6[id="inquiryperson"]{
+	padding-left:20%;
+	}
+	
+	h6[id="inquirysecret"]{
+	padding-left:10%;
+	}
+	
+	h6[id="inquirydate"]{
+	padding-left:10%;
+	}
+	
+	.inquiryDown > p{
+	padding-left:10%;
+	}
+	
+	.inquiryUpper{
+	border-top : 1px solid #e5e5e5;
+	border-bottom : 1px solid #e5e5e5;
+	}
+	
+	.inquirySelectOne .inquiryUpper:focus,
+	.inquirySelectOne .inquiryUpper:hover,
+	.inquirySelectOne .inquiryUpper:active{
+	background:#e5e5e5;
+	transition:all 0.3s;
+	}
+	
+	.inquirySelectOne .inquiryDown{
+	border-bottom : 1px solid #e5e5e5;
+	}
+	
+	.inquirySelectOne  .inquiryDown{
+	height:0;
+	overflow:hidden;
+	transition:height 0.5s ease-in;
+	}
+	
+	.inquirySelectOne:target .inquiryDown{
+	overflow:auto;
+	height:350px;
+	}
+	
+	.inquiryList{
+	margin-top:20px;
 	}
 	
 	</style>
@@ -577,12 +645,12 @@
 			</div>
 			
 			<div class="tab-pane fade review_area" id="review" role="tabpanel" >
-				<form name="productReviewForm" action="${pageContext.request.contextPath}/productreview/productReviewInsert.do" method="post" enctype="multipart/form-data">					 
+				<form name="productReviewForm" action="${pageContext.request.contextPath}/productreview/productReviewInsert.do" onsubmit="return reviewvalidate();" method="post" enctype="multipart/form-data">					 
 				<div class="d-flex mb-4">
 					<div class="mr-3 reviewImage">
 						<img id="reviewImageArea" name="rimage" style="width:200px; height:150px" />
 						<input type="file" name="rimage" id="rimage" onchange="imageLoad(this,1);"/>
-						<button type="submit" class="reviewInsertBtn" onsubmit="return reviewvalidate();">리뷰등록</button>
+						<input type="submit" class="reviewInsertBtn" value="리뷰등록"/>
 					</div>
 					<div class="border rounded py-3 px-4">
 						<div class="border-bottom mb-10" style="width:400px; height:190px;">
@@ -591,7 +659,7 @@
 							<hr />
 							<input type="hidden" name="pno" value="${product.pno}"/>
 							<p>
-								<textarea name="rcontent" id="rcontent" cols="50" rows="5" required>해당 상품에 대한 리뷰를 입력하세요!</textarea>
+								<textarea name="rcontent" id="rcontent" cols="50" rows="5">해당 상품에 대한 리뷰를 입력하세요!</textarea>
 							</p>
 						 </div>
 						    <select name="rrating" class="reviewstar" id="reviewstar" required>	
@@ -615,7 +683,7 @@
 					
 					<div class="review_avg_area">
 						<div class="avg_area">
-							<h6 class="avg_area_font">평점 : ${rratingavg2}</h6>
+							<h6 class="avg_area_font">평점 : <span style="color:#997296">${rratingavg2}</span></h6>
 						</div>
 						
 						<div class="count_area">
@@ -843,16 +911,19 @@
 			</div>
 			
 			<div class="tab-pane fade product_inquiry_area" id="productInquiry" role="tabpanel">
-				<form action="${pageContext.request.contextPath}/product/productInquiry.do" method="post" onsubmit="return PIvalidate();" >
+				<form action="${pageContext.request.contextPath}/productinquiry/productInquiry.do" method="post" onsubmit="return PIvalidate();" >
 					<div class="goinquiry">
 						<div class="pititle">
 							<h6 class="font-weight-light">
-								<label for="pititle">제목&nbsp;:&nbsp;</label><input type="text" id="pititle"/>
+								<label for="pititle">제목&nbsp;:&nbsp;</label><input type="text" name="pititle" id="pititle"/>
 							</h6>
-							<input type="hidden" value="${product.pno}" />
+							<input type="hidden" name="pno" value="${product.pno}" />
 							<h6 class="font-weight-light" id="piproductname">문의 제품 : ${product.pname} </h6>
-							<h6 class="font-weight-light" id="piname">${member.nname}</h6>
-							<input type="hidden" value="" /> <!-- 여기 value에 mno 넣어주기 -->
+							<h6 class="font-weight-light" id="secretinquiry">
+								<input type="checkbox" name="issecret" id="secret" value="Y"/><label for="secret"><span style="color:red;">&nbsp;비밀글</span></label>
+							</h6>
+							<h6 class="font-weight-light" id="piname">문의자 : ${member.nname}</h6>
+							<input type="hidden" name="mno" value="${member.mno}" />
 						</div>
 						<hr />
 						<div class="picontent">
@@ -862,6 +933,86 @@
 						</div>
 					</div>
 				</form>
+				
+				<div class="inquiryList">
+					<c:forEach items="${piList}" var="piList">
+					 <c:if test="${piList.issecret eq 'Y'}">
+					 	<c:if test="${piList.mno eq member.mno}">
+							<div class="inquirySelectOne" id="part${piList.pinqno}"> <!-- list_ -->
+								<div class="inquiryUpper" onclick="location.href='#part${piList.pinqno}'">
+									<h6 class="font-wieght-light" id="inquirynum">
+										${piList.pinqno}
+									</h6>
+									<h6 class="font-weight-light" id="inquirytitle">
+										${piList.pititle}
+									</h6>
+									<h6 class="font-weight-light" id="inquiryperson">
+										${piList.mno}
+									</h6>
+									<h6 class="font-weight-light" id="inquirysecret">
+										비밀글
+									</h6>
+									<h6 class="font-weight-light" id="inquirydate">
+										${piList.pidate} 
+									</h6>
+								</div>
+								<div class="inquiryDown">
+									<p>
+										${piList.picontent} 
+									</p>
+								</div>
+							</div>		
+						</c:if>	 	
+						<c:if test="${piList.mno ne member.mno}">	
+						 	<div class="inquirySelectOne" id="part${piList.pinqno}"> <!-- list_ -->
+								<div class="inquiryUpper" onclick="location.href='#part${piList.pinqno}'">
+									<h6 class="font-wieght-light" id="inquirynum">
+										${piList.pinqno}
+									</h6>
+									<h6 class="font-weight-light" id="inquirytitle">
+										비밀글입니다.
+									</h6>
+									<h6 class="font-weight-light" id="inquiryperson">
+										${piList.mno}
+									</h6>
+									<h6 class="font-weight-light" id="inquirysecret">
+										비밀글
+									</h6>
+									<h6 class="font-weight-light" id="inquirydate">
+										${piList.pidate} 
+									</h6>
+								</div>
+							</div>
+						</c:if>
+					 </c:if>
+					 <c:if test="${empty piList.issecret}">
+						<div class="inquirySelectOne" id="part${piList.pinqno}"> <!-- list_ -->
+							<div class="inquiryUpper" onclick="location.href='#part${piList.pinqno}'">
+								<h6 class="font-wieght-light" id="inquirynum">
+									${piList.pinqno}
+								</h6>
+								<h6 class="font-weight-light" id="inquirytitle">
+									${piList.pititle}
+								</h6>
+								<h6 class="font-weight-light" id="inquiryperson">
+									${piList.mno}
+								</h6>
+								<h6 class="font-weight-light" id="inquirysecret">
+									
+								</h6>
+								<h6 class="font-weight-light" id="inquirydate">
+									${piList.pidate}
+								</h6>
+							</div>
+							<div class="inquiryDown">
+								<p>
+									${piList.picontent}
+								</p>
+							</div>
+						</div>
+					</c:if>
+				</c:forEach>
+				</div>
 			</div>
 		</div>
 	</div>

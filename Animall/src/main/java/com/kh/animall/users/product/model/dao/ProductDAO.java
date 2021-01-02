@@ -8,6 +8,7 @@ import com.kh.animall.users.product.model.vo.Product;
 import com.kh.animall.users.product.model.vo.ProductImage;
 import com.kh.animall.users.product.model.vo.ProductListView;
 import com.kh.animall.users.product.model.vo.ProductReviewView;
+import com.kh.animall.users.productinquiry.model.vo.ProductInquiry;
 
 public interface ProductDAO {
 	
@@ -38,5 +39,7 @@ public interface ProductDAO {
 	int selectRating4(int pno);
 	
 	int selectRating5(int pno);
+
+	List<ProductInquiry> selectProductInquiryList(int pno);
 	
 }

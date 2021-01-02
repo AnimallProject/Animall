@@ -78,6 +78,10 @@
 		SELECT COUNT(*) FROM PRODUCT_REVIEW WHERE PNO=#{pno} AND RRATING = 5
 	</select>
 	
+	<select id="selectProductInquiryList" parameterType="_int" resultType="ProductInquiry">
+		SELECT PI.* , M.NNAME FROM PRODUCT_INQUIRY PI JOIN MEMBER M ON(PI.MNO=M.MNO)
+		WHERE PNO = #{pno} ORDER BY PIDATE DESC
+	</select>	
 	
 	
 
