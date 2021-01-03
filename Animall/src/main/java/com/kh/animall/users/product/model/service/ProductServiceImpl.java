@@ -12,6 +12,7 @@ import com.kh.animall.users.product.model.vo.ProductImage;
 import com.kh.animall.users.product.model.vo.ProductListView;
 import com.kh.animall.users.product.model.vo.ProductReviewView;
 import com.kh.animall.users.productinquiry.model.vo.ProductInquiry;
+import com.kh.animall.users.productinquiry.model.vo.ProductInquiryList;
 
 @Service
 public class ProductServiceImpl implements ProductService {
@@ -115,7 +116,7 @@ public class ProductServiceImpl implements ProductService {
 	}
 
 	@Override
-	public List<ProductInquiry> selectProductInquiryList(int pno) {
+	public List<ProductInquiryList> selectProductInquiryList(int pno) {
 		return productDAO.selectProductInquiryList(pno);
 	}
 

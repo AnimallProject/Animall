@@ -12,6 +12,7 @@ import com.kh.animall.users.product.model.vo.ProductImage;
 import com.kh.animall.users.product.model.vo.ProductListView;
 import com.kh.animall.users.product.model.vo.ProductReviewView;
 import com.kh.animall.users.productinquiry.model.vo.ProductInquiry;
+import com.kh.animall.users.productinquiry.model.vo.ProductInquiryList;
 
 @Repository
 public class ProductDAOImpl implements ProductDAO {
@@ -94,7 +95,7 @@ public class ProductDAOImpl implements ProductDAO {
 	}
 
 	@Override
-	public List<ProductInquiry> selectProductInquiryList(int pno) {
+	public List<ProductInquiryList> selectProductInquiryList(int pno) {
 		return sqlSession.selectList("productMapper.selectProductInquiryList", pno);
 	}
 

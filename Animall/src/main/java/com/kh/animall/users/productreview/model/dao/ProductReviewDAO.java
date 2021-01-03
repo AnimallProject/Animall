@@ -9,4 +9,12 @@ public interface ProductReviewDAO {
 
 	int insertProductReviewImage(ProductReviewImage pri);
 
+	ProductReview selectProductReview(int rno);
+
+	int deleteProductReview(int rno);
+
+	int deleteProductReviewImage(int primgno);
+
+	ProductReviewImage selectProductReviewImage(int primgno);
+
 }

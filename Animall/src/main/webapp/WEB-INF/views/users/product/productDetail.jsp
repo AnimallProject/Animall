@@ -14,8 +14,7 @@
  <link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/owl.carousel.min.css">
 <script type="text/javascript" src="${pageContext.request.contextPath }/resources/js/jquery-3.5.1.js"></script>
 <script src="${pageContext.request.contextPath }/resources/js/jquery-3.5.1.min.js"></script>
-
-	
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
 
 	<style>
 	
@@ -305,28 +304,41 @@
 	height:30px;
 	}
 	
+	.reviewDeleteBtn{
+	margin-left:368px;
+	border-radius:8px;
+	background:#997296;
+	color:snow;
+	border:none;
+	width:100px;
+	height:30px;
+	}
 	
 	/* 문의 부분 css*/
 
 	
 	h6[id="inquirynum"]{
-	padding-left:10%;
+	padding-left:5%;
+	position:absolute;
 	}
 	
 	h6[id="inquirytitle"]{
 	padding-left:10%;
+	position:absolute;
 	}
 	
 	h6[id="inquiryperson"]{
 	padding-left:20%;
+	position:absolute;
 	}
 	
 	h6[id="inquirysecret"]{
-	padding-left:10%;
+	padding-left:28%;
+	position:absolute;
 	}
 	
 	h6[id="inquirydate"]{
-	padding-left:10%;
+	padding-left:80%;
 	}
 	
 	.inquiryDown > p{
@@ -352,16 +364,20 @@
 	.inquirySelectOne  .inquiryDown{
 	height:0;
 	overflow:hidden;
-	transition:height 0.5s ease-in;
+	transition:height 0.5s ease-in-out;
 	}
 	
 	.inquirySelectOne:target .inquiryDown{
-	overflow:auto;
+	overflow:visible;
 	height:350px;
 	}
 	
 	.inquiryList{
 	margin-top:20px;
+	}
+	
+	img[class='lock']{
+	border:none;
 	}
 	
 	</style>
@@ -462,6 +478,25 @@
 				}
 
 				return true;
+			}
+
+			// 내 리뷰 삭제
+			function reviewDelete(){
+				var rno = document.getElementById('rno').value;
+
+				var result = Swal.fire({
+					title : '리뷰를 삭제하시겠습니까?',
+					icon : 'warning',
+					showCancelButton:true,
+					confirmButtonColor:'#997296',
+					cancelButtonText:'리뷰 삭제',
+					cancelButtonText:'취소',
+					}).then((result) => {
+						if(result.isConfirmed){
+							location.href="${pageContext.request.contextPath}/productreview/productReviewDelete.do?rno="+rno;
+						}
+					})
+				
 			}
 		</script>
 
@@ -801,6 +836,7 @@
 					<div class="border rounded py-3 px-4">
 						<div class="border-bottom mb-10"  style="width:600px; height:190px;">
 							<div class="reviewname">
+							<input type="hidden" id="rno" name="rno" value="${prv.rno}" />
 							<h5>${prv.nname}</h5>
 							<h6 class="font-weight-light">${prv.rdate}</h6>
 							</div>
@@ -897,6 +933,9 @@
                               		    	<i class="ti-star text-color"></i>
                         		   		</li>
 									</c:if>
+									<c:if test="${prv.nname eq member.nname}">
+										<input type="button" value="내 리뷰 삭제" id="" class="reviewDeleteBtn" onclick="reviewDelete();"/>		
+									</c:if>
 								</ul>
 							</div>
 						</div>	
@@ -947,10 +986,10 @@
 										${piList.pititle}
 									</h6>
 									<h6 class="font-weight-light" id="inquiryperson">
-										${piList.mno}
+										${piList.nname}
 									</h6>
 									<h6 class="font-weight-light" id="inquirysecret">
-										비밀글
+										<img src="${pageContext.request.contextPath}/resources/images/lock.png" class="lock">
 									</h6>
 									<h6 class="font-weight-light" id="inquirydate">
 										${piList.pidate} 
@@ -973,10 +1012,10 @@
 										비밀글입니다.
 									</h6>
 									<h6 class="font-weight-light" id="inquiryperson">
-										${piList.mno}
+										${piList.nname}
 									</h6>
 									<h6 class="font-weight-light" id="inquirysecret">
-										비밀글
+										<img src="${pageContext.request.contextPath}/resources/images/lock.png" class="lock">
 									</h6>
 									<h6 class="font-weight-light" id="inquirydate">
 										${piList.pidate} 
@@ -995,7 +1034,7 @@
 									${piList.pititle}
 								</h6>
 								<h6 class="font-weight-light" id="inquiryperson">
-									${piList.mno}
+									${piList.nname}
 								</h6>
 								<h6 class="font-weight-light" id="inquirysecret">
 									

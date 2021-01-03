@@ -27,6 +27,7 @@ import com.kh.animall.users.product.model.vo.ProductImage;
 import com.kh.animall.users.product.model.vo.ProductListView;
 import com.kh.animall.users.product.model.vo.ProductReviewView;
 import com.kh.animall.users.productinquiry.model.vo.ProductInquiry;
+import com.kh.animall.users.productinquiry.model.vo.ProductInquiryList;
 
 @Controller
 public class ProductController {
@@ -233,7 +234,7 @@ public class ProductController {
 		
 		List<ProductReviewView> prv = productService.selectProductReviewList(pno); 
 		
-		List<ProductInquiry> piList = productService.selectProductInquiryList(pno);
+		List<ProductInquiryList> piList = productService.selectProductInquiryList(pno);
 		
 		System.out.println("productReviewList입니다 :" + prv);
 		

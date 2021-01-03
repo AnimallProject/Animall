@@ -18,6 +18,19 @@
 		VALUES(SEQ_RNO.NEXTVAL, #{pno}, #{mno}, #{rrating}, DEFAULT, #{rcontent}, #{primgno})
 	</insert>
 	
+	<select id="selectProductReview" parameterType="_int" resultType="ProductReview">
+		SELECT * FROM PRODUCT_REVIEW WHERE RNO = #{rno}
+	</select>
 	
+	<delete id="deleteProductReview" parameterType="_int">
+		DELETE FROM PRODUCT_REVIEW WHERE RNO = #{rno}
+	</delete>
 	
+	<delete id="deleteProductReviewImage" parameterType="_int">
+		DELETE FROM REVIEW_IMAGES WHERE PRIMGNO = #{primgno}
+	</delete>
+	
+	<select id="selectProductReviewImage" parameterType="_int" resultType="ProductReviewImage">
+		SELECT * FROM REVIEW_IMAGES WHERE PRIMGNO = #{primgno}
+	</select>
 </mapper>

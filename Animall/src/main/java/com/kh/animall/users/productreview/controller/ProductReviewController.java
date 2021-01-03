@@ -95,4 +95,43 @@ public class ProductReviewController {
 		return "common/msg";
 	}
 	
+	@RequestMapping("/productreview/productReviewDelete.do")
+	public String productReviewDelete(@RequestParam int rno,
+									  Model model,
+									  HttpServletRequest req) {
+		
+		String saveDir = req.getServletContext().getRealPath("/resources/productReviewUpFiles");
+		
+		
+		
+		ProductReview pr = prService.selectProductReview(rno);
+		
+		ProductReviewImage pri = prService.selectProductReviewImage(pr.getPrimgno());
+		
+		System.out.println("rno는? :" + rno);
+		//System.out.println("productReviewSelectOne은? : " + pr);
+		System.out.println("pri : " + pri);
+		
+		int result1 = prService.deleteProductReview(rno);
+
+		int result2 = prService.deleteProductReviewImage(pr.getPrimgno());
+		
+		
+		String loc = "/product/productSelectOne.do?pno="+pr.getPno();
+		String msg = "";
+		
+		if(result1 > 0 && result2 > 0) {
+			new File(saveDir + "/" + pri.getChangename()).delete();
+			msg="리뷰 삭제 완료";
+		}
+		else {
+			msg = "리뷰 삭제 실패";
+		}
+		
+		model.addAttribute("loc", loc);
+		model.addAttribute("msg", msg);
+		
+		return "common/msg";
+	}
+	
 }

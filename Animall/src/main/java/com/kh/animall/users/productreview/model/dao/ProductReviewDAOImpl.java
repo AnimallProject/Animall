@@ -23,4 +23,24 @@ public class ProductReviewDAOImpl implements ProductReviewDAO {
 		return sqlSession.insert("productReviewMapper.insertReviewImage", pri);
 	}
 
+	@Override
+	public ProductReview selectProductReview(int rno) {
+		return sqlSession.selectOne("productReviewMapper.selectProductReview", rno);
+	}
+
+	@Override
+	public int deleteProductReview(int rno) {
+		return sqlSession.delete("productReviewMapper.deleteProductReview", rno);
+	}
+
+	@Override
+	public int deleteProductReviewImage(int primgno) {
+		return sqlSession.delete("productReviewMapper.deleteProductReviewImage", primgno);
+	}
+
+	@Override
+	public ProductReviewImage selectProductReviewImage(int primgno) {
+		return sqlSession.selectOne("productReviewMapper.selectProductReviewImage", primgno);
+	}
+
 }

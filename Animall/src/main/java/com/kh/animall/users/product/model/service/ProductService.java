@@ -8,6 +8,7 @@ import com.kh.animall.users.product.model.vo.ProductImage;
 import com.kh.animall.users.product.model.vo.ProductListView;
 import com.kh.animall.users.product.model.vo.ProductReviewView;
 import com.kh.animall.users.productinquiry.model.vo.ProductInquiry;
+import com.kh.animall.users.productinquiry.model.vo.ProductInquiryList;
 
 public interface ProductService {
 
@@ -37,5 +38,5 @@ public interface ProductService {
 	
 	int selectRating5(int pno);
 
-	List<ProductInquiry> selectProductInquiryList(int pno);
+	List<ProductInquiryList> selectProductInquiryList(int pno);
 }

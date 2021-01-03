@@ -35,4 +35,28 @@ public class ProductReviewServiceImpl implements ProductReviewService {
 		return result1;
 	}
 
+
+	@Override
+	public ProductReview selectProductReview(int rno) {
+		return prDAO.selectProductReview(rno);
+	}
+
+
+	@Override
+	public int deleteProductReview(int rno) {
+		return prDAO.deleteProductReview(rno);
+	}
+
+
+	@Override
+	public int deleteProductReviewImage(int primgno) {
+		return prDAO.deleteProductReviewImage(primgno);
+	}
+
+
+	@Override
+	public ProductReviewImage selectProductReviewImage(int primgno) {
+		return prDAO.selectProductReviewImage(primgno);
+	}
+
 }
