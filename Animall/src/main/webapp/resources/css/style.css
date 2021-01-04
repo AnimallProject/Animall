@@ -260,9 +260,12 @@ h6, .h6 {
   background: #ee7171;
 }
 
+
+/* background 색상 바꾸고 !important 추가*/
 .btn-secondary {
-  background: #303032;
+  background:#e5e5e5 !important;
   color: #fff;
+  transition-duration: 0.5s;
 }
 
 .btn-secondary:active {
@@ -447,6 +450,8 @@ button {
   background: #000;
   opacity: .8;
 }
+
+
 
 .overlay-primary {
   position: relative;
@@ -1627,8 +1632,15 @@ button {
 }
 
 /* card */
+
+.card{
+  width:300px;
+  height:400px;
+}
 .card-img-wrapper {
   position: relative;
+  width:100%;
+  height:200px;
 }
 
 .card-img-wrapper::before {
@@ -2110,7 +2122,7 @@ img.arrow-bottom {
   padding: 10px 30px;
   border: 1px solid #e5e5e5;
   background: #f5f5f5;
-  border-radius: 45px;
+  border-radius: 30px;
   text-align: center;
   vertical-align: middle;
   color: #222;
@@ -2121,8 +2133,8 @@ img.arrow-bottom {
 
 .nav-tabs .nav-item .active {
   background: #fff;
-  color: #e84444;
-  border-color: #e84444;
+  color:#997296;
+  border-color:#997296;
 }
 
 /* 19.5 tab content */

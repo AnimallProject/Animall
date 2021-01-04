@@ -7,11 +7,11 @@ import lombok.*;
 @NoArgsConstructor
 @AllArgsConstructor
 public class Cart {
-	int cno;
-	int mno;
-	int pno;
-	int amount;
-	int orderPrice;
-	int shipFee;
-	String isFreeShip;
+ private int cno;
+ private int mno;
+ private int pno;
+ private int amount;
+ private int orderprice;
+ private int shipfee;
+ private boolean isfreeship;
 }
