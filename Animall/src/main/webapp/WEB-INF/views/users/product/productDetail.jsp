@@ -359,17 +359,9 @@
 	
 	.inquirySelectOne .inquiryDown{
 	border-bottom : 1px solid #e5e5e5;
-	}
-	
-	.inquirySelectOne  .inquiryDown{
-	height:0;
-	overflow:hidden;
-	transition:height 0.5s ease-in-out;
-	}
-	
-	.inquirySelectOne:target .inquiryDown{
-	overflow:visible;
-	height:350px;
+	display:none;
+	height:300px;
+	animation: listshow 0.8s ease normal;
 	}
 	
 	.inquiryList{
@@ -378,6 +370,31 @@
 	
 	img[class='lock']{
 	border:none;
+	}
+	
+	/* 문의 css */
+	.openinquiry > .inquiryDown{
+	display:block;
+	}
+	
+	@keyframes listshow {
+	0% {
+		opacity:0;
+		height:0px;
+	   }
+	100% {
+		opacity:1;
+		height:300px;
+	   }
+	}
+	
+	#btn_close_all{
+	margin-top : 10px;
+	float:right;
+	margin-right: 10%;
+	width:100px;
+	height:30px;
+	border-radius:5px;
 	}
 	
 	</style>
@@ -501,7 +518,7 @@
 						})
 				
 			}
-
+				
 		</script>
 
 </head>
@@ -987,8 +1004,8 @@
 					<c:forEach items="${piList}" var="piList">
 					<c:if test="${member.mtype eq 'ADMIN'}">
 						<c:if test="${piList.issecret eq 'Y'}">
-							<div class="inquirySelectOne" id="part${piList.pinqno}"> <!-- list_ -->
-								<div class="inquiryUpper" onclick="location.href='#part${piList.pinqno}'">
+							<div class="inquirySelectOne"> <!-- list_ -->
+								<div class="inquiryUpper">
 									<h6 class="font-wieght-light" id="inquirynum">
 										${piList.pinqno}
 									</h6>
@@ -1006,15 +1023,18 @@
 									</h6>
 								</div>
 								<div class="inquiryDown">
-									<p>
+									<p style="width:85%; height:80%;">
 										${piList.picontent} 
 									</p>
+									<c:if test="${member.mno eq piList.mno or member.mtype eq 'ADMIN'}">
+										<input type="button" id="${piList.pinqno}" value="삭제하기" class="btn3" onclick="inquiryDelete(this);" />
+									</c:if>
 								</div>
 							</div>		
 						</c:if>
 						<c:if test="${empty piList.issecret}">
-							<div class="inquirySelectOne" id="part${piList.pinqno}"> <!-- list_ -->
-								<div class="inquiryUpper" onclick="location.href='#part${piList.pinqno}'">
+							<div class="inquirySelectOne"> <!-- list_ -->
+								<div class="inquiryUpper">
 									<h6 class="font-wieght-light" id="inquirynum">
 										${piList.pinqno}
 									</h6>
@@ -1032,9 +1052,12 @@
 									</h6>
 								</div>
 								<div class="inquiryDown">
-									<p>
+									<p style="width:85%; height:80%;">
 										${piList.picontent} 
 									</p>
+									<c:if test="${member.mno eq piList.mno or member.mtype eq 'ADMIN'}">
+										<input type="button" id="${piList.pinqno}" value="삭제하기" class="btn3" onclick="inquiryDelete(this);"/>
+									</c:if>
 								</div>
 							</div>	
 						</c:if>
@@ -1042,8 +1065,8 @@
 				<c:if test="${member.mtype ne 'ADMIN'}">
 					 <c:if test="${piList.issecret eq 'Y'}">
 					 	<c:if test="${piList.mno eq member.mno}">
-							<div class="inquirySelectOne" id="part${piList.pinqno}"> <!-- list_ -->
-								<div class="inquiryUpper" onclick="location.href='#part${piList.pinqno}'">
+							<div class="inquirySelectOne"> <!-- list_ -->
+								<div class="inquiryUpper">
 									<h6 class="font-wieght-light" id="inquirynum">
 										${piList.pinqno}
 									</h6>
@@ -1061,14 +1084,17 @@
 									</h6>
 								</div>
 								<div class="inquiryDown">
-									<p>
+									<p style="width:85%; height:80%;">
 										${piList.picontent} 
 									</p>
+									<c:if test="${member.mno eq piList.mno or member.mtype eq 'ADMIN'}">
+										<input type="button" id="${piList.pinqno}" value="삭제하기" class="btn3" onclick="inquiryDelete(this);" />
+									</c:if>
 								</div>
 							</div>		
 						</c:if>	 	
 						<c:if test="${piList.mno ne member.mno}">	
-						 	<div class="inquirySelectOne" id="part${piList.pinqno}"> <!-- list_ -->
+						 	<div class="inquirySelectOne"> <!-- list_ -->
 								<div class="inquiryUpper">
 									<h6 class="font-wieght-light" id="inquirynum">
 										${piList.pinqno}
@@ -1090,8 +1116,8 @@
 						</c:if>
 					 </c:if>
 					<c:if test="${empty piList.issecret}">
-						<div class="inquirySelectOne" id="part${piList.pinqno}"> <!-- list_ -->
-							<div class="inquiryUpper" onclick="location.href='#part${piList.pinqno}'">
+						<div class="inquirySelectOne"> <!-- list_ -->
+							<div class="inquiryUpper">
 								<h6 class="font-wieght-light" id="inquirynum">
 									${piList.pinqno}
 								</h6>
@@ -1109,18 +1135,21 @@
 								</h6>
 							</div>
 							<div class="inquiryDown">
-								<p>
+								<p style="width:85%; height:80%;">
 									${piList.picontent}
 								</p>
+								<c:if test="${member.mno eq piList.mno or member.mtype eq 'ADMIN'}">
+										<input type="button" id="${piList.pinqno}" value="삭제하기" class="btn3" onclick="inquiryDelete(this);"/>
+								</c:if>
 							</div>
 						</div>
 					</c:if>
 				</c:if>
 				</c:forEach>
+					<c:if test="${!empty piList}">
+						<input type="button" id="btn_close_all" value="모두 닫기" />
+					</c:if>
 				</div>
-				
-				
-				
 				
 			</div>
 		</div>
@@ -1131,6 +1160,57 @@
 	
 	<script src="${pageContext.request.contextPath}/resources/js/owl.carousel.min.js"></script>
 	<script src="${pageContext.request.contextPath}/resources/js/owl.carousel.js"></script>
+	<script>
+
+	// 제품 문의 열고 닫히기
 	
+		var selectAll = document.querySelectorAll('.inquirySelectOne');
+		
+		var closeBtn = document.querySelector('#btn_close_all');
+
+		function closeAll(){
+			for(let i = 0; i < selectAll.length; i++){
+				selectAll[i].classList.remove('openinquiry');
+			}
+		}
+
+		for(let j = 0; j < selectAll.length; j++){
+			selectAll[j].addEventListener('click', function(){
+				//closeAll();
+				if(this.classList.contains('openinquiry')){
+					this.classList.remove('openinquiry');
+				}else{
+					this.classList.add('openinquiry');
+				}
+			});
+		}
+		
+		document.querySelector('#btn_close_all').addEventListener('click', function(){
+			closeAll();
+		});
+
+
+		// 제품 문의 삭제
+		
+		function inquiryDelete(pinqno){
+			var pinqno = $(pinqno).attr("id");
+
+			console.log(pinqno);
+			
+			var result = Swal.fire({
+				title : '문의를 삭제하시겠습니까?',
+				icon : 'warning',
+				showCancelButton:true,
+				confirmButtonColor:'#997296',
+				cancelButtonText:'문의 삭제',
+				cancelButtonText:'취소',
+				}).then((result) => {
+					if(result.isConfirmed){
+						location.href="${pageContext.request.contextPath}/productinquiry/productInquiryDelete.do?pinqno="+pinqno;
+					}
+				})
+			
+		}
+	</script>
 </body>
 </html>

@@ -61,7 +61,7 @@
 												  		   '<img class="card-img-top rounded-0 productListImage" src="${pageContext.request.contextPath}/resources/productUpFiles/' + data[i].changename + '"></div>'
 														+ '<div class="card-body p-0">' + 	
 														'<p class="card-text mx-2 mb-0">' + data[i].pcontent + '</p>' +
-													     '<p class="card-text mx-2 mb-0">' + data[i].pprice + '</p>' +
+													     '<p class="card-text mx-2 mb-0">' + data[i].pprice + '원' + '</p>' +
 													     '<a href="service-single.html" class="btn btn-secondary translateY-25 basket">' +
 													     '<img src="${pageContext.request.contextPath}/resources/images/basketIcon2.png" alt="" />' +
 													     '</a></div></div></div>';
@@ -84,7 +84,7 @@
 												  		   '<img class="card-img-top rounded-0 productListImage" src="${pageContext.request.contextPath}/resources/productUpFiles/' + data[i].changename + '"></div>'
 														+ '<div class="card-body p-0">' + 	
 														'<p class="card-text mx-2 mb-0">' + data[i].pcontent + '</p>' +
-													     '<p class="card-text mx-2 mb-0">' + data[i].pprice + '</p>' +
+													     '<p class="card-text mx-2 mb-0">' + data[i].pprice + '원' + '</p>' +
 													     '<a href="service-single.html" class="btn btn-secondary translateY-25 basket">' +
 													     '<img src="${pageContext.request.contextPath}/resources/images/basketIcon2.png" alt="" />' +
 													     '</a></div></div></div>';
