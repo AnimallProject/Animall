@@ -373,7 +373,7 @@
 	}
 	
 	/* 문의 css */
-	.openinquiry > .inquiryDown{
+	.openinquiry + .inquiryDown{
 	display:block;
 	}
 	
@@ -395,6 +395,37 @@
 	width:100px;
 	height:30px;
 	border-radius:5px;
+	}
+	
+	.btn4{
+	width:100px;
+	height:30px;
+	border-radius:5px;
+	float:right;
+	margin-right:30px;
+	}
+	
+	.inquiryAnswer_area{
+	border : 1px solid #e5e5e5;
+	height:300px;
+	clear : both;
+	display:none;
+	animation: answershow 0.8s ease normal;
+	}
+	
+	.openanswer{
+	display:block;
+	}
+	
+	@keyframes answershow {
+	0% {
+		opacity:0;
+		height:0px;
+	   }
+	100% {
+		opacity:1;
+		height:300px;
+	   }
 	}
 	
 	</style>
@@ -1023,12 +1054,16 @@
 									</h6>
 								</div>
 								<div class="inquiryDown">
-									<p style="width:85%; height:80%;">
+									<p style="width:100%; height:80%; border:1px solid #e5e5e5;">
 										${piList.picontent} 
 									</p>
 									<c:if test="${member.mno eq piList.mno or member.mtype eq 'ADMIN'}">
-										<input type="button" id="${piList.pinqno}" value="삭제하기" class="btn3" onclick="inquiryDelete(this);" />
+										<input type="button" name="${piList.pinqno}" value="답변달기" class="btn4" onclick="inquiryAnswer(this);" />
+										<input type="button" id="${piList.pinqno}" value="삭제하기" class="btn4" onclick="inquiryDelete(this);" />
 									</c:if>
+								</div>
+								<div class="inquiryAnswer_area">
+											
 								</div>
 							</div>		
 						</c:if>
@@ -1052,12 +1087,16 @@
 									</h6>
 								</div>
 								<div class="inquiryDown">
-									<p style="width:85%; height:80%;">
+									<p style="width:100%; height:80%; border:1px solid #e5e5e5;">
 										${piList.picontent} 
 									</p>
 									<c:if test="${member.mno eq piList.mno or member.mtype eq 'ADMIN'}">
-										<input type="button" id="${piList.pinqno}" value="삭제하기" class="btn3" onclick="inquiryDelete(this);"/>
+										<input type="button" name="${piList.pinqno}" value="답변달기" class="btn4" onclick="inquiryAnswer(this);" />
+										<input type="button" id="${piList.pinqno}" value="삭제하기" class="btn4" onclick="inquiryDelete(this);"/>
 									</c:if>
+								</div>
+								<div class="inquiryAnswer_area" >
+											
 								</div>
 							</div>	
 						</c:if>
@@ -1084,11 +1123,11 @@
 									</h6>
 								</div>
 								<div class="inquiryDown">
-									<p style="width:85%; height:80%;">
+									<p style="width:100%; height:80%; border:1px solid #e5e5e5;">
 										${piList.picontent} 
 									</p>
 									<c:if test="${member.mno eq piList.mno or member.mtype eq 'ADMIN'}">
-										<input type="button" id="${piList.pinqno}" value="삭제하기" class="btn3" onclick="inquiryDelete(this);" />
+										<input type="button" id="${piList.pinqno}" value="삭제하기" class="btn4" onclick="inquiryDelete(this);" />
 									</c:if>
 								</div>
 							</div>		
@@ -1135,7 +1174,7 @@
 								</h6>
 							</div>
 							<div class="inquiryDown">
-								<p style="width:85%; height:80%;">
+								<p style="width:100%; height:80%; border:1px solid #e5e5e5;">
 									${piList.picontent}
 								</p>
 								<c:if test="${member.mno eq piList.mno or member.mtype eq 'ADMIN'}">
@@ -1164,7 +1203,7 @@
 
 	// 제품 문의 열고 닫히기
 	
-		var selectAll = document.querySelectorAll('.inquirySelectOne');
+		var selectAll = document.querySelectorAll('.inquiryUpper');
 		
 		var closeBtn = document.querySelector('#btn_close_all');
 
@@ -1211,6 +1250,25 @@
 				})
 			
 		}
+
+		// 제품 문의 답변
+		
+		function inquiryAnswer(obj){
+			var pinqno = $(obj).attr("name");
+
+			console.log(pinqno);
+
+			var answerselect = $(obj).parent().next();
+
+			console.log(answerselect);
+			if(answerselect.hasClass('openanswer')){
+				answerselect.removeClass('openanswer');
+			}
+			else{
+				answerselect.addClass('openanswer');
+			}
+		}
+		
 	</script>
 </body>
 </html>
