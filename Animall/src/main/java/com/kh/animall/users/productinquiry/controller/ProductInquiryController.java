@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.kh.animall.users.productinquiry.model.service.ProductInquiryService;
 import com.kh.animall.users.productinquiry.model.vo.ProductInquiry;
@@ -37,6 +38,29 @@ public class ProductInquiryController {
 		model.addAttribute("loc",loc);
 		model.addAttribute("msg", msg);
 		
+		
+		return "common/msg";
+	}
+	
+	@RequestMapping("/productinquiry/productInquiryDelete.do")
+	public String productInquiryDelete(@RequestParam int pinqno, Model model) {
+		
+		ProductInquiry pi = piService.selectProductInquiry(pinqno);
+		
+		int result = piService.deleteProductInquiry(pinqno);
+		
+		String loc="/product/productSelectOne.do?pno="+pi.getPno();
+		String msg = "";
+		
+		if(result > 0) {
+			msg="제품 문의 삭제 완료";
+		}
+		else {
+			msg="제품 문의 삭제 실패";
+		}
+		
+		model.addAttribute("loc",loc);
+		model.addAttribute("msg",msg);
 		
 		return "common/msg";
 	}

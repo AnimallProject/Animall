@@ -17,4 +17,14 @@ public class ProductInquiryServiceImpl implements ProductInquiryService {
 		return piDAO.insertProductInquiry(pi);
 	}
 
+	@Override
+	public int deleteProductInquiry(int pinqno) {
+		return piDAO.deleteProductInquiry(pinqno);
+	}
+
+	@Override
+	public ProductInquiry selectProductInquiry(int pinqno) {
+		return piDAO.selectProductInquiry(pinqno);
+	}
+
 }

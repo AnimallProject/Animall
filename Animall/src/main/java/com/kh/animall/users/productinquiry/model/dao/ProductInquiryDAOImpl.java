@@ -17,4 +17,14 @@ public class ProductInquiryDAOImpl implements ProductInquiryDAO {
 		return sqlSession.insert("productInquiryMapper.insertProductInquiry", pi);
 	}
 
+	@Override
+	public int deleteProductInquiry(int pinqno) {
+		return sqlSession.delete("productInquiryMapper.deleteProductInquiry", pinqno);
+	}
+
+	@Override
+	public ProductInquiry selectProductInquiry(int pinqno) {
+		return sqlSession.selectOne("productInquiryMapper.selectProductInquiry", pinqno);
+	}
+
 }

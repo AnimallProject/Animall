@@ -6,4 +6,8 @@ public interface ProductInquiryService {
 
 	int insertProductInquiry(ProductInquiry pi);
 
+	int deleteProductInquiry(int pinqno);
+
+	ProductInquiry selectProductInquiry(int pinqno);
+
 }

@@ -8,4 +8,12 @@
 		VALUES(SEQ_PINQNO.NEXTVAL, #{pno}, #{mno}, #{picontent}, DEFAULT, DEFAULT, NULL, #{issecret}, #{pititle})
 	</insert>
 	
+	<delete id="deleteProductInquiry" parameterType="_int">
+		DELETE FROM PRODUCT_INQUIRY WHERE PINQNO=#{pinqno}
+	</delete>
+	
+	<select id="selectProductInquiry" parameterType="_int" resultType="ProductInquiry">
+		SELECT * FROM PRODUCT_INQUIRY WHERE PINQNO=#{pinqno}
+	</select>
+	
 </mapper>
