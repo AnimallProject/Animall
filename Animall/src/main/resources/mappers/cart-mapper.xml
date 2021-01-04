@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cartMapper">
+	
+
+	<!-- id별 장바구니에 넣은 것 select -->
+	<select id="getCartList" resultType="Cart">
+		SELECT *
+		FROM
+		CART
+		WHERE mno = #{mno}
+	</select>
+	
+		<!-- 장바구니에 넣음 insert -->
+	<insert id="insertCartlist" parameterType="Cart">
+		INSERT
+		INTO CART
+		VALUES(#{mno},#{pno}, #{ptype}, #{pname}, #{amount}, #{price})
+	</insert>
+
+	<!-- 장바구니에 넣은 상품을 삭제 delete -->
+	<delete id="deleteCartlist">
+		DELETE
+		FROM CART
+		WHERE productserialnumber = #{productserialnumber}
+	</delete>
+	
+	
+
+	
+	
+	
+	
+	
+	
+
+	
+	
+	 
+	
+</mapper>
