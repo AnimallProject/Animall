@@ -1,5 +1,7 @@
 package com.kh.animall.users.product.model.vo;
 
+import org.springframework.stereotype.Component;
+
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -11,15 +13,17 @@ import lombok.ToString;
 @ToString
 @NoArgsConstructor
 @AllArgsConstructor
+@Component
 public class Product {
 	
 	private int pno;
 	private String ptype;
 	private String pname;
 	private String pcontent;
+	private String pguide;
 	private int pprice;
 	private String pdetail;
-	private boolean isDelete;
+	private String isDelete;
 	private int reviewAmount;
 		
 }
