@@ -102,8 +102,6 @@ public class ProductReviewController {
 		
 		String saveDir = req.getServletContext().getRealPath("/resources/productReviewUpFiles");
 		
-		
-		
 		ProductReview pr = prService.selectProductReview(rno);
 		
 		ProductReviewImage pri = prService.selectProductReviewImage(pr.getPrimgno());

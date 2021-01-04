@@ -481,23 +481,27 @@
 			}
 
 			// 내 리뷰 삭제
-			function reviewDelete(){
-				var rno = document.getElementById('rno').value;
+			function reviewDelete(obj){
+				
+					var rno = $(obj).attr("id");
 
-				var result = Swal.fire({
-					title : '리뷰를 삭제하시겠습니까?',
-					icon : 'warning',
-					showCancelButton:true,
-					confirmButtonColor:'#997296',
-					cancelButtonText:'리뷰 삭제',
-					cancelButtonText:'취소',
-					}).then((result) => {
-						if(result.isConfirmed){
-							location.href="${pageContext.request.contextPath}/productreview/productReviewDelete.do?rno="+rno;
-						}
-					})
+					console.log(rno);
+					
+					var result = Swal.fire({
+						title : '리뷰를 삭제하시겠습니까?',
+						icon : 'warning',
+						showCancelButton:true,
+						confirmButtonColor:'#997296',
+						cancelButtonText:'리뷰 삭제',
+						cancelButtonText:'취소',
+						}).then((result) => {
+							if(result.isConfirmed){
+								location.href="${pageContext.request.contextPath}/productreview/productReviewDelete.do?rno="+rno;
+							}
+						})
 				
 			}
+
 		</script>
 
 </head>
@@ -593,9 +597,11 @@
 				
 				<div class="btn_area">
 					<ol>
-						<li>
-							<input type="button" value="상품 수정하기" id="" class="btn1" onclick="location.href='${pageContext.request.contextPath}/product/productGoUpdate.do?pno=${product.pno}'">
-						</li>
+						<c:if test="${member.mtype eq 'ADMIN'}">
+							<li>
+								<input type="button" value="상품 수정하기" id="" class="btn1" onclick="location.href='${pageContext.request.contextPath}/product/productGoUpdate.do?pno=${product.pno}'">
+							</li>
+						</c:if>
 						<li>
 							<input type="button" value="바로 구매하기" id="" class="btn1" onclick=""/>
 						</li>
@@ -836,15 +842,14 @@
 					<div class="border rounded py-3 px-4">
 						<div class="border-bottom mb-10"  style="width:600px; height:190px;">
 							<div class="reviewname">
-							<input type="hidden" id="rno" name="rno" value="${prv.rno}" />
+							<input type="hidden" name="rno" value="${prv.rno}" />
 							<h5>${prv.nname}</h5>
 							<h6 class="font-weight-light">${prv.rdate}</h6>
 							</div>
 							
 							<hr />
 							<p>${prv.rcontent}</p>
-						</div>
-					
+						</div>				
 						<div class="d-flex justify-content-between">
 							<div>
 								<ul class="list-inline d-inline-block">
@@ -933,16 +938,19 @@
                               		    	<i class="ti-star text-color"></i>
                         		   		</li>
 									</c:if>
-									<c:if test="${prv.nname eq member.nname}">
-										<input type="button" value="내 리뷰 삭제" id="" class="reviewDeleteBtn" onclick="reviewDelete();"/>		
+									<c:if test="${member.mtype ne 'ADMIN'}">
+										<c:if test="${prv.nname eq member.nname}">
+											<input type="button" value="내 리뷰 삭제" id="${prv.rno}" class="reviewDeleteBtn" onclick="reviewDelete(this);"/>		
+										</c:if>
+									</c:if>
+									<c:if test="${member.mtype eq 'ADMIN'}">
+											<input type="button" value="리뷰 삭제" id="${prv.rno}" class="reviewDeleteBtn" onclick="reviewDelete(this);"/>			
 									</c:if>
 								</ul>
 							</div>
 						</div>	
 					</div>
 				</div>
-				 		
-				 		
 				 		
 				 	</c:forEach>
 				 </c:if>
@@ -973,8 +981,65 @@
 					</div>
 				</form>
 				
+				
+				
 				<div class="inquiryList">
 					<c:forEach items="${piList}" var="piList">
+					<c:if test="${member.mtype eq 'ADMIN'}">
+						<c:if test="${piList.issecret eq 'Y'}">
+							<div class="inquirySelectOne" id="part${piList.pinqno}"> <!-- list_ -->
+								<div class="inquiryUpper" onclick="location.href='#part${piList.pinqno}'">
+									<h6 class="font-wieght-light" id="inquirynum">
+										${piList.pinqno}
+									</h6>
+									<h6 class="font-weight-light" id="inquirytitle">
+										${piList.pititle}
+									</h6>
+									<h6 class="font-weight-light" id="inquiryperson">
+										${piList.nname}
+									</h6>
+									<h6 class="font-weight-light" id="inquirysecret">
+										<img src="${pageContext.request.contextPath}/resources/images/lock.png" class="lock">
+									</h6>
+									<h6 class="font-weight-light" id="inquirydate">
+										${piList.pidate} 
+									</h6>
+								</div>
+								<div class="inquiryDown">
+									<p>
+										${piList.picontent} 
+									</p>
+								</div>
+							</div>		
+						</c:if>
+						<c:if test="${empty piList.issecret}">
+							<div class="inquirySelectOne" id="part${piList.pinqno}"> <!-- list_ -->
+								<div class="inquiryUpper" onclick="location.href='#part${piList.pinqno}'">
+									<h6 class="font-wieght-light" id="inquirynum">
+										${piList.pinqno}
+									</h6>
+									<h6 class="font-weight-light" id="inquirytitle">
+										${piList.pititle}
+									</h6>
+									<h6 class="font-weight-light" id="inquiryperson">
+										${piList.nname}
+									</h6>
+									<h6 class="font-weight-light" id="inquirysecret">
+										
+									</h6>
+									<h6 class="font-weight-light" id="inquirydate">
+										${piList.pidate} 
+									</h6>
+								</div>
+								<div class="inquiryDown">
+									<p>
+										${piList.picontent} 
+									</p>
+								</div>
+							</div>	
+						</c:if>
+					</c:if>
+				<c:if test="${member.mtype ne 'ADMIN'}">
 					 <c:if test="${piList.issecret eq 'Y'}">
 					 	<c:if test="${piList.mno eq member.mno}">
 							<div class="inquirySelectOne" id="part${piList.pinqno}"> <!-- list_ -->
@@ -1004,7 +1069,7 @@
 						</c:if>	 	
 						<c:if test="${piList.mno ne member.mno}">	
 						 	<div class="inquirySelectOne" id="part${piList.pinqno}"> <!-- list_ -->
-								<div class="inquiryUpper" onclick="location.href='#part${piList.pinqno}'">
+								<div class="inquiryUpper">
 									<h6 class="font-wieght-light" id="inquirynum">
 										${piList.pinqno}
 									</h6>
@@ -1024,7 +1089,7 @@
 							</div>
 						</c:if>
 					 </c:if>
-					 <c:if test="${empty piList.issecret}">
+					<c:if test="${empty piList.issecret}">
 						<div class="inquirySelectOne" id="part${piList.pinqno}"> <!-- list_ -->
 							<div class="inquiryUpper" onclick="location.href='#part${piList.pinqno}'">
 								<h6 class="font-wieght-light" id="inquirynum">
@@ -1050,8 +1115,13 @@
 							</div>
 						</div>
 					</c:if>
+				</c:if>
 				</c:forEach>
 				</div>
+				
+				
+				
+				
 			</div>
 		</div>
 	</div>

@@ -161,7 +161,8 @@
 	}
 	
 	.btn_area > input[id='loadmore']{
-		margin-right:430px;
+		margin-left:21%;
+		position:absolute;
 	}
 	
 
@@ -222,9 +223,9 @@
   		    <!-- 제품들 for문 끝 -->
   		</div>  
   		<div class="btn_area">
-				<!-- <c:if test="${!empty member and member.mtype eq 'admin'}">  -->
-				<!-- </c:if> -->  		    
+				<c:if test="${!empty member and member.mtype eq 'ADMIN'}">  		    
 					<input type="button" value="상품등록" id="" class="btn2" onclick="productInsertForm();"/>
+				</c:if>
 					<input type="button" value="더보기" id="loadmore" class="btn2"/>
   	   </div>
   	</div>   
