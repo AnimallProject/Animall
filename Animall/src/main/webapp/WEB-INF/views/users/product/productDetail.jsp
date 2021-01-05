@@ -318,27 +318,30 @@
 
 	
 	h6[id="inquirynum"]{
-	padding-left:5%;
+	padding-left:3%;
 	position:absolute;
 	}
 	
 	h6[id="inquirytitle"]{
-	padding-left:10%;
+	padding-left:7%;
 	position:absolute;
 	}
 	
 	h6[id="inquiryperson"]{
-	padding-left:20%;
+	padding-left:17%;
 	position:absolute;
 	}
 	
 	h6[id="inquirysecret"]{
-	padding-left:28%;
+	padding-left:25%;
 	position:absolute;
 	}
 	
 	h6[id="inquirydate"]{
-	padding-left:80%;
+	padding-left:77%;
+	}
+	h6[id="inquiryans"]{
+	padding-left:3%;
 	}
 	
 	.inquiryDown > p{
@@ -1063,6 +1066,11 @@
 									<h6 class="font-weight-light" id="inquirydate">
 										${piList.pidate} 
 									</h6>
+									<c:if test="${!empty piList.pianswer}">
+										<h6 class="font-weight-light" id="inquiryans">
+											답변 완료
+										</h6>
+									</c:if>
 								</div>
 								<div class="inquiryDown">
 									<p style="width:100%; height:80%; border:1px solid #e5e5e5;">
@@ -1111,6 +1119,11 @@
 									<h6 class="font-weight-light" id="inquirydate">
 										${piList.pidate} 
 									</h6>
+									<c:if test="${!empty piList.pianswer}">
+										<h6 class="font-weight-light" id="inquiryans">
+											답변 완료
+										</h6>
+									</c:if>
 								</div>
 								<div class="inquiryDown">
 									<p style="width:100%; height:80%; border:1px solid #e5e5e5;">
@@ -1161,6 +1174,11 @@
 									<h6 class="font-weight-light" id="inquirydate">
 										${piList.pidate} 
 									</h6>
+									<c:if test="${!empty piList.pianswer}">
+										<h6 class="font-weight-light" id="inquiryans">
+										답변 완료
+										</h6>
+									</c:if>
 								</div>
 								<div class="inquiryDown">
 									<p style="width:100%; height:80%; border:1px solid #e5e5e5;">
@@ -1174,6 +1192,9 @@
 									<c:if test="${member.mno eq piList.mno or member.mtype eq 'ADMIN'}">
 										<c:if test="${empty piList.pianswer}">
 											<input type="button" id="${piList.pinqno}" value="삭제하기" class="btn4" onclick="inquiryDelete(this);" />
+											<h6 class="font-weight-light">
+												제품 문의 답변이 완료되면 제품 문의를 삭제하실 수 없습니다.
+											</h6>
 										</c:if>
 									</c:if>
 								</div>
@@ -1219,6 +1240,11 @@
 								<h6 class="font-weight-light" id="inquirydate">
 									${piList.pidate}
 								</h6>
+								<c:if test="${!empty piList.pianswer}">
+								<h6 class="font-weight-light" id="inquiryans">
+									답변 완료
+								</h6>
+								</c:if>
 							</div>
 							<div class="inquiryDown">
 								<p style="width:100%; height:80%; border:1px solid #e5e5e5;">
@@ -1231,7 +1257,10 @@
 								</p>
 								<c:if test="${member.mno eq piList.mno or member.mtype eq 'ADMIN'}">
 									<c:if test="${empty piList.pianswer}">
-										<input type="button" id="${piList.pinqno}" value="삭제하기" class="btn3" onclick="inquiryDelete(this);"/>
+										<input type="button" id="${piList.pinqno}" value="삭제하기" class="btn4" onclick="inquiryDelete(this);"/>
+										<h6 class="font-weight-light">
+												제품 문의 답변이 완료되면 제품 문의를 삭제하실 수 없습니다.
+										</h6>
 									</c:if>
 								</c:if>
 							</div>
