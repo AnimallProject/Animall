@@ -10,4 +10,6 @@ public interface ProductInquiryDAO {
 
 	ProductInquiry selectProductInquiry(int pinqno);
 
+	int insertAnswerInquiry(ProductInquiry pi);
+
 }

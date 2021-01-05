@@ -27,4 +27,9 @@ public class ProductInquiryDAOImpl implements ProductInquiryDAO {
 		return sqlSession.selectOne("productInquiryMapper.selectProductInquiry", pinqno);
 	}
 
+	@Override
+	public int insertAnswerInquiry(ProductInquiry pi) {
+		return sqlSession.update("productInquiryMapper.insertAnswerInquiry", pi);
+	}
+
 }

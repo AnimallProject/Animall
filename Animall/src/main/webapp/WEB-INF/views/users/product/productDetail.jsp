@@ -360,7 +360,7 @@
 	.inquirySelectOne .inquiryDown{
 	border-bottom : 1px solid #e5e5e5;
 	display:none;
-	height:300px;
+	height:400px;
 	animation: listshow 0.8s ease normal;
 	}
 	
@@ -373,6 +373,10 @@
 	}
 	
 	/* 문의 css */
+	
+	.openinquiry > h6{
+	color:#997296;
+	}
 	.openinquiry + .inquiryDown{
 	display:block;
 	}
@@ -384,7 +388,7 @@
 	   }
 	100% {
 		opacity:1;
-		height:300px;
+		height:400px;
 	   }
 	}
 	
@@ -406,7 +410,6 @@
 	}
 	
 	.inquiryAnswer_area{
-	border : 1px solid #e5e5e5;
 	height:300px;
 	clear : both;
 	display:none;
@@ -426,6 +429,14 @@
 		opacity:1;
 		height:300px;
 	   }
+	}
+	
+	.btn5{
+	width:100px;
+	height:30px;
+	border-radius:5px;
+	float:right;
+	margin-right:30px;
 	}
 	
 	</style>
@@ -1055,15 +1066,30 @@
 								</div>
 								<div class="inquiryDown">
 									<p style="width:100%; height:80%; border:1px solid #e5e5e5;">
-										${piList.picontent} 
+										${piList.picontent}
+										<c:if test="${!empty piList.pianswer}">
+											<br /><br /><br /><br /><br />
+											<span style="font-weight:bold">문의 답변</span><br />
+											${piList.pianswer}
+										</c:if>
 									</p>
+									<hr />
 									<c:if test="${member.mno eq piList.mno or member.mtype eq 'ADMIN'}">
-										<input type="button" name="${piList.pinqno}" value="답변달기" class="btn4" onclick="inquiryAnswer(this);" />
+										<c:if test="${empty piList.pianswer}">
+											<input type="button" name="${piList.pinqno}" value="답변달기" class="btn4" onclick="inquiryAnswer(this);" />
+										</c:if>
+										<c:if test="${!empty piList.pianswer}">
+											<input type="button" name="${piList.pinqno}" value="답변수정하기" class="btn4" onclick="inquiryAnswer(this);" />
+										</c:if>
 										<input type="button" id="${piList.pinqno}" value="삭제하기" class="btn4" onclick="inquiryDelete(this);" />
 									</c:if>
 								</div>
-								<div class="inquiryAnswer_area">
-											
+								<div class="inquiryAnswer_area">								
+									<form action="${pageContext.request.contextPath}/productinquiry/inquiryAnswerInsert.do" mothod="post">
+										<textarea name="inquiryAnswer" id="" cols="139" rows="10" style="border:1px solid #e5e5e5; resize:none;" required></textarea>
+										<input type="hidden" name="pinqno" value="${piList.pinqno}" />
+										<input type="submit" class="btn5" value="답변등록"/>	
+									</form>
 								</div>
 							</div>		
 						</c:if>
@@ -1089,14 +1115,28 @@
 								<div class="inquiryDown">
 									<p style="width:100%; height:80%; border:1px solid #e5e5e5;">
 										${piList.picontent} 
+										<c:if test="${!empty piList.pianswer}">
+											<br /><br /><br /><br /><br />
+											<span style="font-weight:bold">문의 답변</span><br />
+											${piList.pianswer}
+										</c:if>
 									</p>
 									<c:if test="${member.mno eq piList.mno or member.mtype eq 'ADMIN'}">
-										<input type="button" name="${piList.pinqno}" value="답변달기" class="btn4" onclick="inquiryAnswer(this);" />
+										<c:if test="${empty piList.pianswer}">
+											<input type="button" name="${piList.pinqno}" value="답변달기" class="btn4" onclick="inquiryAnswer(this);" />
+										</c:if>
+										<c:if test="${!empty piList.pianswer}">
+											<input type="button" name="${piList.pinqno}" value="답변수정하기" class="btn4" onclick="inquiryAnswer(this);" />
+										</c:if>
 										<input type="button" id="${piList.pinqno}" value="삭제하기" class="btn4" onclick="inquiryDelete(this);"/>
 									</c:if>
 								</div>
 								<div class="inquiryAnswer_area" >
-											
+									<form action="${pageContext.request.contextPath}/productinquiry/inquiryAnswerInsert.do" mothod="post">
+										<textarea name="inquiryAnswer" id="" cols="139" rows="10" style="border:1px solid #e5e5e5; resize:none;" required></textarea>
+										<input type="hidden" name="pinqno" value="${piList.pinqno}" />
+										<input type="submit" class="btn5" value="답변등록"/>	
+									</form>		
 								</div>
 							</div>	
 						</c:if>
@@ -1125,9 +1165,16 @@
 								<div class="inquiryDown">
 									<p style="width:100%; height:80%; border:1px solid #e5e5e5;">
 										${piList.picontent} 
+										<c:if test="${!empty piList.pianswer}">
+											<br /><br /><br /><br /><br />
+											<span style="font-weight:bold">문의 답변</span><br />
+											${piList.pianswer}
+										</c:if>
 									</p>
 									<c:if test="${member.mno eq piList.mno or member.mtype eq 'ADMIN'}">
-										<input type="button" id="${piList.pinqno}" value="삭제하기" class="btn4" onclick="inquiryDelete(this);" />
+										<c:if test="${empty piList.pianswer}">
+											<input type="button" id="${piList.pinqno}" value="삭제하기" class="btn4" onclick="inquiryDelete(this);" />
+										</c:if>
 									</c:if>
 								</div>
 							</div>		
@@ -1176,9 +1223,16 @@
 							<div class="inquiryDown">
 								<p style="width:100%; height:80%; border:1px solid #e5e5e5;">
 									${piList.picontent}
+									<c:if test="${!empty piList.pianswer}">
+										<br /><br /><br /><br /><br />
+										<span style="font-weight:bold">문의 답변</span><br />
+										${piList.pianswer}
+									</c:if>
 								</p>
 								<c:if test="${member.mno eq piList.mno or member.mtype eq 'ADMIN'}">
+									<c:if test="${empty piList.pianswer}">
 										<input type="button" id="${piList.pinqno}" value="삭제하기" class="btn3" onclick="inquiryDelete(this);"/>
+									</c:if>
 								</c:if>
 							</div>
 						</div>
@@ -1210,14 +1264,20 @@
 		function closeAll(){
 			for(let i = 0; i < selectAll.length; i++){
 				selectAll[i].classList.remove('openinquiry');
+				var answerAreaAll = selectAll[i].nextSibling.nextSibling.nextSibling.nextSibling;
+				answerAreaAll.classList.remove('openanswer');
 			}
 		}
 
 		for(let j = 0; j < selectAll.length; j++){
 			selectAll[j].addEventListener('click', function(){
+
+				var answerarea = selectAll[j].nextSibling.nextSibling.nextSibling.nextSibling;
+				console.log('answerarea : ', answerarea);
 				//closeAll();
 				if(this.classList.contains('openinquiry')){
 					this.classList.remove('openinquiry');
+					answerarea.classList.remove('openanswer');
 				}else{
 					this.classList.add('openinquiry');
 				}

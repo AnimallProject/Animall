@@ -16,4 +16,10 @@
 		SELECT * FROM PRODUCT_INQUIRY WHERE PINQNO=#{pinqno}
 	</select>
 	
+	<update id="insertAnswerInquiry" parameterType="ProductInquiry">
+		UPDATE PRODUCT_INQUIRY
+		SET PIANSWER = #{pianswer}
+		WHERE PINQNO = #{pinqno}
+	</update>
+	
 </mapper>

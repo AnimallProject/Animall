@@ -64,4 +64,35 @@ public class ProductInquiryController {
 		
 		return "common/msg";
 	}
+	
+	@RequestMapping("/productinquiry/inquiryAnswerInsert.do")
+	public String inquiryAnswerInsert(@RequestParam String inquiryAnswer,
+									  @RequestParam int pinqno,
+									  Model model) {
+		
+		System.out.println("inquiryAnswer쪽 pinqno :" + pinqno);
+		System.out.println("inquiryAnswer쪽 inquiryAnswer:" + inquiryAnswer);
+		
+		ProductInquiry pi = piService.selectProductInquiry(pinqno);
+		
+		System.out.println("inquiryAnswer쪽 pi :" + pi);
+		
+		pi.setPianswer(inquiryAnswer);
+		
+		int result = piService.insertAnswerInquiry(pi);
+		
+		String loc="/product/productSelectOne.do?pno="+pi.getPno();
+		String msg="";
+		
+		if(result > 0) {
+			msg="제품 문의 답변 완료";
+		}
+		else {
+			msg="제품 문의 답변 실패";
+		}
+		
+		model.addAttribute("loc",loc);
+		model.addAttribute("msg",msg);
+		return "common/msg";
+	}
 }
