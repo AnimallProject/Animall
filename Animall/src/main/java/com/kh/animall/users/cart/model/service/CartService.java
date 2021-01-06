@@ -1,5 +1,8 @@
 package com.kh.animall.users.cart.model.service;
 
-public interface CartService {
+import java.util.List;
 
+import com.kh.animall.users.cart.model.vo.Cart;
+public interface CartService {
+	List<Cart> selectCartList(int mno);
 }

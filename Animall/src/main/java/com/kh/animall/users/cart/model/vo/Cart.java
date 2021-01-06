@@ -9,9 +9,12 @@ import lombok.*;
 public class Cart {
  private int cno;
  private int mno;
+ private String nname;
  private int pno;
+ private String pname;
  private int amount;
+ private int pprice;
  private int orderprice;
  private int shipfee;
- private boolean isfreeship;
+ private String isfreeship;
 }
