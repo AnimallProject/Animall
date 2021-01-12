@@ -26,7 +26,7 @@ import com.kh.animall.users.product.model.vo.Product;
 import com.kh.animall.users.product.model.vo.ProductImage;
 import com.kh.animall.users.product.model.vo.ProductListView;
 import com.kh.animall.users.product.model.vo.ProductReviewView;
-import com.kh.animall.users.productinquiry.model.vo.ProductInquiry;
+import com.kh.animall.users.product.model.vo.ProductSearch;
 import com.kh.animall.users.productinquiry.model.vo.ProductInquiryList;
 
 @Controller
@@ -35,69 +35,33 @@ public class ProductController {
 	@Autowired
 	ProductService productService;
 	
-	@RequestMapping("/product/productList2.do")
-	public ModelAndView selectProductList2(@RequestParam String ptype, Model model,
-									HttpServletResponse response) throws IOException {
-		
-		response.setCharacterEncoding("UTF-8"); 
-		
-		ModelAndView mv = new ModelAndView();
-		
-		List<ProductListView> plist = new ArrayList<>();
-		
-		plist = productService.selectProductList(ptype);
-		
-		System.out.println("json plist를 보고싶다 :" + plist);
-		
-		JSONArray jsonplist = new JSONArray();
-		
-		for(ProductListView plv : plist) {
-			JSONObject jsonplv = new JSONObject();
-			
-			jsonplv.put("pno", plv.getPno());
-			jsonplv.put("pname", plv.getPname());
-			jsonplv.put("pprice", plv.getPprice());
-			jsonplv.put("pcontent", plv.getPcontent());
-			jsonplv.put("changename", plv.getChangename());
-			
-			jsonplist.add(jsonplv);
-			
-		}
-		
-		System.out.println("jsonplist :" + jsonplist);
-		
-		JSONObject sendResult = new JSONObject();
-		
-		sendResult.put("jsonplist", jsonplist);
-		
-		System.out.println("sendResult : " + sendResult);
-		
-		
-		response.setContentType("application/json; charset=UTF-8");
-//		response.getWriter().print(sendResult.toJSONString());
-//	
-//		System.out.println("sendResult toJSONString : " + sendResult.toJSONString());
-//		
-//		mv.addObject("ptype", ptype);
-//		mv.addObject("sendResult", sendResult);
-//		
-//		mv.setViewName("users/product/productList");
-		
-		return mv;
-	}
-	
 	@RequestMapping("/product/productMoreList.do")
 	@ResponseBody
-	public void selectProductMoreList(@RequestParam String ptype, Model model,
+	public void selectProductMoreList(@RequestParam String ptype,
+									  @RequestParam String keyword,
+									  Model model,
 									HttpServletResponse response) throws IOException {
 		
 		response.setCharacterEncoding("UTF-8"); 
 		
-//		ModelAndView mv = new ModelAndView();
-		
 		List<ProductListView> plist = new ArrayList<>();
 		
-		plist = productService.selectProductList(ptype);
+		//plist = productService.selectProductList(ptype);
+		
+		if(keyword != null) {
+			ProductSearch ps = new ProductSearch();
+			
+			ps.setPtype(ptype);
+			ps.setKeyword(keyword);
+			
+			plist = productService.searchProductList(ps);
+			
+		}else {
+			plist = productService.selectProductList(ptype);
+		}
+		
+		
+		System.out.println("keyword 보고 싶다 : " + keyword);
 		
 		System.out.println("json plist를 보고싶다 :" + plist);
 		
@@ -121,13 +85,6 @@ public class ProductController {
 		
 		response.setContentType("application/json; charset=UTF-8");
 		response.getWriter().print(jsonplist.toJSONString());
-//	
-//		System.out.println("sendResult toJSONString : " + sendResult.toJSONString());
-//		
-//		mv.addObject("ptype", ptype);
-//		mv.addObject("sendResult", sendResult);
-//		
-//		mv.setViewName("users/product/productList");
 
 	}
 	
@@ -142,6 +99,30 @@ public class ProductController {
 		
 		model.addAttribute("plist", plist);
 		model.addAttribute("ptype", ptype);
+		
+		return "users/product/productList";
+	}
+	
+	@RequestMapping("/product/productSearch.do")
+	public String productSearch(@RequestParam String ptype, 
+								@RequestParam String keyword,
+								Model model) {
+		
+		List<ProductListView> plist = new ArrayList<>();
+		
+		System.out.println("ptype : " + ptype);
+		System.out.println("keyword :" + keyword);
+		
+		ProductSearch ps = new ProductSearch();
+		
+		ps.setPtype(ptype);
+		ps.setKeyword(keyword);
+		
+		plist = productService.searchProductList(ps);
+		
+		model.addAttribute("plist", plist);
+		model.addAttribute("ptype", ptype);
+		model.addAttribute("keyword", keyword);
 		
 		return "users/product/productList";
 	}
@@ -348,4 +329,6 @@ public class ProductController {
 		return "common/msg";
 		
 	}
+	
+
 }

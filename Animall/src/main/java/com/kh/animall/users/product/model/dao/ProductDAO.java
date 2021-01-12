@@ -1,14 +1,13 @@
 package com.kh.animall.users.product.model.dao;
 
 
-import java.util.ArrayList;
 import java.util.List;
 
 import com.kh.animall.users.product.model.vo.Product;
 import com.kh.animall.users.product.model.vo.ProductImage;
 import com.kh.animall.users.product.model.vo.ProductListView;
 import com.kh.animall.users.product.model.vo.ProductReviewView;
-import com.kh.animall.users.productinquiry.model.vo.ProductInquiry;
+import com.kh.animall.users.product.model.vo.ProductSearch;
 import com.kh.animall.users.productinquiry.model.vo.ProductInquiryList;
 
 public interface ProductDAO {
@@ -42,5 +41,10 @@ public interface ProductDAO {
 	int selectRating5(int pno);
 
 	List<ProductInquiryList> selectProductInquiryList(int pno);
+
+	List<ProductListView> searchProductList(ProductSearch ps);
+
+
+
 	
 }

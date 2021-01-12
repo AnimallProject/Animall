@@ -506,6 +506,12 @@
 				$('#total_price').val(totalPrice);
 			}
 
+
+			function ptocart(){
+		         var pamount= $('#orderQuantity').val();
+		         location.href="${pageContext.request.contextPath}/cart/cartInsert.do?pno=${product.pno}&mno=${member.mno}&amount="+pamount;
+		    }
+			
 			// ProductInquiry 유효성 검사
 			function PIvalidate(){
 				var pititle = $("[id=pititle]").val();
@@ -598,7 +604,6 @@
 								<img id="pimage4area" src="${pageContext.request.contextPath}/resources/productUpFiles/${imageList.get(3).changename}" alt="" />
 							 </div>
 						</div>
-					
 					</div>
 					
 					<div class="image_small_area">
@@ -633,7 +638,8 @@
 					<hr />
 					<div class="product_price">
 						<h4>제품 가격</h4>
-						<input type="number" id="pprice" name="pprice" value="${product.pprice}" readonly/>
+						<fmt:formatNumber value="${product.pprice}" pattern="#,###,###" />원
+						<input type="hidden" id="pprice" name="pprice" value="${product.pprice}" readonly/>
 					</div>
 					<hr />
 					<div class="ptype">
@@ -668,13 +674,12 @@
 							<input type="button" value="바로 구매하기" id="" class="btn1" onclick=""/>
 						</li>
 						<li>
-							<input type="button" value="장바구니담기" id="" class="btn2" onclick=""/>
+							<input type="button" value="장바구니담기" id="" class="btn2" onclick="ptocart();"/>
 						</li>
 					
 					</ol>
 				</div>
 			</div>
-
 		<div class="product_lower_area">
 			<div class="nav_area">
 				<ul class="nav nav-tabs" id="myTab" role="tablist">

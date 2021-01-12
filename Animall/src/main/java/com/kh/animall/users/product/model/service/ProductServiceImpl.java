@@ -11,7 +11,7 @@ import com.kh.animall.users.product.model.vo.Product;
 import com.kh.animall.users.product.model.vo.ProductImage;
 import com.kh.animall.users.product.model.vo.ProductListView;
 import com.kh.animall.users.product.model.vo.ProductReviewView;
-import com.kh.animall.users.productinquiry.model.vo.ProductInquiry;
+import com.kh.animall.users.product.model.vo.ProductSearch;
 import com.kh.animall.users.productinquiry.model.vo.ProductInquiryList;
 
 @Service
@@ -120,6 +120,17 @@ public class ProductServiceImpl implements ProductService {
 		return productDAO.selectProductInquiryList(pno);
 	}
 
+	@Override
+	public List<ProductListView> searchProductList(ProductSearch ps) {
+		return productDAO.searchProductList(ps);
+	}
+
+
+
+
+
+
+	
 	
 
 

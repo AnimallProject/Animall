@@ -1,6 +1,5 @@
 package com.kh.animall.users.product.model.dao;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import org.mybatis.spring.SqlSessionTemplate;
@@ -11,7 +10,7 @@ import com.kh.animall.users.product.model.vo.Product;
 import com.kh.animall.users.product.model.vo.ProductImage;
 import com.kh.animall.users.product.model.vo.ProductListView;
 import com.kh.animall.users.product.model.vo.ProductReviewView;
-import com.kh.animall.users.productinquiry.model.vo.ProductInquiry;
+import com.kh.animall.users.product.model.vo.ProductSearch;
 import com.kh.animall.users.productinquiry.model.vo.ProductInquiryList;
 
 @Repository
@@ -98,6 +97,12 @@ public class ProductDAOImpl implements ProductDAO {
 	public List<ProductInquiryList> selectProductInquiryList(int pno) {
 		return sqlSession.selectList("productMapper.selectProductInquiryList", pno);
 	}
+
+	@Override
+	public List<ProductListView> searchProductList(ProductSearch ps) {
+		return sqlSession.selectList("productMapper.searchProductList", ps);
+	}
+
 
 
 }

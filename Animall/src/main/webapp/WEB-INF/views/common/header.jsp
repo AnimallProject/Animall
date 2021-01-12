@@ -117,7 +117,7 @@
 		    </div>
 		    <div>
 			    <div class="rightMenu" style="border : none;">
-			      	<a href='#'>Cart</a>
+			      	<a href='${pageContext.request.contextPath}/cart/cartList.do?mno=${member.mno}'>Cart</a>
 			    </div>
 		    </div>
    		</div>

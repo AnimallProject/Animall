@@ -30,7 +30,7 @@
 			//console.log($start);
 			var ptype = '${ptype}';
 			
-			console.log(ptype);
+			//console.log(ptype);
 	
 			var $productList = $('.forProductList'),
 			$start = 0,
@@ -38,13 +38,16 @@
 			$count = 0;
 			elements =[];
 			$now = 0;
+
+			var keyword = '${keyword}';
+			console.log(keyword);
 			
 			$('#loadmore').on('click',function(){
 
 				elements.length = 0;
 				
 				$.ajax({
-					url : '${pageContext.request.contextPath}/product/productMoreList.do?ptype='+ptype,
+					url : '${pageContext.request.contextPath}/product/productMoreList.do?ptype='+ptype+'&keyword='+keyword,
 					type: 'get',
 					success:function(data){
 						//console.log(data);
@@ -181,19 +184,11 @@
         <i class="ti-close"></i>
     </a>
     <div class="container">
-        <form action="#" class="row">
-            <div class="col-lg-10 mx-auto">
-                <h3>Search Here</h3>
-                <div class="input-wrapper">
-                    <input type="text" class="form-control" name="search" id="search" placeholder="Enter Keywords..." required>
-                    <button>
-                        <i class="ti-search"></i>
-                    </button>
-                </div>
-            </div>
-        </form>
+      
     </div>
 </div>
+
+
 <!-- /navigation --> 
 
 <!-- 상품 조회 헤더 -->
@@ -215,6 +210,17 @@
 
 <section class="section">
     <div class="container">
+
+            <div class="col-lg-10 mx-auto">
+                <h3>Search Here</h3>
+                <div class="input-wrapper">
+                    <input type="search" class="form-control" name="search" id="keyword" placeholder="제품을 검색하세요!">
+                    <button type="button" onclick="search();">
+                        <i class="ti-search"></i>
+                    </button>
+                </div>
+            </div>
+
         <div class="row forProductList">
         	<!-- for문 시작 전 ptype먼저 넘겨주고 -->
         	<input type="hidden" id="ptype" name="ptype" value="${ptype}" readonly/>
@@ -231,6 +237,13 @@
   	</div>   
 </section>
 
+<script>
+	function search(){
+		var ptype = '${ptype}';
+		console.log(ptype);
+		location.href="${pageContext.request.contextPath}/product/productSearch.do?ptype="+ptype+"&keyword="+$('#keyword').val();
+	}
+</script>
 
 	
 	<c:import url="../../common/footer.jsp"/>

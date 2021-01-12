@@ -83,8 +83,16 @@
 		WHERE PNO = #{pno} ORDER BY PIDATE DESC
 	</select>	
 	
-	
-
+	<select id="searchProductList" parameterType="ProductSearch" resultType="ProductListView">
+		SELECT P.PNO, P.PNAME, P.PCONTENT, PI.CHANGENAME, P.PPRICE
+		FROM PRODUCT P JOIN PRODUCT_IMAGES PI ON(P.PNO = PI.PNO)
+		WHERE PTYPE = #{ptype} AND IMGLEVEL = 0
+		<if test="keyword != null">
+			AND (P.PNAME LIKE '%' || #{keyword} || '%'
+			OR P.PCONTENT LIKE '%' || #{keyword} || '%')
+		</if>
+		ORDER BY P.PNO DESC
+	</select>
 	
 	
 	
