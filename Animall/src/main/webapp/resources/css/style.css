@@ -806,7 +806,7 @@ button {
 }
 
 .mb-30 {
-  margin-bottom: 30px;
+  margin-bottom: 15px;
 }
 
 .mb-40 {
@@ -1679,7 +1679,7 @@ button {
 }
 
 .card:hover .card-body-2 {
-  background: #e84444;
+  background: rgb(213,202,165);
 }
 
 .card:hover .card-body-2 h5,
@@ -1689,7 +1689,7 @@ button {
 }
 
 .card:hover .card-body-2::before {
-  background: #e84444;
+  background: rgb(213,202,165);
 }
 
 .overlay-rounded-top::before {
@@ -2758,18 +2758,13 @@ ul.tag-list li a:hover {
   background: #303032;
   top: -25px;
   right: 10px;
-  border: 1px solid #454547;
   text-align: center;
   display: block;
-  transition: .2s ease;
+  transition: 0.1s;
 }
 
 .back-to-top i {
   line-height: 50px;
-}
-
-.back-to-top:hover {
-  border-color: #e84444;
 }
 
 .back-to-top:focus {

@@ -1,3 +1,4 @@
+
   // 이미지 상단 박스
   const carouselSlide = document.querySelector('.carousel-slide');
   
@@ -118,5 +119,6 @@ carouselSlide.addEventListener('mouseout', function(){
  
   prevBtn.style.opacity ='0'
   nextBtn.style.opacity ='0'
+
 
 });
