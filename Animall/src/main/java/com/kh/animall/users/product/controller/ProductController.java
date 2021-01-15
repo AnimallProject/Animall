@@ -57,7 +57,9 @@ public class ProductController {
 			plist = productService.searchProductList(ps);
 			
 		}else {
+			
 			plist = productService.selectProductList(ptype);
+			
 		}
 		
 		
@@ -329,6 +331,7 @@ public class ProductController {
 		return "common/msg";
 		
 	}
+	
 	
 
 }

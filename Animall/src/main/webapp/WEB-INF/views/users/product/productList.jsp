@@ -25,7 +25,8 @@
 				location.href = "${pageContext.request.contextPath}/product/productSelectOne.do?pno="+pno;
 			});
 		}
-		
+
+	
 		$(function(){
 			//console.log($start);
 			var ptype = '${ptype}';
@@ -40,8 +41,8 @@
 			$now = 0;
 
 			var keyword = '${keyword}';
-			console.log(keyword);
-			
+			//console.log(keyword);
+
 			$('#loadmore').on('click',function(){
 
 				elements.length = 0;
@@ -168,6 +169,18 @@
 		position:absolute;
 	}
 	
+	.input-wrapper > #keyword{
+		width:90%;
+		display:inline-block;
+	}
+	
+	.search_btn{
+		border-radius:5px;
+		background: #e5e5e5;
+		width:35px;
+		height:35px;
+		border:none;
+	}
 
 	
 	</style>
@@ -215,12 +228,20 @@
                 <h3>Search Here</h3>
                 <div class="input-wrapper">
                     <input type="search" class="form-control" name="search" id="keyword" placeholder="제품을 검색하세요!">
-                    <button type="button" onclick="search();">
+                    <button type="button" class="search_btn" onclick="search();">
                         <i class="ti-search"></i>
                     </button>
                 </div>
             </div>
-
+            <br /><br />
+            <!-- 
+            <div class="product_order_view">
+            	<select id="product_order">
+            		<option value="pno">최신순</option>
+            		<option value="pprice">가격순</option>
+            	</select>
+            </div>
+             -->
         <div class="row forProductList">
         	<!-- for문 시작 전 ptype먼저 넘겨주고 -->
         	<input type="hidden" id="ptype" name="ptype" value="${ptype}" readonly/>

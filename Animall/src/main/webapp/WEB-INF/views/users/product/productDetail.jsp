@@ -898,7 +898,11 @@
 						</div>
 					</div>
 				</div>				
-						
+				<div class="review_area_start">
+					<c:set var="reviewamount" value="${rating1 + rating2 + rating3 + rating4 + rating5}" />	
+					총 ${reviewamount}개의 리뷰가 있습니다.
+				</div>
+				<hr />
 				 <c:if test="${!empty prv}">
 				 	<c:forEach items="${prv}" var="prv">
 				 	
@@ -1299,7 +1303,7 @@
 			for(let i = 0; i < selectAll.length; i++){
 				selectAll[i].classList.remove('openinquiry');
 				var answerAreaAll = selectAll[i].nextSibling.nextSibling.nextSibling.nextSibling;
-				answerAreaAll.classList.remove('openanswer');
+					answerAreaAll.classList.remove('openanswer');
 			}
 		}
 
