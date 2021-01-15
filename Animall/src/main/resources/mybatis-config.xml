@@ -7,6 +7,17 @@
 	</settings>
 
 	<typeAliases>
+
+			
+
+        
+        <typeAlias type="com.kh.animall.users.board.model.vo.Board" alias="Board" />
+        <typeAlias type="com.kh.animall.users.board.model.vo.BoardReply" alias="BoardReply"/>
+        <typeAlias type="com.kh.animall.users.board.model.vo.BoardImg" alias="BoardImg"/>
+        <typeAlias type="com.kh.animall.users.styboard.model.vo.StyBoard" alias="StyBoard" />
+        <typeAlias type="com.kh.animall.users.styboard.model.vo.StyBoardImg" alias="StyBoardImg" />  
+        
+
 		<typeAlias type="com.kh.animall.users.product.model.vo.Product" alias="Product" />
 		<typeAlias type="com.kh.animall.users.product.model.vo.ProductImage" alias="ProductImage" />
 		<typeAlias type="com.kh.animall.users.product.model.vo.ProductListView" alias="ProductListView" />
@@ -15,12 +26,16 @@
 		<typeAlias type="com.kh.animall.users.product.model.vo.ProductReviewView" alias="ProductReviewView" />
 		<typeAlias type="com.kh.animall.users.productinquiry.model.vo.ProductInquiry" alias="ProductInquiry" />
 		<typeAlias type="com.kh.animall.users.productinquiry.model.vo.ProductInquiryList" alias="ProductInquiryList" />
+    <typeAlias type="com.kh.animall.users.product.model.vo.ProductSearch" alias="ProductSearch" />
 		
 		<typeAlias type="com.kh.animall.index.model.vo.IndexProduct" alias="IndexProduct" />
+    <typeAlias type="com.kh.animall.index.model.vo.ProductImages" alias="ProductImages"/>
+    
 		<typeAlias type="com.kh.animall.users.member.model.vo.Member" alias="Member" />
 		
-		<typeAlias type="com.kh.animall.users.product.model.vo.ProductSearch" alias="ProductSearch" />
 		
+		
+
 	</typeAliases>
 
 	<typeHandlers>

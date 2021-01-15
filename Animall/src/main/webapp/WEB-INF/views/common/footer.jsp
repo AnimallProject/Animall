@@ -117,8 +117,6 @@
 <script src="${pageContext.request.contextPath }/resources/plugins/slick/slick.min.js"></script>
 <!-- filter -->
 <script src="${pageContext.request.contextPath }/resources/plugins/filterizr/jquery.filterizr.min.js"></script>
-<!-- Google Map -->
-<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBu5nZKbeK-WHQ70oqOWo-_4VmwOwKP9YQ"></script>
 <script src="${pageContext.request.contextPath }/resources/plugins/google-map/gmap.js"></script>
 <!-- Syo Timer -->
 <script src="${pageContext.request.contextPath }/resources/plugins/syotimer/jquery.syotimer.js"></script>

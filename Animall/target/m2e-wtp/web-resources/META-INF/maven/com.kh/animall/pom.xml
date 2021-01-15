@@ -109,6 +109,13 @@
 			<artifactId>jstl</artifactId>
 			<version>1.2</version>
 		</dependency>
+		
+			<!-- @ResponseBody : java Object ==> JSON -->
+		<dependency>
+			<groupId>com.fasterxml.jackson.core</groupId>
+			<artifactId>jackson-databind</artifactId>
+			<version>2.11.3</version>
+		</dependency>
 	
 		<!-- Test -->
 		<dependency>
@@ -165,9 +172,9 @@
 			<groupId>commons-fileupload</groupId>
 			<artifactId>commons-fileupload</artifactId>
 			<version>1.4</version>
-		</dependency>
-		
-			<!-- spring security 모듈(비밀번호 암호화작업) -->			
+		</dependency>	
+    
+		<!-- spring security 모듈(비밀번호 암호화작업) -->			
 		<dependency>
 		    <groupId>org.springframework.security</groupId>
 		    <artifactId>spring-security-core</artifactId>
@@ -209,8 +216,7 @@
 		
 	</dependencies>
 	
-	
-    <build>
+	 <build>
         <plugins>
             <plugin>
                 <artifactId>maven-eclipse-plugin</artifactId>
