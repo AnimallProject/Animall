@@ -785,3 +785,142 @@
 
 </body>
 </html>
+
+
+
+h2 {
+   color: #1f76bc;
+}
+
+.width {
+   width: 2000px;
+}
+/* 상품 상세 */
+.product_info {
+   padding: 100px 0 135px;
+   background: white;
+}
+
+.product_pictures {
+   text-align: center;
+   position: relative;
+}
+
+.product_pictures .thumb_img {
+   margin-top: 70px;
+   display: flex;
+   justify-content: center;
+}
+
+.product_pictures .thumb_img li {
+   padding: 12px 0;
+   text-align: center;
+   background: white;
+   display: flex;
+   align-items: center;
+   justify-content: center;
+   position: relative;
+}
+
+.product_pictures .thumb_img li img {
+   width: 70px;
+   height: 70px;
+   margin-left: 25px;
+   margin-right: 25px;
+}
+
+form hr {
+   border: none;
+   border-top: 1px solid #edeff1;
+   margin-top: 15px;
+   margin-bottom: 15px;
+   margin-right: 45px;
+}
+
+.option h4 {
+   display: inline-block;
+   font-weight: 600;
+   font-size: 18px;
+   margin-right: 20px;
+}
+
+.option .size input {
+   display: none;
+}
+
+.option .size label {
+   font-size: 14px;
+   transition: 0.3s;
+   cursor: pointer;
+}
+
+.quantity span {
+   cursor: pointer;
+}
+
+.option .size input:checked+label {
+   font-size: 18px;
+   font-weight: 600;
+   color: #1f76bc;
+}
+
+.option .quantity input {
+   border: none;
+   width: 30px;
+   color: #1f76bc;
+   font-weight: 600;
+   text-align: center;
+   font-size: 18px;
+}
+
+.order_summary h4, button {
+   display: inline-block;
+   font-weight: 600;
+   font-size: 18px;
+   margin-right: 20px;
+}
+
+.order_summary button {
+   margin-top: 20px;
+   cursor: pointer;
+}
+
+.total_price .price {
+   display: inline-block;
+   font-weight: 600;
+   font-size: 18px;
+   margin-right: 4px;
+   color: #1f76bc;
+}
+
+.buybtn {
+   padding: 0 24px;
+   height: 40px;
+   color: white;
+   font-size: 18px;
+   font-weight: 600;
+   background: #1f76bc;
+   border-radius: 25px;
+   border: none;
+}
+
+.product_pictures .thumb_img li:before {
+   content: "";
+   position: absolute;
+   left: 0;
+   right: 0;
+   bottom: 0;
+   top: 0;
+   background: #F5F6CE;
+   opacity: 0;
+   transition: 0.3s;
+   cursor: pointer;
+}
+
+.product_pictures .thumb_img li.active:before {
+   opacity: 1;
+}
+
+.product_pictures .thumb_img li.active img {
+   opacity: 0.3;
+}

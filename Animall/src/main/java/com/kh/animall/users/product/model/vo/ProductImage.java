@@ -23,7 +23,7 @@ public class ProductImage {
 	private String imgpath;
 	private int imglevel;
 	private Date uploaddate;
-	private Boolean isdelete;
+	private String isdelete;
 	
 	
 }

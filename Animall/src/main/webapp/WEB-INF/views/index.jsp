@@ -1,11 +1,17 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
+    
 <!DOCTYPE html>
-<html lang="kr">
+<html lang="zxx">
+
 
 <head>
   <meta charset="utf-8">
   <title>ANIMALL</title>
+
   <!-- css -->
   <link rel="stylesheet" href="resources/css/carousel.css"/>
   <link rel="stylesheet" href="resources/css/index.css" />
@@ -20,16 +26,71 @@
 
 <!-- 캐러셀 -->
 
+
+
+  <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/carousel.css"/>
+  <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/index.css" />
+  <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/rayer.css" />
+  
+  <!-- mobile responsive meta -->
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  
+  <!-- Bootstrap -->
+  <link rel="stylesheet" href="resources/plugins/bootstrap/bootstrap.min.css">
+  <!-- magnific popup -->
+  <link rel="stylesheet" href="resources/plugins/magnific-popup/magnific-popup.css">
+  <!-- Slick Carousel -->
+  <link rel="stylesheet" href="resources/plugins/slick/slick.css">
+  <link rel="stylesheet" href="resources/plugins/slick/slick-theme.css">
+  <!-- themify icon -->
+  <link rel="stylesheet" href="resources/plugins/themify-icons/themify-icons.css">
+  <!-- animate -->
+  <link rel="stylesheet" href="resources/plugins/animate/animate.css">
+  <!-- Aos -->
+  <link rel="stylesheet" href="resources/plugins/aos/aos.css">
+  <!-- swiper -->
+  <link rel="stylesheet" href="resources/plugins/swiper/swiper.min.css">
+  <!-- Stylesheets -->
+  <link href="resources/css/style.css" rel="stylesheet">
+  
+  <!--Favicon-->
+  <link rel="shortcut icon" href="resources/images/favicon.png" type="image/x-icon">
+  <link rel="icon" href="resources/images/favicon.png" type="image/x-icon">
+	
+  <script src="resources/js/jquery-3.5.1.min.js"></script>
+
+  <script>
+		$(function(){
+			$("a[id]").on("click",function(){
+				var ptype = $(this).attr("id");
+				console.log("ptype="+ptype);
+				location.href = "${pageContext.request.contextPath}/product/productList.do?ptype="+ptype;
+			});									
+		});
+  </script>
+
+</head>
+
+<body>
+
+<header>
+	<%@ include file="common/header.jsp"%>
+</header>
+  
+<!-- 캐러셀 -->
+
 <section style="display : flex; justify-content : center;">
   <div class="carousel-container">
   <i class="fas fa-arrow-right" id="nextBtn"></i>
   <i class="fas fa-arrow-left" id="prevBtn"></i>
   	<div class="carousel-slide">
-  	<img src="resources/images/banner/pet_food_banner3.png" id="lastClone" alt="" />
-  		<img src="resources/images/banner/cat_dog_banner3.png" alt="" />
-  		<img src="resources/images/banner/christmas_banner3.png" alt="" />
-  		<img src="resources/images/banner/pet_food_banner3.png" alt="" />
-  	<img src="resources/images/banner/cat_dog_banner3.png" id="firstClone" alt="" />
+
+  	<img src="${pageContext.request.contextPath}/resources/images/banner/pet_food_banner3.png" id="lastClone" alt="" />
+  		<img src="${pageContext.request.contextPath}/resources/images/banner/cat_dog_banner3.png" alt="" />
+  		<img src="${pageContext.request.contextPath}/resources/images/banner/christmas_banner3.png" alt="" />
+  		<img src="${pageContext.request.contextPath}/resources/images/banner/pet_food_banner3.png" alt="" />
+  	<img src="${pageContext.request.contextPath}/resources/images/banner/cat_dog_banner3.png" id="firstClone" alt="" />
   	</div>
   </div>
   
@@ -63,12 +124,6 @@
 	</div>
 </div>
 </section>
-
-
-
-
-
-
 
 
 <div class="primeContainer_forRayer">
@@ -123,13 +178,6 @@
 		</form>
 	</div>
 </div>
-
-
-
-
-
-
-
 
 
 <section class="about section-sm overlay" style="background-image: url(resources/images/background/about-bg.jpg);">
@@ -661,7 +709,7 @@
 </section>
 <!-- /blog -->
 
-<!-- client logo slider -->
+
 <section class="bg-white py-4">
   <div class="container">
     <div class="client-logo-slider align-self-center">
@@ -690,10 +738,10 @@
 </section>
 <!-- /client logo slider -->
 
-<!-- 캐러셀 js -->
 <script type="text/javascript" src="resources/js/carousel.js"></script> 
 
 <!-- footer -->
+
 <footer>
 	<%@ include file="common/footer.jsp" %>
 </footer>
