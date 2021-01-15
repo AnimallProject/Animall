@@ -23,6 +23,28 @@
 	
 	<context:component-scan base-package="com.kh.animall" />
 	
+	<!--  파일업로드를 처리할 Resolver클래스 빈등록(빈이름 주의)  -->
+	<beans:bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+		<beans:property name="maxUploadSize" value="99999999"/>
+		<!--  max 파일용량은 10MB이다. 10485760 -->
+	</beans:bean>
+	
+	<!-- 사용을 위한 인터셉터 등록하기 -->
+	<interceptors>
+		<interceptor>
+			<mapping path="/board/list" />
+			<mapping path="/styBoard/list" />
+			<beans:bean id="loggerInterceptor" class="com.kh.animall.common.interceptor.LoggerInterceptor" />
+		</interceptor>
+		
+		<!-- 로그인 유무를 확인하는 인터셉터 -->
+		<!-- <interceptor>
+			<mapping path="/board/list" />
+			<exclude-mapping path="/board/list" />
+			<beans:bean id="loginInterceptor"  class="com.kh.animall.common.interceptor.LoginInterceptor"/>
+		</interceptor> -->
+	</interceptors>
+	
 	
 	
 </beans:beans>
