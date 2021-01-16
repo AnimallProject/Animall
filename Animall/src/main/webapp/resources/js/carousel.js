@@ -1,4 +1,3 @@
-
   // 이미지 상단 박스
   const carouselSlide = document.querySelector('.carousel-slide');
   
@@ -64,6 +63,13 @@ carouselSlide.addEventListener('transitionend', function(){
 		}
 });
 
+carouselSlide.addEventListener('load', function(){
+	
+	carouselImages.style.width = window.innerwidth +'px';
+	
+});
+
+
 //자동 슬라이드
 function slide(){
 
@@ -119,6 +125,5 @@ carouselSlide.addEventListener('mouseout', function(){
  
   prevBtn.style.opacity ='0'
   nextBtn.style.opacity ='0'
-
 
 });

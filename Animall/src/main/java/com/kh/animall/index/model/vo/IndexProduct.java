@@ -1,7 +1,5 @@
 package com.kh.animall.index.model.vo;
 
-import java.sql.Date;
-
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -18,9 +16,12 @@ public class IndexProduct {
 	private int pno;
 	private String ptype;
 	private String pname;
+	private String pexplain;
 	private int pprice;
+	private int saleprice;
+	private int sale;
 	private String pdetail;
-	private String pguide;
 	private char isdelete;
 	private int reviewamount;
+	private int productlevel;
 }

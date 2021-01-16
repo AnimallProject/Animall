@@ -66,8 +66,7 @@
 														+ '<div class="card-body p-0">' + 	
 														'<p class="card-text mx-2 mb-0">' + data[i].pcontent + '</p>' +
 													     '<p class="card-text mx-2 mb-0">' + data[i].pprice + '원' + '</p>' +
-													     '<a href="service-single.html" class="btn btn-secondary translateY-25 basket">' +
-													     '<img src="${pageContext.request.contextPath}/resources/images/basketIcon2.png" alt="" />' +
+													     '<button type="button"  name="'+data[i].pno+'" onclick="insertthis(this);" class="btn btn-secondary translateY-25 basket">' +													     '<img src="${pageContext.request.contextPath}/resources/images/basketIcon2.png" alt="" />' +
 													     '</a></div></div></div>';
 													     
 								     elements.push($(itemHTML).get(0));	  
@@ -89,8 +88,7 @@
 														+ '<div class="card-body p-0">' + 	
 														'<p class="card-text mx-2 mb-0">' + data[i].pcontent + '</p>' +
 													     '<p class="card-text mx-2 mb-0">' + data[i].pprice + '원' + '</p>' +
-													     '<a href="service-single.html" class="btn btn-secondary translateY-25 basket">' +
-													     '<img src="${pageContext.request.contextPath}/resources/images/basketIcon2.png" alt="" />' +
+													     '<button type="button"  name="'+data[i].pno+'" onclick="insertthis(this);" class="btn btn-secondary translateY-25 basket">' +													     '<img src="${pageContext.request.contextPath}/resources/images/basketIcon2.png" alt="" />' +
 													     '</a></div></div></div>';
 													     
 								     elements.push($(itemHTML).get(0));	  
@@ -131,7 +129,31 @@
 			
 		});
 
+		
+
 	</script>
+	
+	<c:choose>
+      <c:when test="${!empty member}">
+         <script>
+        function insertthis(obj) {
+         var pno = $(obj).attr("name");
+         
+         location.href = "${pageContext.request.contextPath}/cart/cartInsertThis.do?mno=${member.mno}&amount=1&pno="+pno;
+         alert('장바구니에 상품이 담겼습니다.')
+         location.reload();
+   }
+       </script>
+       </c:when>
+       <c:when test="${empty member}">
+       <script>
+         function insertthis(obj){
+         location.href="${pageContext.request.contextPath}"
+         alert("로그인 후 이용하세요.")
+             }
+       </script>
+       </c:when>
+     </c:choose>
 	
 	<style>
 	.btn2{

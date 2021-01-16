@@ -2,6 +2,28 @@
 
 @import url('https://fonts.googleapis.com/css2?family=Nanum+Gothic:wght@700&display=swap');
 
+
+.preloader {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #fff;
+    z-index: 9999;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.preloader img{
+    display: flex;
+    width: 150px;
+    height: 150px; 
+    border-radius: 70%;
+    overflow: hidden;
+}
+
 .dropbtn {
     background-color : white;
     padding: 16px;
@@ -29,9 +51,13 @@
 	color : #997296;
 	
 }
+
+/* absolute를 주면 메뉴바가 크기에 영향을 받지 않고 떠 있게 됨
+   또한 여기서 중요한 건 상위 div의 크기가 정해져 있기 때문에
+   div들이 옆으로 놓이지 않고 위 아래로 놓이게 됨 따라서 따로 flex설정 필요가 없음*/
 .dropdown-content {
     display: none;
-    position: absolute;
+    position: absolute;        
     background-color: white;
     width: 160px;
     z-index: 1;

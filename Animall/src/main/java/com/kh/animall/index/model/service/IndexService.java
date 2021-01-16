@@ -15,7 +15,20 @@ public interface IndexService {
 
 	List<IndexProduct> selectProductList();
 
-	Map<String, Object> productInsert(IndexProduct indexProduct, List<MultipartFile> file, HttpServletRequest req,
-			HttpSession session);
+	int insertProduct(IndexProduct indexProduct, MultipartFile[] upFiles, HttpServletRequest req);
+
+	List<ProductImages> selectProductImagesList(int pno);
+
+	int deleteProduct(int pno);
+
+	Map<String, Object> productUpdateList(int pno);
+
+	int updateProduct(IndexProduct indexProduct, MultipartFile[] upFiles, HttpServletRequest req, int pno);
+
+	List<IndexProduct> recSelectProductList();
+
+	List<IndexProduct> eventSelectProductList();
+
+	List<IndexProduct> instaSelectProductList();
 
 }

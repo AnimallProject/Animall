@@ -12,7 +12,29 @@ public interface IndexDAO {
 
 	int insertProduct(IndexProduct indexProduct);
 
-	int insertAttachment(List<ProductImages> productImages);
+	int insertProductImg(ProductImages productImages);
+
+	List<ProductImages> selectProductImagesList(int pno);
+
+	int deleteProduct(int pno);
+
+	Map<String, Object> productUpdateList(int pno);
+
+	IndexProduct productUpdate(int pno);
+
+	ProductImages productImagesList(int pno);
+
+	int productUpdateEnd(IndexProduct ip);
+
+	int productImagesUpdateEnd(ProductImages pi);
+
+	List<IndexProduct> recSelectProductList();
+
+	List<IndexProduct> eventSelectProductList();
+
+	List<IndexProduct> instaSelectProductList();
+
+	
 
 	
 }
