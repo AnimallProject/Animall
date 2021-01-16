@@ -14,6 +14,12 @@ public interface MemberDAO {
 
 	int deleteMember(String id);
 	
-	int checkIdDuplicate(HashMap<String, Object> hmap);
+	// 아이디 중복 검사
+	int idCheck(String id);
 
+	// 아이디 찾기
+	String find_id(String email);
+		
+	// 비밀번호 변경
+	public int update_pw(Member member) throws Exception;
 }

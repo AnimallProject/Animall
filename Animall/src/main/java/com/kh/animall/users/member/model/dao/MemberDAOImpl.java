@@ -1,12 +1,12 @@
 package com.kh.animall.users.member.model.dao;
 
-import java.util.HashMap;
-
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.kh.animall.users.member.model.vo.Member;
+
+import org.springframework.transaction.annotation.Transactional;
 
 @Repository
 public class MemberDAOImpl implements MemberDAO {
@@ -37,11 +37,24 @@ public class MemberDAOImpl implements MemberDAO {
 		// TODO Auto-generated method stub
 		return 0;
 	}
+	
+	@Override
+	public int idCheck(String id) {
+	
+	return sqlSession.selectOne("memberMapper.idCheck", id);
+	}
 
 	@Override
-	public int checkIdDuplicate(HashMap<String, Object> hmap) {
-		// TODO Auto-generated method stub
-		return 0;
+	public String find_id(String email) {
+		// 
+		return sqlSession.selectOne("memberMapper.find_id", email);
+	}
+		 			
+	
+	// 비밀번호변경
+	@Transactional
+	public int update_pw(Member member) throws Exception{
+		return sqlSession.update("memberMapper.update_pw", member);
 	}
 
 }
