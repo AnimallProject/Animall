@@ -6,6 +6,7 @@ import lombok.*;
 @ToString
 @NoArgsConstructor
 @AllArgsConstructor
+
 public class Cart {
  private int cno;
  private int mno;
@@ -14,7 +15,8 @@ public class Cart {
  private String pname;
  private int amount;
  private int pprice;
- private int orderprice;
- private int shipfee;
  private String isfreeship;
+ private int pimgno;
+ private int money;
+ private String changename;
 }
