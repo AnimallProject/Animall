@@ -8,6 +8,8 @@
 
 	<typeAliases>
 
+			
+
         
         <typeAlias type="com.kh.animall.users.board.model.vo.Board" alias="Board" />
         <typeAlias type="com.kh.animall.users.board.model.vo.BoardReply" alias="BoardReply"/>

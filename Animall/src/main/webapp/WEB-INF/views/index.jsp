@@ -1,83 +1,67 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
+    <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
-<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
-    
 <!DOCTYPE html>
-<html lang="zxx">
-
+<html lang="kr">
 
 <head>
   <meta charset="utf-8">
   <title>ANIMALL</title>
-
   <!-- css -->
-  <link rel="stylesheet" href="resources/css/carousel.css"/>
-  <link rel="stylesheet" href="resources/css/index.css" />
-  <link rel="stylesheet" href="resources/css/rayer.css" />
-</head>
-
-<body>
-  
-<header>
-	<%@ include file="common/header.jsp"%>
-</header>
-
-<!-- 캐러셀 -->
-
-
-
   <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/carousel.css"/>
   <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/index.css" />
-  <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/rayer.css" />
+  <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/rayer_submit.css" />
+  <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/rayer_update.css" />
   
-  <!-- mobile responsive meta -->
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  
-  <!-- Bootstrap -->
-  <link rel="stylesheet" href="resources/plugins/bootstrap/bootstrap.min.css">
-  <!-- magnific popup -->
-  <link rel="stylesheet" href="resources/plugins/magnific-popup/magnific-popup.css">
-  <!-- Slick Carousel -->
-  <link rel="stylesheet" href="resources/plugins/slick/slick.css">
-  <link rel="stylesheet" href="resources/plugins/slick/slick-theme.css">
-  <!-- themify icon -->
-  <link rel="stylesheet" href="resources/plugins/themify-icons/themify-icons.css">
-  <!-- animate -->
-  <link rel="stylesheet" href="resources/plugins/animate/animate.css">
-  <!-- Aos -->
-  <link rel="stylesheet" href="resources/plugins/aos/aos.css">
-  <!-- swiper -->
-  <link rel="stylesheet" href="resources/plugins/swiper/swiper.min.css">
-  <!-- Stylesheets -->
-  <link href="resources/css/style.css" rel="stylesheet">
-  
-  <!--Favicon-->
-  <link rel="shortcut icon" href="resources/images/favicon.png" type="image/x-icon">
-  <link rel="icon" href="resources/images/favicon.png" type="image/x-icon">
-	
-  <script src="resources/js/jquery-3.5.1.min.js"></script>
-
   <script>
-		$(function(){
-			$("a[id]").on("click",function(){
-				var ptype = $(this).attr("id");
-				console.log("ptype="+ptype);
-				location.href = "${pageContext.request.contextPath}/product/productList.do?ptype="+ptype;
-			});									
-		});
-  </script>
+  function productUpdateList(pno){
 
+// 	  	함수는 중복해서 존재해도 실행되지만
+// 		addEventListner의 경우 id를 찾아서 실행하기 때문에 중복된 id가 여러개인 경우 가장 첫번째 id를 찾고 끝나버린다.
+
+		$('#primeContainer_forRayer2').css("visibility","visible");
+		
+		$.ajax({
+			url : '${pageContext.request.contextPath}/index/productUpdateList.do',
+			data : { pno : pno}, 
+			dataType : 'json',
+			success : function(data){
+				
+				console.log(data);
+				
+				$('#btitle2').val(data['PNAME']);		
+				$('#bprice2').val(data.PPRICE);
+				$('#bsale2').val(data.SALE);
+				$('#bsaleprice2').val(data.SALEPRICE);
+				$('#bexplain2').val(data.PEXPLAIN);	
+				$('#bproductlevel2').val(data.PRODUCTLEVEL)
+				
+				$('#nameBox2').val(data.ORIGINNAME);
+				$('#write_form2_pno').val(data.PNO);
+ 				
+				
+				
+			},
+			error : function(error){
+				
+				console.log("error");
+			}
+		});
+
+}
+
+  
+  
+
+  </script>
+  
 </head>
 
 <body>
-
+  
 <header>
 	<%@ include file="common/header.jsp"%>
 </header>
-  
+
 <!-- 캐러셀 -->
 
 <section style="display : flex; justify-content : center;">
@@ -85,7 +69,6 @@
   <i class="fas fa-arrow-right" id="nextBtn"></i>
   <i class="fas fa-arrow-left" id="prevBtn"></i>
   	<div class="carousel-slide">
-
   	<img src="${pageContext.request.contextPath}/resources/images/banner/pet_food_banner3.png" id="lastClone" alt="" />
   		<img src="${pageContext.request.contextPath}/resources/images/banner/cat_dog_banner3.png" alt="" />
   		<img src="${pageContext.request.contextPath}/resources/images/banner/christmas_banner3.png" alt="" />
@@ -97,8 +80,10 @@
 
 </section>
 
-<!-- 상품추천 -->
+<!--                                              이 상품 어때요? 부분                                  -->
+<!-- --------------------------------------------------------------------------------------------- -->
 <section>
+<div style="font-family: Nanum Gothic">
 <div class="primeContainer_ForIndexProduct">
 	<div class="bigContainer_ForIndexProduct1">
 	        <h3 class="">이 상품 어때요?</h3>
@@ -106,645 +91,340 @@
 	
 	<div class="bigContainer_ForIndexProduct2">
 	
-	<c:forEach var="indexProduct" items="${productList}">
-		<div>
+	<c:forEach var="b" items="${productList}" begin="0" end="3">
+		<div style="display : flex; flex-direction : column">
 			<div class="imgContainer_ForIndexProduct">
-				<a href="">
-				<img src="${pageContext.request.contextPath}${indexProduct.imgpath}" alt="" />
+				<a href="#">
+					<img src="${ pageContext.request.contextPath }/resources/boardUpload/${b.changename}" alt="" />
 				</a>
 			</div>
 			<div class="productContainer_ForIndexProduct">
-				<p style ="height : 10px">${indexProduct.pname}</p>
-				<p style ="height : 10px">${indexProduct.pprice}</p>
+				<p style ="height : 10px; font-size : 13pt; color : black; font-weight : 550;">${b.pname}</p>
+				<p style ="height : 10px; font-size : 13pt; color : black;">${b.pprice}원</p>
+			</div>
+			<div style="display : flex; justify-content : center;" >
+			<c:if test="${member.mtype eq 'ADMIN'}">
+				<input type="button" class="deleteButton_forindexProduct" value="삭제" 
+				       onclick="location.href='${pageContext.request.contextPath}/index/ProductDelete.do?pno=${b.pno}'"/>
+				
+				
+				<input type="button" class="updateButton_forindexProduct" value="수정" onclick="productUpdateList(${b.pno});"/>
+			</c:if>
 			</div>
 		</div>
+		
+		
+		
 	</c:forEach>
+	
 	
 
 	</div>
+	
+</div>
 </div>
 </section>
 
 
-<div class="primeContainer_forRayer">
-<div class="bigContainer_forRayer" id="write__form__bg"></div>
 
-		<form id='write__form' role='form' method='post'
-			enctype='multipart/form-data'>
-			<div id="write__form__box"
-				style="display: flex; justify-content: center; align-items: center; position: fixed; top: 0; left: 0; widtH: 100%; height: 100%; z-index: 9999;">
-				<div
-					style="background-color: #ffffff; width: 550px; height: 700px; position: relative; display: flex; justify-content: center;">
 
-					<div style="margin: 60px 0 0 0;">
-						<div>
-							<input id="btitle" placeholder="제목" type="text" name="btitle"
-								style="height: 40px; width: 350px; margin: 0 0 30px 0; padding: 0; border: none; border-bottom: 1px solid #191621; font-size: 20pt; background-color: transparent; border-radius: 0;">
-						</div>
-						<div style="width: 350px; height: 350px; margin: 0 0 30px 0;">
-							<textarea id="bcontent" placeholder="내용" name="bcontent"
-								style="padding: 0; border: solid 1px black; font-size: 11pt; width: 100%; height: 100%; padding: 10px;"></textarea>
-						</div>
+<!--                                              #연말특가 부분                                       -->
+<!-- --------------------------------------------------------------------------------------------- -->
+<section>
+<div style="font-family: Nanum Gothic">
+<div class="primeContainer_ForYear">
+<div class="primeSemiContainer_ForYear">
+	<div class="bigContainer_ForYear1">
+	        <h3 class="title_ForYear">#설 얼리버드 특가</h3>
+	        <h4>-</h4>
+	        <h5 class="title2_ForYear">설날까지 매일 진행되는 24시간 한정 특가</h5>
+	</div>
+	
+	<div class="bigContainer_ForYear2">
+	
+	<c:forEach var="y" items="${recProductList}" begin="0" end="0">
+		<div style="display : flex; flex-direction : column">
+			<div class="imgContainer_ForYear">
+				<a href="#">
+				<img src="${ pageContext.request.contextPath }/resources/boardUpload/${y.changename}" alt="" />
+				</a>
+			</div>
+			<div class="productContainer_ForYear">
+				<p style ="height : 10px;  font-size : 13pt; color : black; font-weight : 550;">${y.pname}</p>
+				<p style ="height : 10px">${y.pexplain}</p>
+				<div class="priceContainer_ForYear">
+					<p style ="height : 10px; color : orange;  font-size : 13pt; font-weight : 550; ">${y.sale}%</p>&nbsp
+					<p style ="height : 10px;  font-size : 13pt; color : black; font-weight : 550;">${y.saleprice}원</p>&nbsp
+					<p style ="height : 10px; text-decoration : line-through;">${y.pprice}원</p>
+				</div>
+			</div>
+			<div style="display : flex; justify-content : center;" >
+			<c:if test="${member.mtype eq 'ADMIN'}">
+				<input type="button" class="deleteButton_forYear" value="삭제" 
+				       onclick="location.href='${pageContext.request.contextPath}/index/ProductDelete.do?pno=${y.pno}'"/>
+				
+				
+				<input type="button" class="updateButton_forYear" value="수정" onclick="productUpdateList(${y.pno});"/>
+			</c:if>
+			</div>
+		</div>
+		
+		
+		
+	</c:forEach>
+	
+	
 
-						<div>
-							<div>
-								<input id="file1" type="file" name="file">
-							</div>
-							<div>
-								<input id="file2" type="file" name="file">
-							</div>
-							<div>
-								<input id="file3" type="file" name="file">
-							</div>
-						</div>
+	</div>
+</div>
+	
+</div>
+</div>
+</section>
 
-						<div
-							style="margin: 20px 0 0 0; display: flex; justify-content: center;">
-							<div id="write__button"
-								style="background-color: #997296; width: 350px; border-radius: 14px; display: flex; justify-content: center; align-items: center; cursor: pointer; height: 25px;">
-								<div style="font-size: 10pt; color: white;">글등록</div>
+
+
+
+
+<!--                                              이벤트소식 부분                                       -->
+<!-- --------------------------------------------------------------------------------------------- -->
+<section>
+<div style="font-family: Nanum Gothic">
+<div class="primeContainer_ForEvent">
+	<div class="bigContainer_ForEvent1">
+	        <h3 class="">이벤트 소식 ></h3>
+	</div>
+	
+	<div class="bigContainer_ForEvent2">
+	
+	<c:forEach var="e" items="${eventProductList}" begin="0" end="2">
+		<div style="display : flex; flex-direction : column">
+			<div class="imgContainer_ForEvent">
+				<a href="#">
+				<img src="${ pageContext.request.contextPath }/resources/boardUpload/${e.changename}" alt="" />
+				</a>
+			</div>
+			<div class="productContainer_ForEvent">
+				<p style ="height : 10px; font-size : 13pt; font-weight : 550; ">${e.pname}</p>
+				<p style ="height : 10px; font-size : 11pt;">${e.pexplain}</p>
+			</div>
+			<div style="display : flex; justify-content : center; " >
+			<c:if test="${member.mtype eq 'ADMIN'}">
+				<input type="button" class="deleteButton_ForEvent" value="삭제" 
+				       onclick="location.href='${pageContext.request.contextPath}/index/ProductDelete.do?pno=${e.pno}'"/>
+				
+				
+				<input type="button" class="updateButton_ForEvent" value="수정" onclick="productUpdateList(${e.pno});"/>
+			</c:if>		
+			</div>
+		</div>
+		
+		
+		
+	</c:forEach>
+	
+	
+
+	</div>
+	
+</div>
+</div>
+</section>
+
+<!--                                              인스타그램 부분                                       -->
+<!-- --------------------------------------------------------------------------------------------- -->
+<section>
+<div class="primeContainer_ForInsta">
+	<div class="bigContainer_ForInsta1">
+	        <h3 class="">인스타그램 고객 후기</h3>
+	</div>
+	
+	<div class="bigContainer_ForInsta2">
+	
+	<c:forEach var="i" items="${instaProductList}" begin="0" end="4">
+		<div style="display : flex; flex-direction : column">
+			<div class="imgContainer_ForInsta">
+				<a href="#">
+					<img src="${ pageContext.request.contextPath }/resources/boardUpload/${i.changename}" alt="" />
+					<div class="div_ForInstaHover">
+						<i class="fas fa-heart"></i>&nbsp&nbsp&nbsp
+						<i class="fas fa-comment"></i>
+					</div>
+				</a>
+				
+			</div>
+			<div style="display : flex; justify-content : center;" >
+			<c:if test="${member.mtype eq 'ADMIN'}">
+				<input type="button" class="deleteButton_ForInsta" value="삭제" 
+				       onclick="location.href='${pageContext.request.contextPath}/index/ProductDelete.do?pno=${i.pno}'"/>
+			</c:if>
+			</div>
+		</div>
+		
+		
+		
+	</c:forEach>
+	</div>
+	<br />
+	<h5>더 많은 고객 후기가 궁금하다면?</h5>
+	<h5>@Animall_regram</h5>
+	<c:if test="${member.mtype eq 'ADMIN'}">
+		<div class="submit_forindexProduct" id="submit_forindexProduct4">
+		등록
+		</div>
+	</c:if>
+</div>
+</section>
+
+
+<!-- 														상품등록 딤드레이어							 -->
+<!-- 														----------        						 -->
+
+<div class="primeContainer_forRayer" id="submitPrimeContainer_forRayer">
+		<div class="dimedContainer_forRayer" id="write_form__bg">
+		</div>
+		
+<!-- 		파일 전송을 위해 multipart/form-data사용 -->
+		<form id='write_form' role='form' method='post' enctype='multipart/form-data'
+		 action="${pageContext.request.contextPath}/index/ProductInsert.do">
+		
+<!-- 		가운데 맞추기 용 div -->
+			<div class="bigContainer_forRayer" id="write_form_box">
+				<div class="formContainer_forRayer">
+
+					<div style="margin-top: 60px;">
+							<div class="content_container_forRayer">
+								<input class="title_forRayer" id="btitle" placeholder="제목" type="text" name="pname">
 							</div>
-						</div>
+							<div class="content_container_forRayer">
+								<input class="content_forRayer" id="bprice" placeholder="가격" name="pprice">
+							</div>
+							<div class="content_container_forRayer">
+								<input class="content_forRayer" id="bsale" placeholder="할인율" name="sale">
+							</div>
+							<div class="content_container_forRayer">
+								<input class="content_forRayer" id="bsaleprice" placeholder="할인적용가격" name="saleprice">
+							</div>
+							<div class="content_container_forRayer">
+								<input class="content_forRayer" id="bexplain" placeholder="상품설명" name="pexplain">
+							</div>
+							<div class="content_container_forRayer">
+								<select class="select_forRayer" id="bproductlevel" placeholder="상품 등록 종류"
+								 name="productlevel" required="required">
+								 	<option value="" style="color : gray;">등록 종류 선택</option>
+									<option value="0">이 상품 어때요?</option>
+									<option value="1">특가</option>
+									<option value="2">이벤트</option>
+									<option value="3">인스타</option>
+								</select>
+							</div>
+	
+							<div class="fileContainer_forRayer">
+								
+								<div class="fileBox">
+									<input id="nameBox1" class="nameBox" placeholder="파일선택"
+									 disabled="disabled"/> &nbsp&nbsp
+									<div>
+									<label for="fileSubmit1"><i class="fas fa-camera-retro"></i></label>
+									</div>
+									<input id="fileSubmit1" type="file" name="upFile" class="upload-hidden"
+									 onchange="getImgFile1(this)">
+								</div>
+								
+							</div>
+	
+							<button class="writeButton_forRayer" id="write_button" type="submit">
+							등록
+							</button>
 
 					</div>
-					<div id="write__close__button"
-						style="cursor: pointer; position: absolute; top: 10px; right: 10px;">
-						<img src="/animall/resources/images/cancel.png"
-							style="width: 25px;">
+					
+<!-- 					이거는 absolute 적용중 -->
+					<div class="closeButton_forRayer" id="write_close_button">
+						<i class="fas fa-times"></i>
 					</div>
 				</div>
 
 			</div>
 		</form>
 	</div>
-</div>
 
 
-<section class="about section-sm overlay" style="background-image: url(resources/images/background/about-bg.jpg);">
-    <div class="container">
-        <div class="row">
-            <div class="col-lg-6 ml-auto">
-                <div class="rounded p-sm-5 px-3 py-5 bg-secondary">
-                    <h3 class="section-title section-title-border-half text-white">Who We Are?</h3>
-                    <p class="text-white mb-40">Excepteur sint occaecat cupidatat non proident sunt culpa qui officia deserunt mollit anim id est laborum.</p>
-                    <div>
-                        <ul class="d-inline-block pl-0">
-                            <li class="font-secondary mb-10 text-white float-sm-left mr-sm-5">
-                                <i class="text-primary mr-2 ti-arrow-circle-right"></i>Business Services</li>
-                            <li class="font-secondary mb-10 text-white">
-                                <i class="text-primary mr-2 ti-arrow-circle-right"></i>Audit &amp; Assurance</li>
-                            <li class="font-secondary mb-10 text-white">
-                                <i class="text-primary mr-2 ti-arrow-circle-right"></i>IT Control Solutions</li>
-                        </ul>
-                        <ul class="d-inline-block pl-0">
-                            <li class="font-secondary mb-10 text-white">
-                                <i class="text-primary mr-2 ti-arrow-circle-right"></i>Business Services</li>
-                            <li class="font-secondary mb-10 text-white">
-                                <i class="text-primary mr-2 ti-arrow-circle-right"></i>Audit &amp; Assurance</li>
-                            <li class="font-secondary mb-10 text-white">
-                                <i class="text-primary mr-2 ti-arrow-circle-right"></i>IT Control Solutions</li>
-                        </ul>
-                    </div>
-                    <a href="service.html" class="btn btn-primary mt-4">Explore More</a>
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
+<!-- 													상품수정 딤드레이어 								-->
+<!-- 														----------        						 -->
 
-<!-- skill -->
-<section class="section">
-  <div class="container">
-    <div class="row">
-      <div class="col-lg-12">
-        <h5 class="section-title-sm">Best Service</h5>
-        <h2 class="section-title section-title-border-half">Why Choose Us</h2>
-      </div>
-      <div class="col-lg-7">
-        <div class="mb-40">
-          <p class="text-dark">Lorem ipsum dolor sit amet, consectetur adipisicing elit,
-            sed eiusmod tempor incididunt laboris nisi
-            ut aliquip ex ea commodo consequat. </p>
-          <p class="text-dark mb-30">Duis aute irure dolor in reprehenderit voluptate
-            velit esse cillum dolore fugiat nulla pariatur.Excepteur
-            sint ocaecat cupidatat non proident sunt culpa qui officia deserunt mollit
-            anim id est laborum. sed
-            perspiciatis unde omnisiste natus error sit voluptatem
-            accusantium.doloremque ladantium totam rem
-            aperieaque ipsa quae ab illo inventore.veritatis. et quasi architecto beatae
-            vitae dicta sunt explicabo.</p>
-        </div>
-        <!-- fun-fact -->
-        <div class="mb-md-50">
-          <div class="row">
-            <div class="col-4">
-              <div class="d-flex flex-column flex-sm-row align-items-center">
-                <i class="round-icon mr-sm-3 ti-server"></i>
-                <div class="text-center text-sm-left">
-                  <h2 class="count mb-0" data-count="230">0</h2>
-                  <p class="mb-0">Projects Done</p>
-                </div>
-              </div>
-            </div>
-            <div class="col-4">
-              <div class="d-flex flex-column flex-sm-row align-items-center">
-                <i class="round-icon mr-sm-3 ti-face-smile"></i>
-                <div class="text-center text-sm-left">
-                  <h2 class="count mb-0" data-count="789">0</h2>
-                  <p class="mb-0">Satisfied Clients</p>
-                </div>
-              </div>
-            </div>
-            <div class="col-4">
-              <div class="d-flex flex-column flex-sm-row align-items-center">
-                <i class="round-icon mr-sm-3 ti-thumb-up"></i>
-                <div class="text-center text-sm-left">
-                  <h2 class="count mb-0" data-count="580">0</h2>
-                  <p class="mb-0">Cup Of Coffee</p>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-      <!-- progressbar -->
-      <div class="col-lg-4 offset-lg-1">
-        <div class="progressbar">
-          <h5 class="progressbar-title">Branding</h5>
-          <div class="progress" data-percent="85%">
-            <div class="progress-bar progress-bar-striped" style="width: 85%;">
-              <div class="progress-bar-value">85%</div>
-            </div>
-          </div>
-        </div>
-        <div class="progressbar">
-          <h5 class="progressbar-title">Consulting</h5>
-          <div class="progress" data-percent="90%">
-            <div class="progress-bar progress-bar-striped" style="width: 90%;">
-              <div class="progress-bar-value">90%</div>
-            </div>
-          </div>
-        </div>
-        <div class="progressbar">
-          <h5 class="progressbar-title">Business</h5>
-          <div class="progress" data-percent="75%">
-            <div class="progress-bar progress-bar-striped" style="width: 75%;">
-              <div class="progress-bar-value">75%</div>
-            </div>
-          </div>
-        </div>
-        <div class="progressbar">
-          <h5 class="progressbar-title">Promotion</h5>
-          <div class="progress" data-percent="90%">
-            <div class="progress-bar progress-bar-striped" style="width: 90%;">
-              <div class="progress-bar-value">90%</div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-<!-- /skill -->
+<div class="primeContainer_forRayer2" id="primeContainer_forRayer2">
+		<div class="dimedContainer_forRayer2" id="write_form__bg2">
+		</div>
+		
+		<form id='write_form2' method='post' enctype='multipart/form-data'
+		action="${pageContext.request.contextPath}/index/ProductUpdate.do">
+			<input type="hidden" type="text" id="write_form2_pno" name="pno"/>
+<!-- 		가운데 맞추기 용 div -->
+			<div class="bigContainer_forRayer2" id="write_form_box2">
+				<div class="formContainer_forRayer2">
 
-<!-- work -->
-<section class="section bg-gray">
-  <div class="container-fluid">
-    <div class="row">
-      <div class="col-lg-12 text-center">
-        <h5 class="section-title-sm">Our Works</h5>
-        <h2 class="section-title section-title-border-gray">Latest Projects</h2>
-      </div>
-    </div>
-    <!-- work slider -->
-    <div class="row work-slider">
-      <div class="col-lg-3 px-0">
-        <div class="work-slider-image">
-          <img class="img-fluid w-100" src="resources/images/works/work-1.jpg" alt="work-image">
-          <div class="image-overlay">
-            <a class="popup-image" data-effect="mfp-zoom-in" href="resources/images/works/work-1.jpg">
-              <i class="ti-search"></i>
-            </a>
-            <a class="h4" href="project-single.html">Cras Sed Elit Sit Amet.</a>
-            <p>by Admin</p>
-          </div>
-        </div>
-      </div>
-      <div class="col-lg-3 px-0">
-        <div class="work-slider-image">
-          <img class="img-fluid w-100" src="resources/images/works/work-2.jpg" alt="work-image">
-          <div class="image-overlay">
-            <a class="popup-image" data-effect="mfp-zoom-in" href="resources/images/works/work-2.jpg">
-              <i class="ti-search"></i>
-            </a>
-            <a class="h4" href="project-single.html">Cras Sed Elit Sit Amet.</a>
-            <p>by Admin</p>
-          </div>
-        </div>
-      </div>
-      <div class="col-lg-3 px-0">
-        <div class="work-slider-image">
-          <img class="img-fluid w-100" src="resources/images/works/work-3.jpg" alt="work-image">
-          <div class="image-overlay">
-            <a class="popup-image" data-effect="mfp-zoom-in" href="resources/images/works/work-3.jpg">
-              <i class="ti-search"></i>
-            </a>
-            <a class="h4" href="project-single.html">Cras Sed Elit Sit Amet.</a>
-            <p>by Admin</p>
-          </div>
-        </div>
-      </div>
-      <div class="col-lg-3 px-0">
-        <div class="work-slider-image">
-          <img class="img-fluid w-100" src="resources/images/works/work-4.jpg" alt="work-image">
-          <div class="image-overlay">
-            <a class="popup-image" data-effect="mfp-zoom-in" href="resources/images/works/work-4.jpg">
-              <i class="ti-search"></i>
-            </a>
-            <a class="h4" href="project-single.html">Cras Sed Elit Sit Amet.</a>
-            <p>by Admin</p>
-          </div>
-        </div>
-      </div>
-      <div class="col-lg-3 px-0">
-        <div class="work-slider-image">
-          <img class="img-fluid w-100" src="resources/images/works/work-1.jpg" alt="work-image">
-          <div class="image-overlay">
-            <a class="popup-image" data-effect="mfp-zoom-in" href="resources/images/works/work-1.jpg">
-              <i class="ti-search"></i>
-            </a>
-            <a class="h4" href="project-single.html">Cras Sed Elit Sit Amet.</a>
-            <p>by Admin</p>
-          </div>
-        </div>
-      </div>
-      <div class="col-lg-3 px-0">
-        <div class="work-slider-image">
-          <img class="img-fluid w-100" src="resources/images/works/work-2.jpg" alt="work-image">
-          <div class="image-overlay">
-            <a class="popup-image" data-effect="mfp-zoom-in" href="resources/images/works/work-2.jpg">
-              <i class="ti-search"></i>
-            </a>
-            <a class="h4" href="project-single.html">Cras Sed Elit Sit Amet.</a>
-            <p>by Admin</p>
-          </div>
-        </div>
-      </div>
-      <div class="col-lg-3 px-0">
-        <div class="work-slider-image">
-          <img class="img-fluid w-100" src="resources/images/works/work-3.jpg" alt="work-image">
-          <div class="image-overlay">
-            <a class="popup-image" data-effect="mfp-zoom-in" href="resources/images/works/work-3.jpg">
-              <i class="ti-search"></i>
-            </a>
-            <a class="h4" href="project-single.html">Cras Sed Elit Sit Amet.</a>
-            <p>by Admin</p>
-          </div>
-        </div>
-      </div>
-      <div class="col-lg-3 px-0">
-        <div class="work-slider-image">
-          <img class="img-fluid w-100" src="resources/images/works/work-4.jpg" alt="work-image">
-          <div class="image-overlay">
-            <a class="popup-image" data-effect="mfp-zoom-in" href="resources/images/works/work-4.jpg">
-              <i class="ti-search"></i>
-            </a>
-            <a class="h4" href="project-single.html">Cras Sed Elit Sit Amet.</a>
-            <p>by Admin</p>
-          </div>
-        </div>
-      </div>
-      <div class="col-lg-3 px-0">
-        <div class="work-slider-image">
-          <img class="img-fluid w-100" src="resources/images/works/work-1.jpg" alt="work-image">
-          <div class="image-overlay">
-            <a class="popup-image" data-effect="mfp-zoom-in" href="resources/images/works/work-1.jpg">
-              <i class="ti-search"></i>
-            </a>
-            <a class="h4" href="project-single.html">Cras Sed Elit Sit Amet.</a>
-            <p>by Admin</p>
-          </div>
-        </div>
-      </div>
-      <div class="col-lg-3 px-0">
-        <div class="work-slider-image">
-          <img class="img-fluid w-100" src="resources/images/works/work-2.jpg" alt="work-image">
-          <div class="image-overlay">
-            <a class="popup-image" data-effect="mfp-zoom-in" href="resources/images/works/work-2.jpg">
-              <i class="ti-search"></i>
-            </a>
-            <a class="h4" href="project-single.html">Cras Sed Elit Sit Amet.</a>
-            <p>by Admin</p>
-          </div>
-        </div>
-      </div>
-      <div class="col-lg-3 px-0">
-        <div class="work-slider-image">
-          <img class="img-fluid w-100" src="resources/images/works/work-3.jpg" alt="work-image">
-          <div class="image-overlay">
-            <a class="popup-image" data-effect="mfp-zoom-in" href="resources/images/works/work-3.jpg">
-              <i class="ti-search"></i>
-            </a>
-            <a class="h4" href="project-single.html">Cras Sed Elit Sit Amet.</a>
-            <p>by Admin</p>
-          </div>
-        </div>
-      </div>
-      <div class="col-lg-3 px-0">
-        <div class="work-slider-image">
-          <img class="img-fluid w-100" src="resources/images/works/work-4.jpg" alt="work-image">
-          <div class="image-overlay">
-            <a class="popup-image" data-effect="mfp-zoom-in" href="resources/images/works/work-4.jpg">
-              <i class="ti-search"></i>
-            </a>
-            <a class="h4" href="project-single.html">Cras Sed Elit Sit Amet.</a>
-            <p>by Admin</p>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-<!-- /work -->
+					<div style="margin-top: 60px;">
+							<div class="content_container_forRayer2">
+								<input class="title_forRayer2" id="btitle2" placeholder="제목" type="text" name="pname">
+							</div>
+							<div class="content_container_forRayer2">
+								<input class="content_forRayer2" id="bprice2" placeholder="가격" type="text" name="pprice">
+							</div>
+							<div class="content_container_forRayer2">
+								<input class="content_forRayer2" id="bsale2" placeholder="할인율" type="text" name="sale">
+							</div>
+							<div class="content_container_forRayer2">
+								<input class="content_forRayer2" id="bsaleprice2" placeholder="할인가격" type="text" name="saleprice">
+							</div>
+							<div class="content_container_forRayer2">
+								<input class="content_forRayer2" id="bexplain2" placeholder="상품설명" type="text" name="pexplain">
+							</div>
+							
+	
+							<div class="fileContainer_forRayer2">
+								
+								<div class="fileBox2">
+									<input id="nameBox2" class="nameBox" value="" disabled="disabled"/> &nbsp&nbsp
+									<div>
+										<label for="fileSubmit2"><i class="fas fa-camera-retro"></i></label>
+									</div>
+									<input id="fileSubmit2" type="file" name="upFile2" class="upload-hidden"
+									 onchange="getImgFile2(this)">
+								</div>
+								
+							</div>
+							<div>
+							</div>
+	
+							<button class="writeButton_forRayer2" id="write_button2" type="submit">
+							수정
+							</button>
 
-<!-- mission -->
-<section class="mission section">
-  <div class="container">
-    <div class="row">
-      <div class="col-lg-12">
-        <h5 class="section-title-sm">Our Goal</h5>
-        <h2 class="section-title section-title-border-half">Company Mission</h2>
-        <div class="row">
-          <div class="col-lg-6">
-            <p class="mb-40">Lorem ipsum dolor sit amet consectetur adipisicing elit sed
-              eiusmod tempor didunt laboris nisi ut aliquip ex ea commodo consequat.
-            </p>
-          </div>
-        </div>
-      </div>
-      <div class="col-lg-6">
-        <!-- accordion -->
-        <div id="accordion" class="mb-md-50">
-          <div class="card border-0 mb-4">
-            <div class="card-header bg-gray border p-0">
-              <a class="card-link h5 d-block tex-dark mb-0 py-10 px-4" data-toggle="collapse" href="#collapseOne">
-                <i class="ti-minus text-primary mr-2"></i> Our Company Mission
-              </a>
-            </div>
-            <div id="collapseOne" class="collapse show" data-parent="#accordion">
-              <div class="card-body font-secondary text-color pl-0 pb-0">
-                Duis aute irure dolor in reprehenderit voluptate velit esse cillum
-                dolore fugiat nulla pariatur.Excepteur sint ocaecat cupidatat
-                non proident sunt culpa qui officia deserunt mollit anim id est
-                laborum.
-              </div>
-            </div>
-          </div>
-          <div class="card border-0 mb-4">
-            <div class="card-header bg-gray border p-0">
-              <a class="collapsed card-link h5 d-block tex-dark mb-0 py-10 px-4" data-toggle="collapse"
-                href="#collapseTwo">
-                <i class="ti-plus text-primary mr-2"></i> Our Company Mission
-              </a>
-            </div>
-            <div id="collapseTwo" class="collapse" data-parent="#accordion">
-              <div class="card-body font-secondary text-color pl-0 pb-0">
-                Duis aute irure dolor in reprehenderit voluptate velit esse cillum
-                dolore fugiat nulla pariatur.Excepteur sint ocaecat cupidatat
-                non proident sunt culpa qui officia deserunt mollit anim id est
-                laborum.
-              </div>
-            </div>
-          </div>
-          <div class="card border-0 mb-4">
-            <div class="card-header bg-gray border p-0">
-              <a class="collapsed card-link h5 d-block tex-dark mb-0 py-10 px-4" data-toggle="collapse"
-                href="#collapseThree">
-                <i class="ti-plus text-primary mr-2"></i> Our Company Mission
-              </a>
-            </div>
-            <div id="collapseThree" class="collapse" data-parent="#accordion">
-              <div class="card-body font-secondary text-color pl-0 pb-0">
-                Duis aute irure dolor in reprehenderit voluptate velit esse cillum
-                dolore fugiat nulla pariatur.Excepteur sint ocaecat cupidatat
-                non proident sunt culpa qui officia deserunt mollit anim id est
-                laborum.
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-      <!-- chart -->
-      <div class="col-lg-6">
-        <img src="resources/images/chart.png" alt="chart" class="img-fluid w-100">
-      </div>
-    </div>
-  </div>
-</section>
-<!-- /mission -->
+					</div>
+					
+<!-- 					이거는 absolute 적용중 -->
+					<div class="closeButton_forRayer2" id="write_close_button2">
+						<i class="fas fa-times"></i>
+					</div>
+				</div>
 
-<!-- promo-video -->
-<section class="promo-video overlay section" style="background-image: url(resources/images/background/promo-video.jpg);">
-  <div class="container">
-    <div class="row">
-      <div class="col-lg-12">
-        <h1 class="text-white mb-20 font-weight-normal">We Are Alawys <br> Comited</h1>
-        <div class="d-flex">
-          <a class="popup-youtube play-icon mr-4" href="https://www.youtube.com/watch?v=6ZfuNTqbHE8">
-            <i class="ti-control-play"></i>
-          </a>
-          <p class="text-white align-self-center h4">Lorem ipsum dolor <br> sit amet con.
-          </p>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-<!-- /promo-video -->
-
-<!-- testimonial -->
-<section class="section pb-0">
-    <div class="container">
-        <div class="row">
-            <div class="col-lg-12 text-center">
-                <h5 class="section-title-sm">Clients</h5>
-                <h2 class="section-title section-title-border"> What client Say </h2>
-            </div>
-            <div class="col-lg-5 col-md-5 pr-0 align-self-center">
-                <img class="img-fluid w-100" src="resources/images/client.png" alt="clients-image">
-            </div>
-            <div class="col-lg-7 col-md-7 align-self-center pl-0">
-                <div class="testimonial-slider p-5">
-                    <!-- slider item -->
-                    <div class="outline-0">
-                        <i class="testimonial-icon ti-quote-left"></i>
-                        <p class="text-dark">Lorem ipsum dolor sit amet constur adipisicing elit sed eiusmtempor incid sed dolore magna aliqu enim minim veniam quis nostrud exercittion ullamco labo ris nisi aliquip excepteur.</p>
-                        <h4 class="font-weight-normal">Julia Robertson</h4>
-                        <h6 class="font-secondary text-color">Happy Clients</h6>
-                    </div>
-                    <!-- slider item -->
-                    <div class="outline-0">
-                        <i class="testimonial-icon ti-quote-left"></i>
-                        <p class="text-dark">Lorem ipsum dolor sit amet constur adipisicing elit sed eiusmtempor incid sed dolore magna aliqu enim minim veniam quis nostrud exercittion ullamco labo ris nisi aliquip excepteur.</p>
-                        <h4 class="font-weight-normal">Julia Robertson</h4>
-                        <h6 class="font-secondary text-color">Happy Clients</h6>
-                    </div>
-                    <!-- slider item -->
-                    <div class="outline-0">
-                        <i class="testimonial-icon ti-quote-left"></i>
-                        <p class="text-dark">Lorem ipsum dolor sit amet constur adipisicing elit sed eiusmtempor incid sed dolore magna aliqu enim minim veniam quis nostrud exercittion ullamco labo ris nisi aliquip excepteur.</p>
-                        <h4 class="font-weight-normal">Julia Robertson</h4>
-                        <h6 class="font-secondary text-color">Happy Clients</h6>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
-<!-- /testimonial -->
-
-<section class="cta overlay-primary py-50 text-center text-lg-left" style="background-image: url(resources/images/background/cta.jpg);">
-        <div class="container">
-            <div class="row justify-content-between">
-                <div class="col-lg-6">
-                    <h3 class="text-white">Biztrox give the smart solution for your business</h3>
-                </div>
-                <div class="col-lg-6 text-lg-right align-self-center">
-                    <a href="contact.html" class="btn btn-light">GET AN QUOTE</a>
-                </div>
-            </div>
-        </div>
-</section>
-
-<!-- blog -->
-<section class="section bg-gray">
-  <div class="container">
-    <div class="row justify-content-center">
-      <div class="col-lg-12 text-center">
-        <h5 class="section-title-sm">Latest News</h5>
-        <h2 class="section-title section-title-border-gray">Company News</h2>
-      </div>
-      <!-- blog-item -->
-      <div class="col-lg-4 col-sm-6 mb-4 mb-lg-0">
-        <div class="card">
-          <div class="card-img-wrapper overlay-rounded-top">
-            <img class="card-img-top" src="resources/images/blog/blog-1.jpg" alt="blog-thumbnail">
-          </div>
-          <div class="card-body p-0">
-            <div class="d-flex">
-              <div class="py-3 px-4 border-right text-center">
-                <h3 class="text-primary mb-0">25</h3>
-                <p class="mb-0">Nov</p>
-              </div>
-              <div class="p-3">
-                <a href="blog-single.html" class="h4 font-primary text-dark">Cras
-                  sed elit sit amet.</a>
-                <p>by Admin</p>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-      <!-- blog-item -->
-      <div class="col-lg-4 col-sm-6 mb-4 mb-lg-0">
-        <div class="card">
-          <div class="card-img-wrapper overlay-rounded-top">
-            <img class="card-img-top" src="resources/images/blog/blog-2.jpg" alt="blog-thumbnail">
-          </div>
-          <div class="card-body p-0">
-            <div class="d-flex">
-              <div class="py-3 px-4 border-right text-center">
-                <h3 class="text-primary mb-0">25</h3>
-                <p class="mb-0">Nov</p>
-              </div>
-              <div class="p-3">
-                <a href="blog-single.html" class="h4 font-primary text-dark">Cras
-                  sed elit sit amet.</a>
-                <p>by Admin</p>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-      <!-- blog-list -->
-      <div class="col-lg-4 col-12">
-        <ul class="bg-white border rounded pl-0">
-          <li class="d-flex border-bottom">
-            <div class="py-3 px-4 border-right text-center">
-              <h3 class="text-primary mb-0">25</h3>
-              <p class="mb-2">Nov</p>
-            </div>
-            <div class="p-3">
-              <a href="blog-single.html" class="h4 font-primary text-dark">Cras sed
-                elit sit amet.</a>
-              <p>by Admin</p>
-            </div>
-          </li>
-          <li class="d-flex border-bottom">
-            <div class="py-3 px-4 border-right text-center">
-              <h3 class="text-primary mb-0">25</h3>
-              <p class="mb-2">Nov</p>
-            </div>
-            <div class="p-3">
-              <a href="blog-single.html" class="h4 font-primary text-dark">Cras sed
-                elit sit amet.</a>
-              <p>by Admin</p>
-            </div>
-          </li>
-          <li class="d-flex">
-            <div class="py-3 px-4 border-right text-center">
-              <h3 class="text-primary mb-0">25</h3>
-              <p class="mb-2">Nov</p>
-            </div>
-            <div class="p-3">
-              <a href="blog-single.html" class="h4 font-primary text-dark">Cras sed
-                elit sit amet.</a>
-              <p>by Admin</p>
-            </div>
-          </li>
-        </ul>
-      </div>
-    </div>
-  </div>
-</section>
-<!-- /blog -->
+			</div>
+		</form>
+	</div>
 
 
-<section class="bg-white py-4">
-  <div class="container">
-    <div class="client-logo-slider align-self-center">
-      <a href="#" class="text-center d-block outline-0 py-3 px-2"><img class="d-unset"
-          src="resources/images/client-logo/client-logo-1.png" alt="client-logo"></a>
-      <a href="#" class="text-center d-block outline-0 py-3 px-2"><img class="d-unset"
-          src="resources/images/client-logo/client-logo-2.png" alt="client-logo"></a>
-      <a href="#" class="text-center d-block outline-0 py-3 px-2"><img class="d-unset"
-          src="resources/images/client-logo/client-logo-3.png" alt="client-logo"></a>
-      <a href="#" class="text-center d-block outline-0 py-3 px-2"><img class="d-unset"
-          src="resources/images/client-logo/client-logo-4.png" alt="client-logo"></a>
-      <a href="#" class="text-center d-block outline-0 py-3 px-2"><img class="d-unset"
-          src="resources/images/client-logo/client-logo-5.png" alt="client-logo"></a>
-      <a href="#" class="text-center d-block outline-0 py-3 px-2"><img class="d-unset"
-          src="resources/images/client-logo/client-logo-1.png" alt="client-logo"></a>
-      <a href="#" class="text-center d-block outline-0 py-3 px-2"><img class="d-unset"
-          src="resources/images/client-logo/client-logo-2.png" alt="client-logo"></a>
-      <a href="#" class="text-center d-block outline-0 py-3 px-2"><img class="d-unset"
-          src="resources/images/client-logo/client-logo-3.png" alt="client-logo"></a>
-      <a href="#" class="text-center d-block outline-0 py-3 px-2"><img class="d-unset"
-          src="resources/images/client-logo/client-logo-4.png" alt="client-logo"></a>
-      <a href="#" class="text-center d-block outline-0 py-3 px-2"><img class="d-unset"
-          src="resources/images/client-logo/client-logo-5.png" alt="client-logo"></a>
-    </div>
-  </div>
-</section>
-<!-- /client logo slider -->
-
-<script type="text/javascript" src="resources/js/carousel.js"></script> 
 
 <!-- footer -->
-
 <footer>
 	<%@ include file="common/footer.jsp" %>
 </footer>
 
+<!-- js -->
+<script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/carousel.js"></script> 
+<script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/rayer_submit.js"></script>
+<script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/rayer_update.js"></script>
+
 </body>
 </html>
+    

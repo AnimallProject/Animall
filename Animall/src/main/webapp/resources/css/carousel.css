@@ -1,11 +1,10 @@
-
 @charset "UTF-8";
 .carousel-container{
 	
 	
 	overflow : hidden;
 	position: relative;
-	width : 2050px;
+	
 	
 }
 
@@ -20,6 +19,7 @@
 .carousel-slide img{
 	
 	margin : auto;
+	height : auto;
 	width : 100%;
 	
 }
@@ -48,5 +48,4 @@
 	opacity : 0;
 	cursor : pointer;
 	
-
 }

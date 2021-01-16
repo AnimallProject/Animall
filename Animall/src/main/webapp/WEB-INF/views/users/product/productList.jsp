@@ -204,23 +204,6 @@
 
 <!-- /navigation --> 
 
-<!-- 상품 조회 헤더 -->
-<section class="page-title overlay" style="background-image: url(${pageContext.request.contextPath }/resources/images/background/page-title.jpg);">
-    <div class="container">
-        <div class="row">
-            <div class="col-lg-12 text-center">
-                <h2 class="text-white font-weight-bold">Our Service</h2>
-                <ol class="breadcrumb">
-                    <li>
-                        <a href="index.html">Home</a>
-                    </li>
-                    <li>Our Service</li>
-                </ol>
-            </div>
-        </div>
-    </div>
-</section>
-
 <section class="section">
     <div class="container">
 
