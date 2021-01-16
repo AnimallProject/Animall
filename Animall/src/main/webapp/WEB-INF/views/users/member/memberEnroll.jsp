@@ -88,7 +88,7 @@
                <h4>비밀번호 확인</h4>
             </td>
             <td>
-               <input type="password" size="20" name="pwd2" id="pwd2" class="form-control" placeholder="비밀번호 확인" onkeyup="chkPwd()" required="required">
+               <input type="password" size="20" name="pwd2" id="pwd2" class="form-control" placeholder="비밀번호 확인" required="required">
             </td>
             <td colspan="2">
                <h5></h5>
@@ -99,7 +99,7 @@
                <h4>닉네임</h4>
             </td>
             <td>
-               <input type="text" size="20" name="nname" id="nname" class="form-control" placeholder="닉네임" required="required" onkeyup="dupCheck(this)">
+               <input type="text" size="20" name="nname" id="nname" class="form-control" placeholder="닉네임" required="required">
             </td>
             <td>
                <!-- &nbsp;<button type="button" class="nickCheck" id="nickCheck">중복확인</button>  -->
@@ -137,7 +137,7 @@
                <h4>이메일</h4>
             </td>
             <td>
-               <input type="text" size="20" name="email" id="email" class="form-control" placeholder="이메일" required="required" onkeyup="dupCheck(this)">               
+               <input type="text" size="20" name="email" id="email" class="form-control" placeholder="이메일" required="required">               
             </td>
             <td>
                <button type="button" id="codeCheck" name="codeCheck" class="codeCheck">코드발송</button>

@@ -80,6 +80,26 @@
     border-radius: 70%;
     overflow: hidden;
 }
+
+
+#success:hover{
+      
+   color : #997296;
+   
+}
+#success {
+  font-size: 10px;
+  font-family: "Open Sans", sans-serif;
+  text-transform: capitalize;
+  padding: 16px 44px;
+  border-radius: 35px;
+  font-weight: 600;
+  border: 0;
+  position: relative;
+  z-index: 1;
+  transition: .2s ease;
+  }
+
 </style>
 
 
@@ -115,7 +135,7 @@
             <c:if test="${empty member}">
             <div>
              <div class="rightMenu">
-                  <a data-toggle="modal" href="#loginModal">Login</a>                  
+                <a href='${pageContext.request.contextPath}/users/member/memberLoginMain.do'>Login</a>                  
              </div>
              </div>
              
@@ -166,44 +186,7 @@
    	
    	
    	
-   	
-   	<!-- Modal시작 -->
-				<!-- https://getbootstrap.com/docs/4.1/components/modal/#live-demo -->
-				<div class="modal fade" id="loginModal" tabindex="-1" role="dialog"
-					aria-labelledby="loginModalLabel" aria-hidden="true">
-					<div class="modal-dialog" role="document">
-						<div class="modal-content">
-							<div class="modal-header">
-								<h5 class="modal-title" id="loginModalLabel">로그인</h5>
-								<button type="button" class="close" data-dismiss="modal"
-									aria-label="Close">
-									<span aria-hidden="true">&times;</span>
-								</button>
-							</div>
-							<!--로그인폼 -->
-							<!-- https://getbootstrap.com/docs/4.1/components/forms/#overview -->
-							<form action="${pageContext.request.contextPath}/users/member/memberLogin.do" method="post">
-								<div class="modal-body">
-									<input type="text" class="form-control" name="id"
-										placeholder="아이디" required> <br /> 
-										<input
-										type="password" class="form-control" name="pwd"
-										placeholder="비밀번호" required>
-								</div>
-								<div class="modal-footer">
-									<button type="submit" class="btn btn-outline-success">로그인</button>
-									<button type="button" class="btn btn-outline-success"
-										data-dismiss="modal">취소</button>
-								</div>
-							</form>
-						</div>
-					</div>
-				</div>
-				<!-- Modal 로그인폼 끝-->
-   	
-   	
-   	
-    
+   
     <div class="bigContainer">  
     	<div class="leftMenuContainer">
 		    <div class="totalCategory">
