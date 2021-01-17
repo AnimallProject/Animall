@@ -10,6 +10,8 @@ import org.springframework.stereotype.Repository;
 
 import com.kh.animall.users.cart.model.vo.Cart;
 import com.kh.animall.users.member.model.vo.Member;
+import com.kh.animall.users.order.model.vo.Order;
+import com.kh.animall.users.order.model.vo.OrderDetail;
 
 @Repository
 public class CartDAOImpl implements CartDAO {
@@ -69,5 +71,17 @@ public class CartDAOImpl implements CartDAO {
 		return sqlSession.update("cartMapper.modifyCart", cart);
 		
 	}
+
+	@Override
+	public void orderInfo(Order order) throws Exception {
+		sqlSession.insert("cartMapper.orderInfo", order);
+		
+	}
+
+	@Override
+	public void orderDetail(OrderDetail orderDetail) throws Exception {
+		sqlSession.insert("cartMapper.orderDetail", orderDetail);
+	}
+	
 
 }

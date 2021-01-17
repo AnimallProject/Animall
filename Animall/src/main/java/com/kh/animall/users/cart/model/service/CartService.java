@@ -4,6 +4,8 @@ import java.util.List;
 
 import com.kh.animall.users.cart.model.vo.Cart;
 import com.kh.animall.users.member.model.vo.Member;
+import com.kh.animall.users.order.model.vo.Order;
+import com.kh.animall.users.order.model.vo.OrderDetail;
 public interface CartService {
 	List<Cart> selectCartList(int mno); //장바구니 목록
 	int insertCart(Cart cart); //장바구니 추가
@@ -13,4 +15,5 @@ public interface CartService {
     int sumMoney(int mno); //장바구니 금액 합계
     int countCart(int mno, int pno); //장바구니 상품 개수
     int modifyCart(Cart cart); //장바구니 화면에서 수량 변경
+    
 }

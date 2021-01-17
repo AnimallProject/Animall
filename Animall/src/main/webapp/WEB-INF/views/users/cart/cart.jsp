@@ -14,7 +14,7 @@
    height:50vh;
    justify-content: center;
    align-items: center;
-   margin:50px;
+   margin:100px;
    
 }
 
@@ -32,7 +32,9 @@
 }
 
 h2{
-	margin:60px;
+	position:absolute;
+	top:220px;
+	left:810px;
 	text-align: center;
 }
 
@@ -55,6 +57,8 @@ a:visited{
 		}
 	};
 </script>
+
+
 <title>장바구니</title>
     
 
@@ -62,10 +66,9 @@ a:visited{
 <body>
 <c:import url="../../common/header.jsp"/>
 
-<h2>${member.nname}님의 장바구니</h2>
 
 <div class="carttable">
-
+<h2>${member.nname}님의 장바구니</h2><br><br>
 <c:choose>
     <c:when test="${map.count == 0 }">
     <!--map의 count가 0일때 which means 장바구니 비었을 때-->
@@ -138,7 +141,7 @@ a:visited{
             <input type="hidden" name="count" value="${map.count}">
             <button type="submit" id="btnUpdate" class="btn mt-4">수정</button>
             <button type="button" id="dall" onclick="deleall();" class="btn mt-4">장바구니 비우기</button>
-            <button type="button" id="pay" class="btn btn-primary mt-4">주문하기</button>
+            <button type="button" id="pay" onclick="location.href='${pageContext.request.contextPath}/order/orderList.do?mno=${member.mno}' "class="btn btn-primary mt-4 orderOpen">주문하기</button>
         </form>
     </c:otherwise>
 </c:choose>

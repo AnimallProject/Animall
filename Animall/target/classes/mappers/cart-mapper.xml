@@ -58,9 +58,18 @@
 		AND CNO = #{cno}
 	</update>
 	
+	<!-- 주문 정보 -->
+	<insert id="orderInfo">
+ 		insert into ORDER_TBL(ONO, PNO, MNO, RECEIVER, OADDDR1, OADDR2, OADDR3, RECEPHONE )
+     			values(#{ono}, #{mno}, #{pno}, #{receiver}, #{oaddr1}, #{oaddr2}, #{oaddr3}, #{recephone})
+	</insert>
 	
-	
-	
+	<!-- 주문 상세 정보 --> 
+	<insert id="orderDetail">
+ 			insert into ORDERDETAIL(odno, ono, oamount)
+   			  select SEQ_ODNO.nextval, #{orderId}, #{oamount}
+      		   from CART
+	</insert> 
 
 	
 	

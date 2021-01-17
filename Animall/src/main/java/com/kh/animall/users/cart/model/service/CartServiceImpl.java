@@ -8,6 +8,8 @@ import org.springframework.stereotype.Service;
 import com.kh.animall.users.cart.model.dao.CartDAO;
 import com.kh.animall.users.cart.model.vo.Cart;
 import com.kh.animall.users.member.model.vo.Member;
+import com.kh.animall.users.order.model.vo.Order;
+import com.kh.animall.users.order.model.vo.OrderDetail;
 
 @Service
 public class CartServiceImpl implements CartService {
@@ -64,5 +66,7 @@ public class CartServiceImpl implements CartService {
 		return cartDAO.modifyCart(cart);
 		
 	}
+
+	
 
 }

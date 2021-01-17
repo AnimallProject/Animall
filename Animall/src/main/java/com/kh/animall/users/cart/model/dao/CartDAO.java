@@ -4,6 +4,8 @@ import java.util.List;
 
 import com.kh.animall.users.cart.model.vo.Cart;
 import com.kh.animall.users.member.model.vo.Member;
+import com.kh.animall.users.order.model.vo.Order;
+import com.kh.animall.users.order.model.vo.OrderDetail;
 
 public interface CartDAO {
 	
@@ -23,5 +25,7 @@ public interface CartDAO {
   
     int modifyCart(Cart cart); //장바구니 수정(수량 변경)
 
-
+    public void orderInfo(Order order) throws Exception;
+    
+    public void orderDetail(OrderDetail orderDetail) throws Exception;
 }
