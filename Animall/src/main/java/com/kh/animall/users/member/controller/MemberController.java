@@ -20,6 +20,8 @@ import org.springframework.web.bind.support.SessionStatus;
 
 import com.kh.animall.users.member.model.service.MemberService;
 import com.kh.animall.users.member.model.vo.Member;
+import com.kh.animall.users.stylist.model.service.StylistService;
+import com.kh.animall.users.stylist.model.vo.MyStylist;
 
 //@SessionAttributes(value= { "member" })
 @Controller
@@ -33,6 +35,9 @@ public class MemberController {
    
    @Autowired
    private MemberService memberService;
+   
+   @Autowired
+   private StylistService stylistService;
    
    /*회원가입(enroll) 페이지로 이동 */
    
@@ -108,6 +113,8 @@ public class MemberController {
       String loc = "/";
       String msg = "";
       
+      MyStylist sty = null;
+      
       if( member == null) {
          msg = "존재하지 않는 아이디입니다.";
       } else {
@@ -116,6 +123,13 @@ public class MemberController {
             
             msg = "로그인 성공!";
             session.setAttribute("member", member);
+            
+            if(member.getMtype().equals("STY")) {
+            	sty = stylistService.selectOneStylist(member.getMno());
+            	session.setAttribute("stylist", sty);
+            }else {
+            	session.setAttribute("stylist", null);  	
+            }
             
          } else {
             msg = "비밀번호가 틀렸습니다.";
@@ -297,5 +311,89 @@ public class MemberController {
          memberService.find_pw(response, memberVo);
       }
             
+      
+      @RequestMapping("/users/member/memberDelete.do")
+      public String memberDelete(HttpSession session, Model model, @RequestParam int mno) {
+         
+    	 System.out.println("mno :" + mno);
+    	  
+         int result = memberService.deleteMember(mno);
+         
+         if( result > 0 )session.invalidate(); 
+         
+         String loc = "/";
+         String msg = "";
+         
+         if( result > 0 ) msg = "회원 탈퇴 성공!!";
+         else msg = "회원 탈퇴 실패!";
+         
+         model.addAttribute("loc", loc);
+         model.addAttribute("msg", msg);
+         
+         
+         return "common/msg";
+      }
+      
+
+      @RequestMapping(value = "mypage/mypage.do")
+      public String mypage() throws Exception{
+         return "/mypage/mypage";
+      }
+      
+      
+      
+      @RequestMapping(value = "mypage/memberInfo.do")
+      public String memberInfo() throws Exception{
+         return "/mypage/memberInfo";
+      }
+      
+      
+      
+      
+      
+      // return type이 void인 경우 uri를 jsp로 forword하는 정보 사용한다.
+         // 요청은 get방식으로 글쓰기 폼
+         @RequestMapping(path = "/mypage/memberInfo", method = RequestMethod.GET)
+         public void memberInfoForm() {
+            
+         }
+
+         
+         
+         
+         @RequestMapping(value="/member/memberUpdate", method = RequestMethod.POST)
+         public String memberUpdate(Member member, Model model,  @RequestParam("old_pw") String old_pw,  @RequestParam("new_pw") String new_pw, HttpSession session) {
+            System.out.println("컨트롤러 접근 확인 ");
+            String loc = "/";
+            String msg = "";
+            
+            // 1. 현재 비밀번호가 / old_pw == 지금로그인한 비밀번호
+            Member m = memberService.selectOneMember(member.getId());
+            System.out.println("변경 전 : " + m);
+            
+            if( bcryptPasswordEncoder.matches(old_pw, m.getPwd()) ) {
+               
+               // 2. old_pw --> new_pw
+               String encryptPassword = bcryptPasswordEncoder.encode(new_pw);
+               member.setPwd(encryptPassword);
+               member.setAddress(member.getZip() + member.getAddr1() + member.getAddr2());
+               
+               memberService.updateMember(member);
+               
+               System.out.println("변경 후 : " + member);
+               
+               model.addAttribute("member", memberService.selectOneMember(member.getId()));
+               
+               msg = "회원정보 변경이 완료되었습니다.";
+            } else {
+               msg = "회원정보 변경이 완료되었습니다.";
+            }
+            
+            model.addAttribute("msg", msg);
+            model.addAttribute("loc", loc);
+            
+            return "common/msg";
+         }
+      
           
 }

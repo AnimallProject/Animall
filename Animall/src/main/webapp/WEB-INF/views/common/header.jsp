@@ -167,8 +167,8 @@
 					    <c:when test="${member.mtype eq 'ADMIN'}">
 					       <a href='${pageContext.request.contextPath}/admin/adminPage.do'>AdminPage</a>
 					    </c:when>
-					    <c:when test="${member.mtype eq 'USER'}">
-					       <a href='#'>Mypage</a>
+					    <c:when test="${member.mtype eq 'USER' or member.mtype eq 'STY'}">
+					        <a href='${pageContext.request.contextPath}/mypage/mypage.do'>Mypage</a>
 					    </c:when>
 					    <c:otherwise>
 					        <a href='javascript:void(0);' onclick=" alert('로그인이 필요합니다')">MyPage</a>

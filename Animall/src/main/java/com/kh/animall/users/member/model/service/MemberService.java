@@ -12,7 +12,7 @@ public interface MemberService {
 	
 	int updateMember(Member member);
 			
-	int deleteMember(String id);
+	int deleteMember(int mno);
 		
 	int idCheck(String id) throws Exception;
 	

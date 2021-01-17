@@ -12,7 +12,7 @@ public interface MemberDAO {
 
 	int updateMember(Member member);
 
-	int deleteMember(String id);
+	int deleteMember(int mno);
 	
 	// 아이디 중복 검사
 	int idCheck(String id);

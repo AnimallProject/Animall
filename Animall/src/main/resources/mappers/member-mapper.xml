@@ -50,4 +50,22 @@
 		update member set pwd = #{pwd} where id = #{id}
 	</update>
 	
+	<delete id="deleteMember" parameterType="_int" >
+      DELETE FROM MEMBER 
+      WHERE MNO = #{mno}
+   </delete>
+   
+      <!-- 회원정보 수정 -->
+   <update id="updateMember" parameterType="member">
+      UPDATE MEMBER
+      SET
+         pwd = #{pwd},
+         nname = #{nname},
+         email = #{email},
+         address = #{address}
+      WHERE
+         id = #{id}
+   </update>
+   
+	
 </mapper>

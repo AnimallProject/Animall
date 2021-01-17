@@ -41,16 +41,14 @@ public class MemberServiceImpl implements MemberService {
 
    @Override
    public int updateMember(Member member) {
-      // TODO Auto-generated method stub
-      return 0;
+      
+      return memberDAO.updateMember(member); 
+      //받은 member를 memberDAO로 보내준다
    }
-   
-   
 
    @Override
-   public int deleteMember(String id) {
-      // TODO Auto-generated method stub
-      return 0;
+   public int deleteMember(int mno) {
+      return memberDAO.deleteMember(mno);
    }
    
    // 아이디 중복 검사
