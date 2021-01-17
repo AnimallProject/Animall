@@ -310,6 +310,7 @@ public class ProductController {
 		
 		int result2 = productService.deleteProductImage(pno);
 		int result1 = productService.deleteProduct(pno);
+
 		
 		String loc = "/product/productList.do?ptype="+ptype;
 		String msg = "";

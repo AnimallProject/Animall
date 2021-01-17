@@ -19,7 +19,7 @@
 	<style>
 	
 	.product_upper_area{
-	padding:30px;
+	padding:50px;
 	}
 
 	.product_image_area{
@@ -30,15 +30,16 @@
 	
 	.product_text_area{
 	float:right;
-	width:400px;
+	width:470px;
 	height:500px;
-	margin-right:100px;
+	margin-right:0px;
 	}
 	
 	.image_big_area{
 	width:500px;
 	height:450px;
-	border:1px solid #e5e5e5;
+	border:2px solid #e5e5e5;
+	border-right: 3px solid #e5e5e5;
 	}
 	
 	.image_big_area > .item > img{
@@ -56,10 +57,10 @@
 	margin:0px 0px;
 	}
 	.image_small_area > ol > li{
-	width:100px;
+	width:115px;
 	height:100px;
 	display:inline-block;
-	float: right;
+	float: left;
 	padding:10px;
 	}
 	
@@ -104,6 +105,16 @@
 	border-radius:5px;
 	}
 	
+	.btn1:hover{
+	background:white;
+	border-width:2px;
+    border-style:solid;
+    border-image:linear-gradient(to bottom, #997296, #c439b9);
+    border-image-slice:1;
+    border-radius:5px;
+    font-weight:bold;
+	}
+	
 	.btn2{
 	height:50px;
 	width:200px;
@@ -146,6 +157,10 @@
 	.product_lower_area .nav_area > ol > li > h3{
 	color : black;
 	font-weight:bold;
+	}
+	
+	.nav-tabs .nav-item{
+	width:260px;
 	}
 	
 	.reviewImage{
@@ -340,8 +355,9 @@
 	h6[id="inquirydate"]{
 	padding-left:77%;
 	}
-	h6[id="inquiryans"]{
+	h6[id="inquirydone"]{
 	padding-left:3%;
+	position:absolute;
 	}
 	
 	.inquiryDown > p{
@@ -628,11 +644,12 @@
 					<div class="product_name">
 						<h4>제품명</h4>
 						<input type="hidden" id="pno" value="${product.pno}" />
-						<input type="text" id="pname" name="pname" value="${product.pname}" readonly/>
+						<input type="text" id="pname" name="pname" value="${product.pname}" style="width:400px;" readonly/>
 					</div>
 					<hr />
 					<div class="product_content">
-						<textarea name="pcontent" id="pcontent" placeholder="제품상세설명" style="border:none; resize:none;" readonly>${product.pcontent}</textarea>
+						<h4>제품 설명</h4>
+						<textarea name="pcontent" id="pcontent" placeholder="제품상세설명" style="border:none; resize:none; width:400px;" readonly>${product.pcontent}</textarea>
 					</div>
 				
 					<hr />
@@ -648,7 +665,7 @@
 					</div>
 					<hr />
 					<div class="product_pguide">
-						<textarea name="pguide" id="pguide" placeholder="구매안내" style="border:none; resize:none;" readonly>${product.pguide}</textarea>
+						<textarea name="pguide" id="pguide" placeholder="구매안내" style="border:none; resize:none; width:400px;" readonly>${product.pguide}</textarea>
 					</div>
 					<hr />
 					<div class="product_order_price">
@@ -684,22 +701,22 @@
 			<div class="nav_area">
 				<ul class="nav nav-tabs" id="myTab" role="tablist">
 					<li class="nav-item">
-						<a class="nav-link active" data-toggle="tab" href="#detailInfo" role="tab">
+						<a class="nav-link active nav_font" data-toggle="tab" href="#detailInfo" role="tab">
 							<h3>상세정보</h3>
 						</a>
 					</li>
 					<li class="nav-item">
-						<a class="nav-link" data-toggle="tab" href="#orderInfo" role="tab">
+						<a class="nav-link nav_font" data-toggle="tab" href="#orderInfo" role="tab">
 							<h3>구매 안내</h3>
 						</a>
 					</li>
 					<li class="nav-item">
-						<a class="nav-link" data-toggle="tab" href="#review" role="tab">
+						<a class="nav-link nav_font" data-toggle="tab" href="#review" role="tab">
 							<h3>리뷰</h3>
 						</a>
 					</li>
 					<li class="nav-item">
-						<a class="nav-link" data-toggle="tab" href="#productInquiry" role="tab">
+						<a class="nav-link nav_font" data-toggle="tab" href="#productInquiry" role="tab">
 							<h3>상품문의</h3>						
 						</a>
 					</li>
@@ -1076,7 +1093,7 @@
 										${piList.pidate} 
 									</h6>
 									<c:if test="${!empty piList.pianswer}">
-										<h6 class="font-weight-light" id="inquiryans">
+										<h6 class="font-weight-light" id="inquirydone">
 											답변 완료
 										</h6>
 									</c:if>
@@ -1129,7 +1146,7 @@
 										${piList.pidate} 
 									</h6>
 									<c:if test="${!empty piList.pianswer}">
-										<h6 class="font-weight-light" id="inquiryans">
+										<h6 class="font-weight-light" id="inquirydone">
 											답변 완료
 										</h6>
 									</c:if>
@@ -1184,7 +1201,7 @@
 										${piList.pidate} 
 									</h6>
 									<c:if test="${!empty piList.pianswer}">
-										<h6 class="font-weight-light" id="inquiryans">
+										<h6 class="font-weight-light" id="inquirydone">
 										답변 완료
 										</h6>
 									</c:if>
@@ -1250,7 +1267,7 @@
 									${piList.pidate}
 								</h6>
 								<c:if test="${!empty piList.pianswer}">
-								<h6 class="font-weight-light" id="inquiryans">
+								<h6 class="font-weight-light" id="inquirydone">
 									답변 완료
 								</h6>
 								</c:if>
@@ -1277,7 +1294,7 @@
 					</c:if>
 				</c:if>
 				</c:forEach>
-					<c:if test="${!empty piList}">
+					<c:if test="${!empty piList and member.mtype eq 'ADMIN'}">
 						<input type="button" id="btn_close_all" value="모두 닫기" />
 					</c:if>
 				</div>

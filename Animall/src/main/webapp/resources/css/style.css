@@ -273,7 +273,7 @@ h6, .h6 {
 }
 
 .btn-secondary:hover {
-  background: #e84444 !important;
+  background: #997296 !important;
   background: #ee7171;
 }
 
@@ -1635,12 +1635,12 @@ button {
 
 .card{
   width:300px;
-  height:400px;
+  height:450px;
 }
 .card-img-wrapper {
   position: relative;
   width:100%;
-  height:200px;
+  height:250px;
 }
 
 .card-img-wrapper::before {
