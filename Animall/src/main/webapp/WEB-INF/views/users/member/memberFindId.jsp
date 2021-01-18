@@ -107,15 +107,20 @@ form label.floatLabel {
     margin-top: 50px;
 }
 .login_btn{
-	margin-top: -20px;
+   margin-top: -20px;
     text-align: right;
 }
 .snsicon{
-	margin-bottom: 10px;
+   margin-bottom: 10px;
 }
 .button1 {
     background: #997296;
     
+    cursor: pointer;
+}
+button {
+    background: none;
+    border: none;
     cursor: pointer;
 }
 
@@ -129,18 +134,18 @@ form label.floatLabel {
 <c:import url="../../common/header.jsp" />
 <link rel="stylesheet">
 <body>
-    		<form action="find_id.do" method="post">
-				  <h4>아이디 찾기</h4>						
-						<p>
-							<label for="email" class="floatLabel">이메일</label>
-							<input type="text" class="user_email"name="email" id="email" maxlength="25" placeholder="1234@example.com" required="required" />
-						</p>
-						
-						<div class="login_sorting">
-							<button class ="button1" type="submit"><span>아이디 찾기</span></button>
-					    </div>
-		       	
-			</form>
+          <form action="find_id.do" method="post">
+              <h4>아이디 찾기</h4>                  
+                  <p>
+                     <label for="email" class="floatLabel">이메일</label>
+                     <input type="text" class="user_email"name="email" id="email" maxlength="25" placeholder="1234@example.com" required="required" />
+                  </p>
+                  
+                  <div class="login_sorting">
+                     <button class ="button1" type="submit"><span>아이디 찾기</span></button>
+                   </div>
+                
+         </form>
 
 <c:import url="../../common/footer.jsp" />
 

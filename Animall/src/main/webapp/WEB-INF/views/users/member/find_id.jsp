@@ -20,139 +20,105 @@ form {
   margin: 50px auto 0;
   border-radius: 2px;
 }
-form h2 {
+
+
+h5 {
   margin: 0 0 50px 0;
   padding: 10px;
   text-align: center;
   font-size: 30px;
-  color: #666666;
-  border-bottom: solid 1px #e5e5e5;
-}
-form p {
-  margin: 0 0 3em 0;
-  position: relative;
-}
-form input {
-  display: block;
-  box-sizing: border-box;
-  width: 100%;
-  outline: none;
-  margin: 0;
-}
-form input[type="text"],
-form input[type="password"] {
-  background: #fff;
-  border: 1px solid #dbdbdb;
-  font-size: 1.6em;
-  padding: .8em .5em;
-  border-radius: 2px;
-  width: 400px;
-}
-form input[type="text"]:focus,
-form input[type="password"]:focus {
-  background: #fff;
-}
-form span {
-  display: block;
-  background: #F9A5A5;
-  padding: 2px 5px;
-  color: #666;
-}
-form input[type="submit"] {
-  background: rgba(148, 186, 101, 0.7);
-  box-shadow: 0 3px 0 0 rgba(123, 163, 73, 0.7);
-  border-radius: 2px;
-  border: none;
-  color: #fff;
-  cursor: pointer;
-  display: block;
-  font-size: 2em;
-  line-height: 1.6em;
-  margin: 2em 0 0;
-  outline: none;
-  padding: .8em 0;
-  text-shadow: 0 1px #68B25B;
-}
-form input[type="submit"]:hover {
-  background: #94af65;
-  text-shadow: 0 1px 3px rgba(70, 93, 41, 0.7);
-}
-form label {
-  position: absolute;
-  left: 8px;
-  top: 12px;
-  color: #999;
-  font-size: 16px;
-  display: inline-block;
-  padding: 4px 10px;
-  font-weight: 400;
-  background-color: rgba(255, 255, 255, 0);
-  -moz-transition: color 0.3s, top 0.3s, background-color 0.8s;
-  -o-transition: color 0.3s, top 0.3s, background-color 0.8s;
-  -webkit-transition: color 0.3s, top 0.3s, background-color 0.8s;
-  transition: color 0.3s, top 0.3s, background-color 0.8s;
-}
-form label.floatLabel {
-  top: -13px;
-  background-color: rgba(255, 255, 255, 0.8);
-  font-size: 14px;
-}
-.login_sorting{
-    margin-top: -20px;
-}
-.login_btn{
-	margin-top: -20px;
-    text-align: right;
-}
-.snsicon{
-	margin-bottom: 10px;
-}
-button {
-    background: none;
-    border: none;
-    cursor: pointer;
-}
-
-.findpw p input[type="text"] {height: 20px;}
-.findpw p input::placeholder{font-size: 12px;}
-
-
-h3 {
-  margin: 0 0 50px 0;
-  padding: 10px;
-  text-align: center;
-  font-size: 30px;
-  color : #997296;
+  font-color : #997296;
   border-bottom: solid 1px #e5e5e5;
 }
 
 #resultId {
-  color : #997296;
+       color : #997296;
+      padding-left: 35px;
+      font-size: 20px;
+      width: 400px;
+      height: 10%;
+      /*border: 1px solid red;*/
+      
+      vertical-align:middle;
+  }
 }
 .login_sorting{
     margin-top: -20px;
+    margin-left: 50px;
 }
-
+ #bottomBtn{                           /*하단 버튼 3개*/    
+    margin-right: 50px;
+    width: 140px;
+    height: 30px;
+    background-color: white;
+    color: #997296;
+    border: 1px solid #997296;
+  }
+  
+   #main{                            /*기본 바탕 부분 div*/
+      width: 700px;
+      height: 100px;
+      /*border: 1px solid red;*/
+      
+      align-items: center;
+      
+  }
+    #mainLogo{                        /*로그인 타이틀*/
+      width: 700px;
+      height: 100px;
+      /*border: 1px solid red;*/
+      display: flex;
+      
+  }
+  
+  #bottomBtn:hover{                     /*하단 버튼 오버*/
+    width: 140px;
+    height: 30px;
+    background-color: #997296;
+    color: white;
+    border: 1px solid #997296;
+    cursor: pointer;
+  }
+    #loginTitle{
+    color: #4E266D; /* 마켓컬리 색깔*/
+    font-size: 20px;
+    font-weight: bold;
+    padding-left : 50px;
+  }
+  
 </style>
 
 </head>
 <c:import url="../../common/header.jsp" />
 <link rel="stylesheet">
 <body>
-<form action="find_id.do" method="post">
-    			<h3 style="text-align:center">아이디 찾기</h3>
-    			<form action="" method="post">
-    			
-    						
-			<div id="resultId">				
-				<br>
-				<br>
-				<br>
-			    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;		
-				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;								
-				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;회원님의 아이디는 '${ id }' 입니다.
-			    <button class ="button1" type="submit"><span>아이디 찾기</span></button>						
-			</div>							
+      <form action="find_id.do" method="post">
+                          
+             <!--  <h5 style="text-align:center">아이디 찾기</h3> -->
+             <form action="" method="post">
+          <div id="mainLogo"> <span id="loginTitle"></span> </div>                      
+         <div id="resultId">            
+            
+                                     
+            회원님의 아이디는 '${ id }' 입니다.
+             <br>
+             
+             
+             <br>
+             <br>
+             <br>
+             <br>
+         </div>  
+         <br>
+         <br>
+         <div id="mainLine" style="clear: both;"></div>     
+           <div id="main" >                
+             
+           &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  <button id="bottomBtn" type="button" onclick="location.href='${pageContext.request.contextPath}/users/member/memberLoginMain.do'">로그인 하기</button>
+           &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  <button id="bottomBtn" type="button" onclick="location.href='${pageContext.request.contextPath}/users/member/memberFindPwd.do'">비밀번호 찾기</button>
+             </div>
+                               
+                              
 </form>
 <c:import url="../../common/footer.jsp" />
 </body>

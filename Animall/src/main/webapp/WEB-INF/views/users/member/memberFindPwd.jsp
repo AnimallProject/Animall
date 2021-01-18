@@ -20,11 +20,11 @@ form {
   margin: 50px auto 0;
   border-radius: 2px;
 }
-form h2 {
+form h4 {
   margin: 0 0 50px 0;
   padding: 10px;
   text-align: center;
-  font-size: 30px;
+  font-size: 20px;
   color: #666666;
   border-bottom: solid 1px #e5e5e5;
 }
@@ -54,9 +54,9 @@ form input[type="password"]:focus {
 }
 form span {
   display: block;
-  background: #F9A5A5;
+  background: #997296;
   padding: 2px 5px;
-  color: #666;
+  color: white;
 }
 form input[type="submit"] {
   background: rgba(148, 186, 101, 0.7);
@@ -101,11 +101,11 @@ form label.floatLabel {
     margin-top: -20px;
 }
 .login_btn{
-	margin-top: -20px;
+   margin-top: -20px;
     text-align: right;
 }
 .snsicon{
-	margin-bottom: 10px;
+   margin-bottom: 10px;
 }
 button {
     background: none;
@@ -115,6 +115,13 @@ button {
 
 .findpw p input[type="text"] {height: 20px;}
 .findpw p input::placeholder{font-size: 12px;}
+.button1 {
+    background: #997296;
+    
+    cursor: pointer;
+}
+
+.button1 {width: 110%;}
 </style>
 
 </head>
@@ -122,26 +129,29 @@ button {
 <link rel="stylesheet">
 <body>
 
-    		<form action="find_pw.do" method="post">
-				  <h2>비밀번호 찾기</h2>
-						 <p>
-							<label for="Name" class="floatLabel">아이디</label>
-							<input  type="text" class="user_nname" name="id" id="id" maxlength="20"  placeholder="아이디를 입력하세요." required="required" />
-						</p>
-						
-						<p>
-							<label for="email" class="floatLabel">이메일</label>
-							<input type="text" class="user_email"name="email" id="email" maxlength="25" placeholder="1234@example.com" required="required" />
-						</p>
-						
-						<div class="login_sorting">
-						<button type="submit" id="" class="w3-button w3-hover-white w3-ripple w3-margin-top w3-round mybtn">찾기</button>
-						<button type="button" onclick="history.go(-1);" class="">로그인으로</button>						
-					    </div>
-					    </form>
-		       	
-					
-			
+          <form action="find_pw.do" method="post">
+              <h4>비밀번호 찾기</h4>
+                   <p>
+                     <label for="Name" class="floatLabel">아이디</label>
+                     <input  type="text" class="user_nname" name="id" id="id" maxlength="20"  placeholder="아이디를 입력하세요." required="required" />
+                  </p>
+                  
+                  <p>
+                     <label for="email" class="floatLabel">이메일</label>
+                     <input type="text" class="user_email"name="email" id="email" maxlength="25" placeholder="1234@example.com" required="required" />
+                  </p>
+                  
+                  <div class="login_sorting">
+                  <button type="submit" id="" class="button1"><span>찾기</span></button>
+                  <br>                  
+                  <br>
+                  <br>
+                  <button type="button" class="button1" onclick="location.href='${pageContext.request.contextPath}/users/member/memberLoginMain.do'" class=""><span>로그인으로</span></button>                  
+                   </div>
+                   </form>
+                
+               
+         
 
 <c:import url="../../common/footer.jsp" />
 </body>
