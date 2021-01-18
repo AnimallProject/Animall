@@ -212,13 +212,13 @@
 	}
 	
 	h6[id='piproductname']{
-	padding-left:10%
+	padding-left:3%
 	}
 	h6[id='piname']{
-	padding-left:5%;
+	padding-left:3%;
 	}
 	h6[id="secretinquiry"]{
-	padding-left:10%;
+	padding-left:7%;
 	}
 	
 	textarea[name='picontent']{
@@ -357,7 +357,6 @@
 	}
 	h6[id="inquirydone"]{
 	padding-left:3%;
-	position:absolute;
 	}
 	
 	.inquiryDown > p{
@@ -688,7 +687,7 @@
 							</li>
 						</c:if>
 						<li>
-							<input type="button" value="바로 구매하기" id="" class="btn1" onclick=""/>
+							<input type="button" value="바로 구매하기" id="" class="btn1" onclick="location.href='${pageContext.request.contextPath}/order/orderthis.do?pno=${product.pno}&amount=1&mno=${member.mno}'" />
 						</li>
 						<li>
 							<input type="button" value="장바구니담기" id="" class="btn2" onclick="ptocart();"/>
@@ -934,7 +933,6 @@
 							<h5>${prv.nname}</h5>
 							<h6 class="font-weight-light">${prv.rdate}</h6>
 							</div>
-							
 							<hr />
 							<p>${prv.rcontent}</p>
 						</div>				
@@ -1383,6 +1381,7 @@
 				answerselect.addClass('openanswer');
 			}
 		}
+
 		
 	</script>
 </body>

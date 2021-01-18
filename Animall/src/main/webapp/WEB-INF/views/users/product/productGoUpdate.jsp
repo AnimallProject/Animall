@@ -144,18 +144,18 @@
 
 				<div class="product_image_area">
 					<div class="image_big_area">
-					<img id="pimage1area" alt="'${pageContext.request.contextPath}'/resources/productUpFiles/" />
+					<img id="pimage1area" src="${pageContext.request.contextPath}/resources/productUpFiles/${imageList.get(0).changename}" />
 					</div>
 					<div class="image_small_area">
 						<ol>
 							<li class="image_small_area1">
-								<img id="pimage2area" alt="" />
+								<img id="pimage2area" src="${pageContext.request.contextPath}/resources/productUpFiles/${imageList.get(1).changename}" />
 							</li>
 							<li class="image_small_area2">
-								<img id="pimage3area" alt=""/>
+								<img id="pimage3area" src="${pageContext.request.contextPath}/resources/productUpFiles/${imageList.get(2).changename}"/>
 							</li>
 							<li class="image_small_area3">
-								<img id="pimage4area" alt=""/>
+								<img id="pimage4area" src="${pageContext.request.contextPath}/resources/productUpFiles/${imageList.get(3).changename}"/>
 							</li>
 						</ol>
 					</div>

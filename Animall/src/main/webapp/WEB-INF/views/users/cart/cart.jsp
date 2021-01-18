@@ -14,7 +14,7 @@
    height:50vh;
    justify-content: center;
    align-items: center;
-   margin:50px;
+   margin:100px;
    
 }
 
@@ -32,29 +32,33 @@
 }
 
 h2{
-	margin:60px;
-	text-align: center;
+   position:absolute;
+   top:220px;
+   left:810px;
+   text-align: center;
 }
 
 a:link{
-	text-decoration:none;
-	color:black;
+   text-decoration:none;
+   color:black;
 }
 a:visited{
-	text-decoration:none;
-	color:black;
+   text-decoration:none;
+   color:black;
 }
 </style>
 <script src="${pageContext.request.contextPath}/resources/js/jquery-3.5.1.min.js"></script>
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script>
-	function deleall(){
-		var mno= "${member.mno}";
-		if(confirm("장바구니를 비우시겠습니까?")==true){
-		location.href="${pageContext.request.contextPath}/cart/cartDeleteAll.do?mno="+mno;		
-		}
-	};
+   function deleall(){
+      var mno= "${member.mno}";
+      if(confirm("장바구니를 비우시겠습니까?")==true){
+      location.href="${pageContext.request.contextPath}/cart/cartDeleteAll.do?mno="+mno;      
+      }
+   };
 </script>
+
+
 <title>장바구니</title>
     
 
@@ -62,10 +66,9 @@ a:visited{
 <body>
 <c:import url="../../common/header.jsp"/>
 
-<h2>${member.nname}님의 장바구니</h2>
 
 <div class="carttable">
-
+<h2>${member.nname}님의 장바구니</h2><br><br>
 <c:choose>
     <c:when test="${map.count == 0 }">
     <!--map의 count가 0일때 which means 장바구니 비었을 때-->
@@ -73,7 +76,7 @@ a:visited{
         <figure>
             <img id="emptybasket" alt="빈 장바구니" src="${pageContext.request.contextPath}/resources/images/emptybasket.png"/>
             <figcaption><h3>장바구니가 비었습니다.</h3></figcaption>
-    	</figure>
+       </figure>
     </c:when>
     
     <c:otherwise>
@@ -105,22 +108,22 @@ a:visited{
                             <!-- ex) 5,000 / 10,000 등등등-->
                             
                     <td><input type="number" name="amount" 
-                        	   style="width:50px;"
+                              style="width:50px;"
                                value="<fmt:formatNumber value="${row.amount}"
-                           	   pattern="#,###,###" />">
-                           	    <!-- 물건의 개수 (amount)를 fmt태그를 사용해서 패턴의 형식에 맞춰서 문자열로 변환함 -->
+                                 pattern="#,###,###" />">
+                                  <!-- 물건의 개수 (amount)를 fmt태그를 사용해서 패턴의 형식에 맞춰서 문자열로 변환함 -->
                     <!--1,000 / 5,000 등등~  -->
                         <input type="hidden" name="pno" value="${row.pno}"/>
                         <input type="hidden" name="mno" value="${row.mno}"/>
- 						<input type="hidden" name="cno" value="${row.cno}">
+                   <input type="hidden" name="cno" value="${row.cno}">
                             
                                 
                     </td>
                     <td><fmt:formatNumber value="${row.money}"
                             pattern="#,###,###" /></td>
                     <td> <a href= "${pageContext.request.contextPath}/cart/cartDelete.do?cno=${row.cno}&mno=${row.mno}"
-                    	onclick="return confirm('정말로 삭제하시겠습니까?');">삭제</a>
-					<!-- 삭제 버튼을 누르면 delete.do로 장바구니 개별 id (삭제하길원하는 장바구니 id)를 보내서 삭제한다. -->
+                       onclick="return confirm('정말로 삭제하시겠습니까?');">삭제</a>
+               <!-- 삭제 버튼을 누르면 delete.do로 장바구니 개별 id (삭제하길원하는 장바구니 id)를 보내서 삭제한다. -->
                     </td>
                 </tr>
             </c:forEach>
@@ -138,7 +141,7 @@ a:visited{
             <input type="hidden" name="count" value="${map.count}">
             <button type="submit" id="btnUpdate" class="btn mt-4">수정</button>
             <button type="button" id="dall" onclick="deleall();" class="btn mt-4">장바구니 비우기</button>
-            <button type="button" id="pay" class="btn btn-primary mt-4">주문하기</button>
+            <button type="button" id="pay" onclick="location.href='${pageContext.request.contextPath}/order/orderList.do?mno=${member.mno}' "class="btn btn-primary mt-4 orderOpen">주문하기</button>
         </form>
     </c:otherwise>
 </c:choose>

@@ -346,22 +346,18 @@ public class MemberController {
       public String memberInfo() throws Exception{
          return "/mypage/memberInfo";
       }
-      
-      
-      
-      
-      
+
       // return type이 void인 경우 uri를 jsp로 forword하는 정보 사용한다.
          // 요청은 get방식으로 글쓰기 폼
-         @RequestMapping(path = "/mypage/memberInfo", method = RequestMethod.GET)
-         public void memberInfoForm() {
+      @RequestMapping(path = "/mypage/memberInfo", method = RequestMethod.GET)
+      public void memberInfoForm() {
             
-         }
+      }
 
          
          
          
-         @RequestMapping(value="/member/memberUpdate", method = RequestMethod.POST)
+       @RequestMapping(value="/member/memberUpdate", method = RequestMethod.POST)
          public String memberUpdate(Member member, Model model,  @RequestParam("old_pw") String old_pw,  @RequestParam("new_pw") String new_pw, HttpSession session) {
             System.out.println("컨트롤러 접근 확인 ");
             String loc = "/";
